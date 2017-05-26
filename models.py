@@ -32,7 +32,7 @@ class Constants(BaseConstants):
 
     # only used in probability mode
     constants = {
-        'k': 0.15,          # scaling factor, only used in 'probability' mode
+        'k': 0.4,          # scaling factor, only used in 'probability' mode
         'maxArea': 100
     }
     # only used in non-probability mode

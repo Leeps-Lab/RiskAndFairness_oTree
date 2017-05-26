@@ -49,8 +49,8 @@ var vm = new Vue({
             var areaA = this.constants.k * val
             var areaB = this.constants.k * this.prob.b
 
-            this.radius.a = Math.pow(areaA / Math.PI, 2);
-            this.radius.b = Math.pow(areaB / Math.PI, 2)
+            this.radius.a = Math.pow(areaA / Math.PI, 1);
+            this.radius.b = Math.pow(areaB / Math.PI, 1)
 
             d3.select('[line-index="a"]')
             .attr('r', this.radius.a)
