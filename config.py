@@ -5,6 +5,6 @@ data = [
     {'Mode': 'Probability', 'Income': 100, 'Px': '2', 'Py': '3'}
     ]
 
-numberOfPeriod = len(data)
-
+def numberOfPeriod():
+	return len(data)
 

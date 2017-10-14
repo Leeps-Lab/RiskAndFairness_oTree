@@ -2,7 +2,7 @@ from otree.api import (
     models, widgets, BaseConstants, BaseSubsession, BaseGroup, BasePlayer,
     Currency as c, currency_range
 )
-
+from . import config
 
 author = 'Rachel Chen <me@rachelchen.me>'
 
@@ -14,7 +14,7 @@ Your app description
 class Constants(BaseConstants):
     name_in_url = 'RiskAndFairness_oTree'
     players_per_group = None
-    num_rounds = 1
+    num_rounds = config.numberOfPeriod();
 
     # Graph parameters
     mode = 'negative'    # valid options: 'single', 'independent', 'positive', 'negative', or 'probability'
