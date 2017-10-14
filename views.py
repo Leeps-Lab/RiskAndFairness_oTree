@@ -2,10 +2,38 @@ from otree.api import Currency as c, currency_range
 from . import models
 from ._builtin import Page, WaitPage
 from .models import Constants
-
+from . import config
+from . import models
 
 class Graph(Page):
     pass
+
+class Probability(Page):
+	def is_displayed(self):
+		if config.data[self.round_number-1]['Mode'] == 'Probability':
+			print("PROBABILITY (************)")
+			return True
+		else:
+			return False
+
+
+
+class Positive(Page):
+	def is_displayed(self):
+		if config.data[self.round_number-1]['Mode'] == 'Positive':
+			print("POSITIVE (************)")
+			return True
+		else:
+			return False
+
+class Independent(Page):
+	def is_displayed(self):
+		if config.data[self.round_number-1]['Mode'] == 'Independent':
+			print("INDEPENT (************)")
+			return True
+		else:
+			return False
+
 
 
 class ResultsWaitPage(WaitPage):
@@ -19,7 +47,9 @@ class Results(Page):
 
 
 page_sequence = [
-    Graph,
+    Probability,
+    Positive,
+    Independent,
     ResultsWaitPage,
     Results
 ]
