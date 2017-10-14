@@ -12,12 +12,12 @@ Your app description
 
 
 class Constants(BaseConstants):
-    name_in_url = 'utility'
+    name_in_url = 'RiskAndFairness_oTree'
     players_per_group = None
     num_rounds = 1
 
     # Graph parameters
-    mode = 'probability'    # valid options: 'single', 'independent', 'positive', 'negative', or 'probability'
+    mode = 'negative'    # valid options: 'single', 'independent', 'positive', 'negative', or 'probability'
     precision = 2           # number of decimcals
     scale = {
         'type': 'fixed',    # axis scaling, could be "fixed" or "dynamic"
