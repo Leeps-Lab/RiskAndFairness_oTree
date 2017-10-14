@@ -5,8 +5,9 @@ from .models import Constants
 
 
 class Graph(Page):
-    pass
-
+    
+    form_model = models.Player
+    form_fields = ['x', 'y']
 
 class ResultsWaitPage(WaitPage):
 

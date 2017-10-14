@@ -64,9 +64,8 @@
 {% block title %}
     Risk Preference
 {% endblock %}
-
+{{form.x.errors}}
 {% block content %}
-
     <div id="app">
         <div class="container">
             <div class="row">
@@ -99,6 +98,8 @@
                 <div class="row" v-if="mode !== 'probability'">
                     <div class="col-md-6" v-html="'Circle: ' + JSON.stringify(selected[0])">
                     </div>
+                    <input type="hidden" name="x" value="10" id="id_x"/>
+            		<input type="hidden" name="y" value="10" id="id_y"/>
                     <div class="col-md-6" v-if="selected[1] && selected[1].x" v-html="'Rect: ' + JSON.stringify(selected[1])">
                     </div>
                 </div>
