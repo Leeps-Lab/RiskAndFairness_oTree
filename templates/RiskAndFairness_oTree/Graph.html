@@ -73,8 +73,8 @@
         var roundData = dynamicValues[currentRound - 1]
         if (roundData) {
             return (typeof roundData.label === 'undefined' ? defaultValues.label : {
-                x: (typeof roundData.label.x === 'undefined' ? defaultValues.label.x : roundData.label.x),
-                y: (typeof roundData.label.y === 'undefined' ? defaultValues.label.y : roundData.label.y)
+                x: defaultValue(roundData.label, 'x', defaultValues.label, 'x'),
+                y: defaultValue(roundData.label, 'y', defaultValues.label, 'y')
             })
         }else{
             return defaultValues.equation
