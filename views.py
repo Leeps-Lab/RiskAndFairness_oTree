@@ -4,6 +4,11 @@ from ._builtin import Page, WaitPage
 from .models import Constants
 
 
+class Probability:
+    def is_displayed(self):
+        return self.player.role() == 'A'
+
+
 class Graph(Page):
     pass
 
@@ -19,7 +24,8 @@ class Results(Page):
 
 
 page_sequence = [
-    Graph,
+    Probability,
+    Positive,
     ResultsWaitPage,
     Results
 ]
