@@ -8,7 +8,7 @@ from . import models
 class Graph(Page):
 
     form_model = models.Player
-    form_fields = ['x', 'y']
+    
 '''
 class Probability(Page):
 	def is_displayed(self):
