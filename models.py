@@ -3,7 +3,6 @@ from otree.api import (
     Currency as c, currency_range
 )
 from . import config
-import json
 
 author = 'Rachel Chen <me@rachelchen.me>'
 
@@ -18,9 +17,9 @@ class Constants(BaseConstants):
     num_rounds = config.numberOfPeriod()
 
     # I'm offloading the heavy lifting to JavaScript because I'm very bad at Python
-    static_values = json.dumps(config.getContants())
-    default_values = json.dumps(config.getDefaultValues())
-    dynamic_values = json.dumps(config.getDynamicValues())
+    static_values = config.getContants()
+    default_values = config.getDefaultValues()
+    dynamic_values = config.getDynamicValues()
 
 class Subsession(BaseSubsession):
 

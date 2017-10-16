@@ -78,7 +78,7 @@
         }
     }
 
-    var newGraphData = function() {
+    var getGraphData = function() {
         var graphData = {}
 
         graphData = Object.assign({}, constantValues)
@@ -150,7 +150,7 @@
     <script type="text/javascript">
     var graphInstance = null
     $(document).ready(function() {
-        appSpecific = newGraphData()
+        appSpecific = getGraphData()
         graphInstance = new riskGraph().$mount('#app')
         $('.otree-next-button').hide()
     })
@@ -159,7 +159,7 @@
             return
         }
         currentRound++
-        graphInstance.update(newGraphData())
+        graphInstance.update(getGraphData())
         if (currentRound === totalRounds) {
             $('.otree-next-button').show()
             $('.next-round').hide()

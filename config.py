@@ -1,3 +1,19 @@
+import json
+
+data = [
+    {'Mode': 'independent', 'Income': 100, 'Px': 2, 'Py': 1},
+    {'Mode': 'positive'   , 'Income': 100, 'Px': 1, 'Py': 3},
+    {'Mode': 'probability'}
+]
+
+# !!!!!!!!
+
+'''
+!!! DO NOT EDIT VALUES BELOW !!!
+'''
+
+# !!!!!!!!
+
 # Static parameters
 # Graph parameters
 staticValues = {
@@ -43,24 +59,15 @@ defaultValues = {
     }
 }
 
-'''
-!!! DO NOT EDIT VALUES ABOVE !!!
-'''
-
-data = [
-    {'Mode': 'independent', 'Income': 100, 'Px': 2, 'Py': 1},
-    {'Mode': 'positive'   , 'Income': 100, 'Px': 1, 'Py': 3},
-    {'Mode': 'probability'}
-]
 
 def numberOfPeriod():
 	return len(data)
 
 def getContants():
-    return staticValues
+    return json.dumps(staticValues)
 
 def getDefaultValues():
-    return defaultValues
+    return json.dumps(defaultValues)
 
 def getDynamicValues():
-    return data
+    return json.dumps(data)
