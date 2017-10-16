@@ -37,6 +37,8 @@ class Group(BaseGroup):
 
 class Player(BasePlayer):
 
+    #player_round_data = models.
+
 	def role(self):
 		if self.id_in_group == 1:
 			return 'decision_maker'

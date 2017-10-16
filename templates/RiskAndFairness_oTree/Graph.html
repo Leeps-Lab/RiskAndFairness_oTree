@@ -22,10 +22,10 @@
     <script src="{% static "js/graph.js" %}"></script>
     <script type="text/javascript">
     var totalRounds = {{ Constants.num_rounds }}
-    var currentRound = 1
-    var constantValues = {{ Constants.static_values | safe }}
-    var defaultValues  = {{ Constants.default_values | safe }}
-    var dynamicValues  = {{ Constants.dynamic_values | safe }}
+    var currentRound = {{ player.round_number | json }}
+    var constantValues = {{ Constants.static_values | json }}
+    var defaultValues  = {{ Constants.default_values | json }}
+    var dynamicValues  = {{ Constants.dynamic_values | json }}
 
     var appSpecific = {}
 
@@ -152,22 +152,9 @@
     $(document).ready(function() {
         appSpecific = getGraphData()
         graphInstance = new riskGraph().$mount('#app')
-        $('.otree-next-button').hide()
     })
-    function nextRound() {
-        if (currentRound === totalRounds) {
-            return
-        }
-        currentRound++
-        graphInstance.update(getGraphData())
-        if (currentRound === totalRounds) {
-            $('.otree-next-button').show()
-            $('.next-round').hide()
-        }
-    }
     </script>
 
-    <button class="btn btn-primary next-round" onclick="nextRound(); return false;" style="display: inline-block;">Next Round</button>
     {% next_button %}
 
 {% endblock %}

@@ -1,5 +1,3 @@
-import json
-
 data = [
     {'Mode': 'independent', 'Income': 100, 'Px': 2, 'Py': 1},
     {'Mode': 'positive'   , 'Income': 100, 'Px': 1, 'Py': 3},
@@ -64,10 +62,10 @@ def numberOfPeriod():
 	return len(data)
 
 def getContants():
-    return json.dumps(staticValues)
+    return staticValues
 
 def getDefaultValues():
-    return json.dumps(defaultValues)
+    return defaultValues
 
 def getDynamicValues():
-    return json.dumps(data)
+    return data

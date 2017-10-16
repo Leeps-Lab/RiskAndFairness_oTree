@@ -445,21 +445,11 @@ window.riskGraph = Vue.extend({
             this.showSelect()
         },
         update: function(newData) {
-            if (typeof newData !== 'undefined') {
-                if (typeof jQuery === 'undefined') {
-                    alert('.update() requires jQuery.extend')
-                    return 
-                }
-                $.extend(true, this, newData)
-            }
             d3.select('svg').remove();
             this.start();
         }
     },
     mounted: function() {
         this.start();
-    },
-    beforeDestroy: function() {
-        d3.select('svg').remove()
     }
 })
