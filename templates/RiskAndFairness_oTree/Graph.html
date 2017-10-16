@@ -20,58 +20,111 @@
     <script src="{% static "js/d3.min.js" %}"></script>
     <script src="{% static "js/vue-range-slider.cjs.js" %}"></script>
     <script type="text/javascript">
-    var appSpecific = {
-        precision: {{ Constants.precision }},
-        scale: {
-            type: '{{ Constants.scale.type }}',
-            max: {{ Constants.scale.max }}
-        },
-        constants: {
-            k: {{ Constants.constants.k }},
-            maxArea: {{ Constants.constants.maxArea }}
-        },
-        width: {{ Constants.width }},
-        height: {{ Constants.height }},
-        margin: {
-            top: {{ Constants.margin.top }},
-            right: {{ Constants.margin.right }},
-            bottom: {{ Constants.margin.bottom }},
-            left: {{ Constants.margin.left }},
-        },
-        label: {
-            x: '{{ Constants.label.x }}',
-            y: '{{ Constants.label.y }}'
-        },
-        mode: '{{ Constants.mode }}',
-        equation: {
-            m: {{ Constants.equation.m }},
-            px: {{ Constants.equation.px }},
-            py: {{ Constants.equation.py }},
-            a: {
-                x: {{ Constants.equation.a.x }},
-                y: {{ Constants.equation.a.y }}
-            },
-            b: {
-                x: {{ Constants.equation.b.x }},
-                y: {{ Constants.equation.b.y }}
+
+    /*
+    Principle maintainer: Rachel Chen <me@rachelchen.me>
+    Contributors:
+        <add your name here>
+    */
+
+    var currentRound = {{ player.round_number | json }}
+    var constantValues = {{ Constants.static_values | json }}
+    var defaultValues  = {{ Constants.default_values | json }}
+
+    // Notes: these can probably be offloaded to Python
+    var dynamicValues  = {{ Constants.dynamic_values | json }}
+
+    var getRoundLabel = function() {
+        var roundData = dynamicValues[currentRound - 1]
+        var template =  'Round ' + currentRound + ': '
+        if (roundData && roundData.Mode) return template + roundData.Mode
+        return template + 'negative'
+    }
+
+    var getMode = function() {
+        var roundData = dynamicValues[currentRound - 1]
+        if (roundData && roundData.Mode) return roundData.Mode
+        return 'negative'
+    }
+
+    var defaultValue = function(sourceObj, sourceKey, defaultObj, defaultKey) {
+        return (typeof sourceObj[sourceKey] === 'undefined' ? defaultObj[defaultKey] : sourceObj[sourceKey])
+    }
+
+    var getEquation = function() {
+        var roundData = dynamicValues[currentRound - 1]
+        if (roundData) {
+            if (roundData.Mode && roundData.Mode === 'probability') {
+                return defaultValues.equation
             }
+            return {
+                m: defaultValue(roundData, 'Income', defaultValues.equation, 'm'),
+                px: defaultValue(roundData, 'Py', defaultValues.equation, 'py'),
+                py: defaultValue(roundData, 'Px', defaultValues.equation, 'px'),
+                a: (typeof roundData.A === 'undefined' ? defaultValues.equation.a : {
+                    x: defaultValue(roundData.A, 'X', defaultValues.equation.a, 'x'),
+                    y: defaultValue(roundData.A, 'Y', defaultValues.equation.a, 'y'),
+                }),
+                b: (typeof roundData.B === 'undefined' ? defaultValues.equation.b : {
+                    x: defaultValue(roundData.B, 'X', defaultValues.equation.b, 'x'),
+                    y: defaultValue(roundData.B, 'Y', defaultValues.equation.b, 'y'),
+                })
+            }
+        }else{
+            return defaultValues.equation
         }
     }
+
+    var getLabels = function() {
+        var roundData = dynamicValues[currentRound - 1]
+        if (roundData) {
+            return (typeof roundData.label === 'undefined' ? defaultValues.label : {
+                x: defaultValue(roundData.label, 'x', defaultValues.label, 'x'),
+                y: defaultValue(roundData.label, 'y', defaultValues.label, 'y')
+            })
+        }else{
+            return defaultValues.equation
+        }
+    }
+
+    var getGraphData = function() {
+        var graphData = {}
+
+        graphData = Object.assign({}, constantValues)
+
+        Object.assign(graphData, {
+            mode: getMode(),
+            label: getLabels(),
+            equation: getEquation()
+        })
+
+        $('.round-label').html(getRoundLabel())
+
+        return graphData
+    }
+
+    var appSpecific = getGraphData()
+
     </script>
     <script src="{% static "js/graph.js" %}"></script>
+
 {% endblock %}
 
 {% block title %}
     Risk Preference
 {% endblock %}
-{{form.x.errors}}
+
 {% block content %}
     <div id="app">
         <div class="container">
             <div class="row">
+                <h4 class="round-label"></h4>
+            </div>
+            <div class="row">
                 <div class="graph col-md-6"></div>
-                <div class="col-md-6" style="margin-top: 50px" v-if="mode === 'probability'">
-                    <div class="row">
+                <div class="col-md-6" v-if="mode === 'probability'">
+                    <h5>Currently selected values:</h5>
+                    <div class="row" style="margin-top: 50px">
                         <range-slider
                         class="slider"
                         min="0"
@@ -96,13 +149,34 @@
                     </div>
                 </div>
                 <div class="row" v-if="mode !== 'probability'">
-                    <div class="col-md-6" v-html="'Circle: ' + JSON.stringify(selected[0])">
+                    <h5>Currently selected values:</h5>
+                    <div class="col-12">
+                        <div class="col-2">
+                            Circle:
+                        </div>
+                        <div class="col-10" v-html="'(x = ' + selected[0].x + ', y = ' + selected[0].y + ')'">
+                        </div>
                     </div>
-                    <input type="hidden" name="x" value="10" id="id_x"/>
-            		<input type="hidden" name="y" value="10" id="id_y"/>
-                    <div class="col-md-6" v-if="selected[1] && selected[1].x" v-html="'Rect: ' + JSON.stringify(selected[1])">
+                    <div class="col-12">
+                        <div class="col-2">
+                            Square:
+                        </div>
+                        <div class="col-10" v-html="'(x = ' + selected[1].x + ', y = ' + selected[1].y + ')'">
+                        </div>
                     </div>
                 </div>
+            </div>
+            <div class="row" v-if="mode !== 'probability'">
+                <input type="hidden" name="mode" v-model="mode" />
+                <input type="hidden" name="circle_x" v-model="selected[0].x" />
+                <input type="hidden" name="circle_y" v-model="selected[0].y" />
+                <input type="hidden" name="square_x" v-model="selected[1].x" />
+                <input type="hidden" name="square_y" v-model="selected[1].y" />
+            </div>
+            <div class="row" v-if="mode === 'probability'">
+                <input type="hidden" name="mode" v-model="mode" />
+                <input type="hidden" name="prob_a" v-model="prob.a" />
+                <input type="hidden" name="prob_b" v-model="prob.b" />
             </div>
         </div>
     </div>

@@ -5,42 +5,26 @@ from .models import Constants
 from . import config
 from . import models
 
-class Probability:
-    def is_displayed(self):
-        return self.player.role() == 'A'
-
+"""
+Principle maintainer: Rachel Chen <me@rachelchen.me>
+Contributors:
+    <add your name here>
+"""
 
 class Graph(Page):
-    
+
     form_model = models.Player
-    form_fields = ['x', 'y']
-
-class Probability(Page):
-	def is_displayed(self):
-		if config.data[self.round_number-1]['Mode'] == 'Probability':
-			print("PROBABILITY (************)")
-			return True
-		else:
-			return False
-
-
-
-class Positive(Page):
-	def is_displayed(self):
-		if config.data[self.round_number-1]['Mode'] == 'Positive':
-			print("POSITIVE (************)")
-			return True
-		else:
-			return False
-
-class Independent(Page):
-	def is_displayed(self):
-		if config.data[self.round_number-1]['Mode'] == 'Independent':
-			print("INDEPENT (************)")
-			return True
-		else:
-			return False
-
+    def get_form_fields(self):
+        current_round = self.round_number
+        dynamic_values = config.getDynamicValues()
+        round_data = dynamic_values[current_round - 1]
+        if round_data is not None and round_data['Mode'] is not None:
+            if round_data['Mode'] == 'probability':
+                return ['mode', 'prob_a', 'prob_b']
+            else:
+                return ['mode', 'circle_x', 'circle_y', 'square_x', 'square_y']
+        else:
+            return ['mode', 'circle_x', 'circle_y', 'square_x', 'square_y', 'prob_a', 'prob_b']
 
 
 class ResultsWaitPage(WaitPage):
@@ -54,9 +38,7 @@ class Results(Page):
 
 
 page_sequence = [
-    Probability,
-    Positive,
-    Independent,
+    Graph,
     ResultsWaitPage,
     Results
 ]

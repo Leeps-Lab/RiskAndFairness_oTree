@@ -1,3 +1,9 @@
+/*
+Principle maintainer: Rachel Chen <me@rachelchen.me>
+Contributors:
+    <add your name here>
+*/
+
 var vm = new Vue({
     components: {
         rangeSlider: RangeSlider
@@ -30,7 +36,13 @@ var vm = new Vue({
             tip: [],
             minMax: [],
             graphData: [],
-            selected: [],
+            selected: [{
+                x: null,
+                y: null
+            }, {
+                x: null,
+                y: null
+            }],
             equations: []
         }, appSpecific);
     },
@@ -106,7 +118,13 @@ var vm = new Vue({
             this.tip = []
             this.minMax = []
             this.graphData = []
-            this.selected = []
+            this.selected = [{
+                x: null,
+                y: null
+            }, {
+                x: null,
+                y: null
+            }]
             this.equations = []
         },
         sanity: function() {
@@ -294,7 +312,7 @@ var vm = new Vue({
                         y: null
                     })
 
-                    
+
                     this.selected[index].x = randomX.toFixed(this.precision);
                     this.selected[index].y = self.fn(index, randomX).toFixed(this.precision);
 
@@ -445,7 +463,7 @@ var vm = new Vue({
             this.drawAxis()
             this.showSelect()
         },
-        update: function() {
+        update: function(newData) {
             d3.select('svg').remove();
             this.start();
         }
