@@ -29,7 +29,13 @@ window.riskGraph = Vue.extend({
             tip: [],
             minMax: [],
             graphData: [],
-            selected: [],
+            selected: [{
+                x: null,
+                y: null
+            }, {
+                x: null,
+                y: null
+            }],
             equations: []
         }, appSpecific);
     },
@@ -105,7 +111,13 @@ window.riskGraph = Vue.extend({
             this.tip = []
             this.minMax = []
             this.graphData = []
-            this.selected = []
+            this.selected = [{
+                x: null,
+                y: null
+            }, {
+                x: null,
+                y: null
+            }]
             this.equations = []
         },
         sanity: function() {

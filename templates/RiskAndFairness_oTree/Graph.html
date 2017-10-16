@@ -21,6 +21,7 @@
     <script src="{% static "js/vue-range-slider.cjs.js" %}"></script>
     <script src="{% static "js/graph.js" %}"></script>
     <script type="text/javascript">
+
     var totalRounds = {{ Constants.num_rounds }}
     var currentRound = {{ player.round_number | json }}
     var constantValues = {{ Constants.static_values | json }}
@@ -143,6 +144,18 @@
                     <div class="col-md-6" v-if="selected[1] && selected[1].x" v-html="'Rect: ' + JSON.stringify(selected[1])">
                     </div>
                 </div>
+            </div>
+            <div class="row" v-if="mode !== 'probability'">
+                <input type="hidden" name="mode" v-model="mode" />
+                <input type="hidden" name="circle_x" v-model="selected[0].x" />
+                <input type="hidden" name="circle_y" v-model="selected[0].y" />
+                <input type="hidden" name="square_x" v-model="selected[1].x" />
+                <input type="hidden" name="square_y" v-model="selected[1].y" />
+            </div>
+            <div class="row" v-if="mode === 'probability'">
+                <input type="hidden" name="mode" v-model="mode" />
+                <input type="hidden" name="prob_a" v-model="prob.a" />
+                <input type="hidden" name="prob_b" v-model="prob.b" />
             </div>
         </div>
     </div>

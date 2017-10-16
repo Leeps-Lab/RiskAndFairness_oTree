@@ -37,10 +37,16 @@ class Group(BaseGroup):
 
 class Player(BasePlayer):
 
-    #player_round_data = models.
+    mode = models.CharField()
+    circle_x = models.FloatField()
+    circle_y = models.FloatField()
+    square_x = models.FloatField()
+    square_y = models.FloatField()
+    prob_a = models.FloatField()
+    prob_b = models.FloatField()
 
-	def role(self):
-		if self.id_in_group == 1:
-			return 'decision_maker'
-		else:
-			return 'non-decision_maker'
+    def role(self):
+        if self.id_in_group == 1:
+            return 'decision_maker'
+        else:
+            return 'non-decision_maker'
