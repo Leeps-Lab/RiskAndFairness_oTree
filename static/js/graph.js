@@ -1,7 +1,8 @@
-window.riskGraph = Vue.extend({
+var vm = new Vue({
     components: {
         rangeSlider: RangeSlider
     },
+    el: '#app',
     data: function() {
         return Object.assign({
             // DO NOT CHANGE THE FOLLOWING

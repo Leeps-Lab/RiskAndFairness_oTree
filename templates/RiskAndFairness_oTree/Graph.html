@@ -19,18 +19,14 @@
     <script src="{% static "js/vue.min.js" %}"></script>
     <script src="{% static "js/d3.min.js" %}"></script>
     <script src="{% static "js/vue-range-slider.cjs.js" %}"></script>
-    <script src="{% static "js/graph.js" %}"></script>
     <script type="text/javascript">
 
-    var totalRounds = {{ Constants.num_rounds }}
     var currentRound = {{ player.round_number | json }}
     var constantValues = {{ Constants.static_values | json }}
     var defaultValues  = {{ Constants.default_values | json }}
 
     // Notes: these can probably be offloaded to Python
     var dynamicValues  = {{ Constants.dynamic_values | json }}
-
-    var appSpecific = {}
 
     var getRoundLabel = function() {
         var roundData = dynamicValues[currentRound - 1]
@@ -101,14 +97,17 @@
         return graphData
     }
 
+    var appSpecific = getGraphData()
+
     </script>
+    <script src="{% static "js/graph.js" %}"></script>
 
 {% endblock %}
 
 {% block title %}
     Risk Preference
 {% endblock %}
-{{form.x.errors}}
+
 {% block content %}
     <div id="app">
         <div class="container">
@@ -175,14 +174,6 @@
             </div>
         </div>
     </div>
-
-    <script type="text/javascript">
-    var graphInstance = null
-    $(document).ready(function() {
-        appSpecific = getGraphData()
-        graphInstance = new riskGraph().$mount('#app')
-    })
-    </script>
 
     {% next_button %}
 
