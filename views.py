@@ -6,10 +6,10 @@ from . import config
 from . import models
 
 class Graph(Page):
-    
+
     form_model = models.Player
     form_fields = ['x', 'y']
-
+'''
 class Probability(Page):
 	def is_displayed(self):
 		if config.data[self.round_number-1]['Mode'] == 'Probability':
@@ -35,7 +35,7 @@ class Independent(Page):
 			return True
 		else:
 			return False
-
+'''
 
 
 class ResultsWaitPage(WaitPage):
@@ -49,9 +49,7 @@ class Results(Page):
 
 
 page_sequence = [
-    Probability,
-    Positive,
-    Independent,
+    Graph,
     ResultsWaitPage,
     Results
 ]

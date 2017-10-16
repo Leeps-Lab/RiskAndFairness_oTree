@@ -1,8 +1,7 @@
-var vm = new Vue({
+window.riskGraph = Vue.extend({
     components: {
         rangeSlider: RangeSlider
     },
-    el: '#app',
     data: function() {
         return Object.assign({
             // DO NOT CHANGE THE FOLLOWING
@@ -294,7 +293,7 @@ var vm = new Vue({
                         y: null
                     })
 
-                    
+
                     this.selected[index].x = randomX.toFixed(this.precision);
                     this.selected[index].y = self.fn(index, randomX).toFixed(this.precision);
 
@@ -445,12 +444,22 @@ var vm = new Vue({
             this.drawAxis()
             this.showSelect()
         },
-        update: function() {
+        update: function(newData) {
+            if (typeof newData !== 'undefined') {
+                if (typeof jQuery === 'undefined') {
+                    alert('.update() requires jQuery.extend')
+                    return 
+                }
+                $.extend(true, this, newData)
+            }
             d3.select('svg').remove();
             this.start();
         }
     },
     mounted: function() {
         this.start();
+    },
+    beforeDestroy: function() {
+        d3.select('svg').remove()
     }
 })
