@@ -1,3 +1,9 @@
+/*
+Principle maintainer: Rachel Chen <me@rachelchen.me>
+Contributors:
+    <add your name here>
+*/
+
 var vm = new Vue({
     components: {
         rangeSlider: RangeSlider

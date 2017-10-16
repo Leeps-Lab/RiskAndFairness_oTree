@@ -21,6 +21,12 @@
     <script src="{% static "js/vue-range-slider.cjs.js" %}"></script>
     <script type="text/javascript">
 
+    /*
+    Principle maintainer: Rachel Chen <me@rachelchen.me>
+    Contributors:
+        <add your name here>
+    */
+
     var currentRound = {{ player.round_number | json }}
     var constantValues = {{ Constants.static_values | json }}
     var defaultValues  = {{ Constants.default_values | json }}

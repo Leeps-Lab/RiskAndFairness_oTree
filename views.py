@@ -5,6 +5,12 @@ from .models import Constants
 from . import config
 from . import models
 
+"""
+Principle maintainer: Rachel Chen <me@rachelchen.me>
+Contributors:
+    <add your name here>
+"""
+
 class Graph(Page):
 
     form_model = models.Player

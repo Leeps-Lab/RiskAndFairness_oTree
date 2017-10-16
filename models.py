@@ -4,10 +4,10 @@ from otree.api import (
 )
 from . import config
 
-author = 'Rachel Chen <me@rachelchen.me>'
-
-doc = """
-Your app description
+"""
+Principle maintainer: Rachel Chen <me@rachelchen.me>
+Contributors:
+    <add your name here>
 """
 
 
