@@ -294,6 +294,7 @@ var vm = new Vue({
                         y: null
                     })
 
+                    
                     this.selected[index].x = randomX.toFixed(this.precision);
                     this.selected[index].y = self.fn(index, randomX).toFixed(this.precision);
 

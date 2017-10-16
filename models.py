@@ -13,7 +13,7 @@ Your app description
 
 class Constants(BaseConstants):
     name_in_url = 'RiskAndFairness_oTree'
-    players_per_group = None
+    players_per_group = 2
     num_rounds = config.numberOfPeriod();
 
     # Graph parameters
@@ -61,7 +61,13 @@ class Constants(BaseConstants):
 
 
 class Subsession(BaseSubsession):
-    pass
+    
+    def creating_session(self):
+    
+    	# this both breaks players into random groups,
+    	# and assigns the two players in each group to random 
+    	# roles (d vs nd, decision maker vs non-decision maker)
+    	self.group_randomly()
 
 
 class Group(BaseGroup):
@@ -69,4 +75,15 @@ class Group(BaseGroup):
 
 
 class Player(BasePlayer):
-    pass
+	
+	def role(self):
+		if self.id_in_group == 1:
+			return 'decision_maker'
+		else:
+			return 'non-decision_maker'
+
+	x = models.FloatField()
+	y = models.FloatField()
+	#could do this in group also and have it be getplayer1 x and y and getplayer1 x2 and y2 if they choose both?
+	
+
