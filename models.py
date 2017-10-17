@@ -83,7 +83,7 @@ class Group(BaseGroup):
 
     def set_payoffs(self):
         rnd = random()
-
+        print(rnd)
         current_round = self.round_number
         dynamic_values = config.getDynamicValues()
         round_data = dynamic_values[current_round - 1]
