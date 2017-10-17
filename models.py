@@ -83,20 +83,24 @@ class Group(BaseGroup):
 
     def set_payoffs(self):
         rnd = random()
+
         current_round = self.round_number
         dynamic_values = config.getDynamicValues()
         round_data = dynamic_values[current_round - 1]
+
         for p in self.get_players():
             if round_data['Mode'] == 'probability':
                 if p.role() == 'Decider':
                     p.payoff = (rnd < p.prob_a/100)*round_data['a_x'] + (rnd >= p.prob_a/100)*round_data['b_x']
                 if p.role() == 'Partner':
                     p.payoff = (rnd < p.prob_a / 100) * round_data['a_y'] + (rnd >= p.prob_a / 100) * round_data['b_y']
-            if round_data['Mode'] != 'probability': # this needs to change later
+            if round_data['Mode'] == 'independent':
+                p.payoff = (rnd < round_data['ProbA'])*p.square_x + (rnd >= round_data['ProbA'])*p.square_y
+            if round_data['Mode'] == 'positive' or round_data['Mode'] == 'negative':
                 if p.role() == 'Decider':
-                    p.payoff = (rnd < p.prob_a/100)*round_data['a_x'] + (rnd >= p.prob_a/100)*round_data['b_x']
+                    p.payoff = (rnd < round_data['ProbA']) * p.square_x + (rnd >= round_data['ProbA']) * p.square_y
                 if p.role() == 'Partner':
-                    p.payoff = (rnd < p.prob_a / 100) * round_data['a_y'] + (rnd >= p.prob_a / 100) * round_data['b_y']
+                    p.payoff = (rnd < round_data['ProbA']) * p.circle_x + (rnd >= round_data['ProbA']) * p.circle_y
 
 
 
