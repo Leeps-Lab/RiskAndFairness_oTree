@@ -92,12 +92,20 @@ class Group(BaseGroup):
                     p.payoff = (rnd < p.prob_a/100)*round_data['a_x'] + (rnd >= p.prob_a/100)*round_data['b_x']
                 if p.role() == 'Partner':
                     p.payoff = (rnd < p.prob_a / 100) * round_data['a_y'] + (rnd >= p.prob_a / 100) * round_data['b_y']
-            if round_data['Mode'] != 'probability': # this needs to change later
+            if round_data['Mode'] != 'probability':
                 if p.role() == 'Decider':
                     p.payoff = (rnd < p.prob_a/100)*round_data['a_x'] + (rnd >= p.prob_a/100)*round_data['b_x']
                 if p.role() == 'Partner':
                     p.payoff = (rnd < p.prob_a / 100) * round_data['a_y'] + (rnd >= p.prob_a / 100) * round_data['b_y']
 
+
+
+# payoffs are fixed
+	# prob_a is the decider's probabolity
+	# prob_b is the partner's probability
+	
+	#chosen_round = random.randint(1, Constants.num_rounds) -- where to put this
+	# add to 2 outer if statements (if mode ==/!= probability and current_round - 1 == chosen_round)
 
 
 class Subsession(BaseSubsession):
