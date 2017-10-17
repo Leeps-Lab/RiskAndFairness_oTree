@@ -106,7 +106,7 @@ class Group(BaseGroup):
 					    p.payoff = (rnd < p.prob_a / 100) * round_data['a_y'] + (rnd >= p.prob_a / 100) * round_data['b_y']
 				# single mode: each player only sees a square, so they each get the value of their square
 				elif round_data['Mode'] == 'single':
-						p.payoff = (rnd < round_data['ProbA']) * p.square_x + (rnd >= round_data['ProbA']) * p.square_y
+					p.payoff = (rnd < round_data['ProbA']) * p.square_x + (rnd >= round_data['ProbA']) * p.square_y
 				# for all other modes: if rnd < probability of state A (meaning state A was chosen), player x gets 
 				# the square's x coordinate, and player y gets the circle's x coordinate. If state B was chosen, player
 				# x gets the squares y coordinate and player y gets the circles y coordinate. 
