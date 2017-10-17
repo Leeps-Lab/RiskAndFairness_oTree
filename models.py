@@ -93,7 +93,7 @@ class Group(BaseGroup):
 			
 			# generate pseudo_random number to compare to probabilities
     		# 0 <= rnd <= 1
-        	rnd = random().random()
+        	rnd = random.random()
 
 			for p in self.get_players():
 				# probability mode: if rnd < player x's (the Decider's) chosen prob. of state A, they get the preset
