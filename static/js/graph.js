@@ -1,5 +1,5 @@
 /*
-Principle maintainer: Rachel Chen <me@rachelchen.me>
+Principal maintainer: Rachel Chen <me@rachelchen.me>
 Contributors:
     <add your name here>
 */

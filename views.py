@@ -6,14 +6,26 @@ from . import config
 from . import models
 
 """
-Principle maintainer: Rachel Chen <me@rachelchen.me>
+Principal maintainer: Rachel Chen <me@rachelchen.me>
 Contributors:
-    <add your name here>
+    Kristian Lopez Vargas <kristianlvargas@gmail.com>
+    Eli Pandolfo
 """
+
+class InitialInstructions(Page):
+    def is_displayed(self):
+        return self.round_number == 1
+
+
+class TaskInstructions(Page):
+    def is_displayed(self):
+        return self.round_number == 1
+
 
 class Graph(Page):
 
     form_model = models.Player
+
     def get_form_fields(self):
         current_round = self.round_number
         dynamic_values = config.getDynamicValues()
@@ -29,16 +41,25 @@ class Graph(Page):
 
 class ResultsWaitPage(WaitPage):
 
+    def is_displayed(self):
+        return self.round_number == Constants.num_rounds
+
     def after_all_players_arrive(self):
         pass
 
-
 class Results(Page):
-    pass
+
+    def is_displayed(self):
+        return self.round_number == Constants.num_rounds
 
 
 page_sequence = [
+    InitialInstructions,
+    TaskInstructions,
     Graph,
     ResultsWaitPage,
     Results
 ]
+
+
+# yes | otree resetdb && otree runserver

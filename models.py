@@ -3,11 +3,13 @@ from otree.api import (
     Currency as c, currency_range
 )
 from . import config
+import random
 
 """
-Principle maintainer: Rachel Chen <me@rachelchen.me>
+Principal maintainer: Rachel Chen <me@rachelchen.me>
 Contributors:
-    <add your name here>
+    Kristian Lopez Vargas <kristianlvargas@gmail.com>
+    Eli Pandolfo
 """
 
 
@@ -18,7 +20,7 @@ class Constants(BaseConstants):
 
     # I'm offloading the heavy lifting to JavaScript because I'm very bad at Python
     static_values = {
-        'precision': 2,           # number of decimcals
+        'precision': 1,         # number of decimals
         'scale': {
             'type': 'fixed',    # axis scaling, could be "fixed" or "dynamic"
             'max': 100          # only used in "fixed"
@@ -29,8 +31,8 @@ class Constants(BaseConstants):
             'maxArea': 100
         },
         'width': 600,            # width of the graph
-        'height': 600,            # height of the graph
-        'margin': {              # grapg margins
+        'height': 600,           # height of the graph
+        'margin': {              # graph margins
             'top': 20,
             'right': 20,
             'bottom': 50,
@@ -40,10 +42,10 @@ class Constants(BaseConstants):
     default_values = {
         'mode': 'negative',
         'label': {
-            'x': 'x axis',
-            'y': 'y axis'
+            'x': 'State A',
+            'y': 'State B'
         },
-        # only used in non-probability mode
+        # only used in security mode (aka non-probability mode)
         'equation': {
             'm': 100,           # income
             'px': 1,            # price of X
@@ -60,19 +62,6 @@ class Constants(BaseConstants):
     }
     dynamic_values = config.getDynamicValues()
 
-class Subsession(BaseSubsession):
-
-    def creating_session(self):
-
-    	# this both breaks players into random groups,
-    	# and assigns the two players in each group to random
-    	# roles (d vs nd, decision maker vs non-decision maker)
-    	self.group_randomly()
-
-
-class Group(BaseGroup):
-    pass
-
 
 class Player(BasePlayer):
 
@@ -86,6 +75,37 @@ class Player(BasePlayer):
 
     def role(self):
         if self.id_in_group == 1:
-            return 'decision_maker'
+            return 'Decider'
         else:
-            return 'non-decision_maker'
+            return 'Partner'
+
+class Group(BaseGroup):
+
+    def set_payoffs(self):
+        rnd = random()
+        current_round = self.round_number
+        dynamic_values = config.getDynamicValues()
+        round_data = dynamic_values[current_round - 1]
+        for p in self.get_players():
+            if round_data['Mode'] == 'probability':
+                if p.role() == 'Decider':
+                    p.payoff = (rnd < p.prob_a/100)*round_data['a_x'] + (rnd >= p.prob_a/100)*round_data['b_x']
+                if p.role() == 'Partner':
+                    p.payoff = (rnd < p.prob_a / 100) * round_data['a_y'] + (rnd >= p.prob_a / 100) * round_data['b_y']
+            if round_data['Mode'] != 'probability': # this needs to change later
+                if p.role() == 'Decider':
+                    p.payoff = (rnd < p.prob_a/100)*round_data['a_x'] + (rnd >= p.prob_a/100)*round_data['b_x']
+                if p.role() == 'Partner':
+                    p.payoff = (rnd < p.prob_a / 100) * round_data['a_y'] + (rnd >= p.prob_a / 100) * round_data['b_y']
+
+
+
+class Subsession(BaseSubsession):
+    def creating_session(self):
+        if self.round_number == 1:
+            self.group_randomly()
+        else:
+            self.group_like_round(1)
+
+
+# yes | otree resetdb && otree runserver
