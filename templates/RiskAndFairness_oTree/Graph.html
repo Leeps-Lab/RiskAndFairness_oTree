@@ -141,7 +141,7 @@
             <div class="row">
                 <div class="graph col-md-6"></div>
                 <div class="col-md-6" v-if="mode === 'probability'">
-                    <h5>Currently selected values:</h5>
+                    <h5>This is your choice:</h5>
                     <div class="row" style="margin-top: 50px">
                         <range-slider
                         class="slider"
@@ -190,23 +190,7 @@
                     </div>
                 </div>
                 <div class="col-md-6" v-if="mode !== 'probability'">
-                    <div class="row">
-                        <h5>Currently selected values:</h5>
-                        <div class="col-12">
-                            <div class="col-2">
-                                Circle:
-                            </div>
-                            <div class="col-10" v-html="'(x = ' + selected[0].x + ', y = ' + selected[0].y + ')'">
-                            </div>
-                        </div>
-                        <div class="col-12">
-                            <div class="col-2">
-                                Square:
-                            </div>
-                            <div class="col-10" v-html="'(x = ' + selected[1].x + ', y = ' + selected[1].y + ')'">
-                            </div>
-                        </div>
-                    </div>
+                    <h5>This is your choice:</h5>
                     <div class="row col-md-6" style="margin-top: 50px">
                         <table class="table table-bordered table-condensed small">
                             <thead>
