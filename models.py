@@ -83,36 +83,38 @@ class Group(BaseGroup):
 
     def set_payoffs(self):
         current_round = self.round_number
+        print('current_round in set payoffs', current_round)
         # check if current round is the preset payoff round
         if current_round == self.session.vars['paying_round']:
             # pull dictionary of values for current round from config.py
             dynamic_values = config.getDynamicValues()
             round_data = dynamic_values[current_round - 1]
+            print('round data in set payoffs', round_data)
 
-            # generate pseudo_random number to compare to probabilities
-            # 0 <= rnd <= 1
+            # generate pseudo_random number to compare to probabilities  0 <= rnd <= 1
+            # !!!!  this is now run every round so rnd cant be here. !!!!
             rnd = random.random()
+            print('random rnd', rnd)
 
-            for p in self.get_players():
-                # probability mode: if rnd < player x's (the Decider's) chosen prob. of state A, they get the preset
-                # state A_x payoff, otherwise they get paid preset state b_x payoff. If rnd < player y's prob for state A
-                # (also chosen by player x), player y gets the preset state a_y payoff, else the preset state b_y payoff.
-                if round_data['mode'] == 'probability':
-                    if p.role() == 'Decider':
-                        p.payoff = (rnd < p.prob_a/100)*round_data['a_x'] + (rnd >= p.prob_a/100)*round_data['b_x']
-                    elif p.role() == 'Partner':
-                        p.payoff = (rnd < p.prob_a / 100) * round_data['a_y'] + (rnd >= p.prob_a / 100) * round_data['b_y']
-                # single mode: each player only sees a square, so they each get the value of their square
-                elif round_data['mode'] == 'single':
-                    p.payoff = (rnd < round_data['prob_a']) * p.square_x + (rnd >= round_data['prob_a']) * p.square_y
-                # for all other modes: if rnd < probability of state A (meaning state A was chosen), player x gets
-                # the square's x coordinate, and player y gets the circle's x coordinate. If state B was chosen, player
-                # x gets the squares y coordinate and player y gets the circles y coordinate.
-                elif round_data['mode'] in ['positive', 'negative', 'independent']:
-                    if p.role() == 'Decider':
-                        p.payoff = (rnd < round_data['prob_a']) * p.square_x + (rnd >= round_data['prob_a']) * p.square_y
-                elif p.role() == 'Partner':
-                    p.payoff = (rnd < round_data['prob_a']) * p.circle_x + (rnd >= round_data['prob_a']) * p.circle_y
+            decider = self.get_player_by_role('Decider')
+            partner = self.get_player_by_role('Partner')
+
+            if round_data['mode'] == 'probability':
+                decider.payoff = \
+                    (rnd < decider.prob_a / 100) * round_data['a_x'] + (rnd >= decider.prob_a / 100) * round_data['b_x']
+                partner.payoff = \
+                    (rnd < decider.prob_a / 100) * round_data['a_y'] + (rnd >= decider.prob_a / 100) * round_data['b_y']
+            elif round_data['mode'] == 'single':
+                decider.payoff = \
+                    (rnd < round_data['prob_a'] / 100) * decider.me_a + (rnd >= round_data['prob_a'] / 100) * decider.me_b
+                partner.payoff = \
+                    (rnd < round_data['prob_a'] / 100) * partner.partner_a + (rnd >= round_data['prob_a'] / 100) * partner.partner_b
+            elif round_data['mode'] in ['positive', 'negative', 'independent']:
+                decider.payoff = \
+                    (rnd < round_data['prob_a'] / 100) * decider.me_a + (rnd >= round_data['prob_a'] / 100) * decider.me_b
+                partner.payoff = \
+                    (rnd < round_data['prob_a'] / 100) * decider.partner_a + (rnd >= round_data['prob_a'] / 100) * decider.partner_b
+
 
 class Subsession(BaseSubsession):
     def creating_session(self):

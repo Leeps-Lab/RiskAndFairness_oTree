@@ -39,6 +39,15 @@ class Graph(Page):
             return ['mode', 'partner_a', 'partner_b', 'me_a', 'me_b', 'prob_a', 'prob_b']
 
 
+    def before_next_page(self):
+        current_round = self.round_number
+        dynamic_values = config.getDynamicValues()
+        round_data = dynamic_values[current_round - 1]
+        if round_data['mode'] == 'single':
+            self.group.set_payoffs()
+        elif self.player.id_in_group == 1:
+            self.group.set_payoffs()
+
 class ResultsWaitPage(WaitPage):
 
     def is_displayed(self):
