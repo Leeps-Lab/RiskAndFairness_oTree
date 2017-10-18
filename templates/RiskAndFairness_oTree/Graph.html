@@ -44,13 +44,13 @@
     var getRoundLabel = function() {
         var roundData = dynamicValues[currentRound - 1]
         var template =  'Round ' + currentRound + ': '
-        if (roundData && roundData.Mode) return template + roundData.Mode
+        if (roundData && roundData.mode) return template + roundData.mode
         return template + 'negative'
     }
 
     var getMode = function() {
         var roundData = dynamicValues[currentRound - 1]
-        if (roundData && roundData.Mode) return roundData.Mode
+        if (roundData && roundData.mode) return roundData.mode
         return 'negative'
     }
 
@@ -61,13 +61,13 @@
     var getEquation = function() {
         var roundData = dynamicValues[currentRound - 1]
         if (roundData) {
-            if (roundData.Mode && roundData.Mode === 'probability') {
+            if (roundData.mode && roundData.mode === 'probability') {
                 return defaultValues.equation
             }
             return {
-                m: defaultValue(roundData, 'Income', defaultValues.equation, 'm'),
-                px: defaultValue(roundData, 'Py', defaultValues.equation, 'py'),
-                py: defaultValue(roundData, 'Px', defaultValues.equation, 'px'),
+                m: defaultValue(roundData, 'm', defaultValues.equation, 'm'),
+                px: defaultValue(roundData, 'py', defaultValues.equation, 'py'),
+                py: defaultValue(roundData, 'px', defaultValues.equation, 'px'),
                 a: (typeof roundData.A === 'undefined' ? defaultValues.equation.a : {
                     x: defaultValue(roundData.A, 'X', defaultValues.equation.a, 'x'),
                     y: defaultValue(roundData.A, 'Y', defaultValues.equation.a, 'y'),
@@ -90,7 +90,7 @@
                 y: defaultValue(roundData.label, 'y', defaultValues.label, 'y')
             })
         }else{
-            return defaultValues.equation
+            return defaultValues.label
         }
     }
 

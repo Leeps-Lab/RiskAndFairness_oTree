@@ -30,8 +30,8 @@ class Graph(Page):
         current_round = self.round_number
         dynamic_values = config.getDynamicValues()
         round_data = dynamic_values[current_round - 1]
-        if round_data is not None and round_data['Mode'] is not None:
-            if round_data['Mode'] == 'probability':
+        if round_data is not None and round_data['mode'] is not None:
+            if round_data['mode'] == 'probability':
                 return ['mode', 'prob_a', 'prob_b']
             else:
                 return ['mode', 'circle_x', 'circle_y', 'square_x', 'square_y']
