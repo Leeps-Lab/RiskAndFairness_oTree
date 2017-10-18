@@ -66,8 +66,8 @@ class Constants(BaseConstants):
 class Player(BasePlayer):
 
     mode = models.CharField()
-    other_a = models.FloatField() # Circle is other
-    other_b = models.FloatField()
+    partner_a = models.FloatField() # Circle is other
+    partner_b = models.FloatField()
     me_a = models.FloatField() # Square is me
     me_b = models.FloatField()
     prob_a = models.FloatField()
