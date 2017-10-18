@@ -7,7 +7,8 @@ data = [
         'x': 'Something 1',
         'y': 'Something 2'
     }}, # example usage for label
-    {'mode': 'independent', 'm': 100, 'p_x': 2, 'p_y': 1, 'prob_a': 0.5},
+    {'mode': 'independent', 'm': 100, 'p_x': 2, 'p_y': 1, 'prob_a': 50},
+    # default probability in Security mode is prob_a: 0, prob_b: 100
     {'mode': 'positive'   , 'm': 100, 'p_x': 1, 'p_y': 3}
 ]
 

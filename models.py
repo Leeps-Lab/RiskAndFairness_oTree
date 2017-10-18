@@ -54,6 +54,10 @@ class Constants(BaseConstants):
             'a_y': 80,         # y value of point A
             'b_x': 65,        # x value of point B
             'b_y': 45         # y value of point B
+        },
+        'prob': {
+            'a': 0,
+            'b': 100
         }
     }
     dynamic_values = config.getDynamicValues()
@@ -62,10 +66,10 @@ class Constants(BaseConstants):
 class Player(BasePlayer):
 
     mode = models.CharField()
-    circle_x = models.FloatField()
-    circle_y = models.FloatField()
-    square_x = models.FloatField()
-    square_y = models.FloatField()
+    other_a = models.FloatField() # Circle is other
+    other_b = models.FloatField()
+    me_a = models.FloatField() # Square is me
+    me_b = models.FloatField()
     prob_a = models.FloatField()
     prob_b = models.FloatField()
 

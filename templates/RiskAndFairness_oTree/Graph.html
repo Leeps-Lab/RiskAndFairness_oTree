@@ -84,6 +84,30 @@
         }
     }
 
+    var getProb = function() {
+        var roundData = dynamicValues[currentRound - 1]
+
+        if (roundData.mode && roundData.mode === 'probability') {
+            return defaultValues.prob
+        }
+
+        var prob_a = 0
+        var prob_b = 100
+
+        if (typeof roundData.prob_b === 'undefined' && typeof roundData.prob_a !== 'undefined') {
+            prob_a = roundData.prob_a
+            prob_b = 100 - prob_a
+        }else if (typeof roundData.prob_b !== 'undefined' && typeof roundData.prob_a === 'undefined') {
+            prob_b = roundData.prob_b
+            prob_a = 100 - prob_b
+        }
+
+        return {
+            a: prob_a,
+            b: prob_b
+        }
+    }
+
     var getGraphData = function() {
         var graphData = {}
 
@@ -92,7 +116,11 @@
         Object.assign(graphData, {
             mode: getMode(),
             label: getLabels(),
-            equation: getEquation()
+            equation: getEquation(),
+            prob: getProb(),
+            onChangeCallback: function() {
+                console.log('hi')
+            }
         })
 
         return graphData
@@ -158,10 +186,12 @@
             </div>
             <div class="row" v-if="mode !== 'probability'">
                 <input type="hidden" name="mode" v-model="mode" />
-                <input type="hidden" name="circle_x" v-model="selected[0].x" />
-                <input type="hidden" name="circle_y" v-model="selected[0].y" />
-                <input type="hidden" name="square_x" v-model="selected[1].x" />
-                <input type="hidden" name="square_y" v-model="selected[1].y" />
+                <input type="hidden" name="other_a" v-model="selected[0].x" />
+                <input type="hidden" name="other_b" v-model="selected[0].y" />
+                <input type="hidden" name="me_a" v-model="selected[1].x" />
+                <input type="hidden" name="me_b" v-model="selected[1].y" />
+                <input type="hidden" name="prob_a" v-model="prob.a" />
+                <input type="hidden" name="prob_b" v-model="prob.b" />
             </div>
             <div class="row" v-if="mode === 'probability'">
                 <input type="hidden" name="mode" v-model="mode" />

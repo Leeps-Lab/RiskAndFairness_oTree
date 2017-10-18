@@ -34,9 +34,9 @@ class Graph(Page):
             if round_data['mode'] == 'probability':
                 return ['mode', 'prob_a', 'prob_b']
             else:
-                return ['mode', 'circle_x', 'circle_y', 'square_x', 'square_y']
+                return ['mode', 'other_a', 'other_b', 'me_a', 'me_b', 'prob_a', 'prob_b']
         else:
-            return ['mode', 'circle_x', 'circle_y', 'square_x', 'square_y', 'prob_a', 'prob_b']
+            return ['mode', 'other_a', 'other_b', 'me_a', 'me_b', 'prob_a', 'prob_b']
 
 
 class ResultsWaitPage(WaitPage):

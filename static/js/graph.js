@@ -12,10 +12,6 @@ var vm = new Vue({
     data: function() {
         return Object.assign({
             // DO NOT CHANGE THE FOLLOWING
-            prob: {
-                a: 0,
-                b: 100
-            },
             radius: {
                 a: 0,
                 b: 100
@@ -43,7 +39,8 @@ var vm = new Vue({
                 x: null,
                 y: null
             }],
-            equations: []
+            equations: [],
+            onChangeCallback: function() {}
         }, appSpecific);
     },
     computed: {
@@ -325,6 +322,9 @@ var vm = new Vue({
                 }
 
                 var drag = d3.drag().on('drag', function(d) {
+
+                    self.onChangeCallback()
+
                     var index = d3.select(this).attr('line-index');
 
                     var xValue = self.graph.x.invert(d3.event.x);
