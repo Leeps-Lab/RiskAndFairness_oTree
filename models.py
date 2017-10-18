@@ -50,14 +50,10 @@ class Constants(BaseConstants):
             'm': 100,           # income
             'px': 1,            # price of X
             'py': 2,            # price of Y
-            'a': {
-                'x': 30,        # x value of point A
-                'y': 80         # y value of point A
-            },
-            'b': {
-                'x': 65,        # x value of point B
-                'y': 45         # y value of point B
-            }
+            'a_x': 30,        # x value of point A
+            'a_y': 80,         # y value of point A
+            'b_x': 65,        # x value of point B
+            'b_y': 45         # y value of point B
         }
     }
     dynamic_values = config.getDynamicValues()

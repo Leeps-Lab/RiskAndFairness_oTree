@@ -61,21 +61,18 @@
     var getEquation = function() {
         var roundData = dynamicValues[currentRound - 1]
         if (roundData) {
-            if (roundData.mode && roundData.mode === 'probability') {
-                return defaultValues.equation
-            }
             return {
                 m: defaultValue(roundData, 'm', defaultValues.equation, 'm'),
                 px: defaultValue(roundData, 'py', defaultValues.equation, 'py'),
                 py: defaultValue(roundData, 'px', defaultValues.equation, 'px'),
-                a: (typeof roundData.A === 'undefined' ? defaultValues.equation.a : {
-                    x: defaultValue(roundData.A, 'X', defaultValues.equation.a, 'x'),
-                    y: defaultValue(roundData.A, 'Y', defaultValues.equation.a, 'y'),
-                }),
-                b: (typeof roundData.B === 'undefined' ? defaultValues.equation.b : {
-                    x: defaultValue(roundData.B, 'X', defaultValues.equation.b, 'x'),
-                    y: defaultValue(roundData.B, 'Y', defaultValues.equation.b, 'y'),
-                })
+                a: {
+                    x: defaultValue(roundData, 'a_x', defaultValues.equation, 'a_x'),
+                    y: defaultValue(roundData, 'a_y', defaultValues.equation, 'a_y'),
+                },
+                b: {
+                    x: defaultValue(roundData, 'b_x', defaultValues.equation, 'b_x'),
+                    y: defaultValue(roundData, 'b_y', defaultValues.equation, 'b_y'),
+                }
             }
         }else{
             return defaultValues.equation
