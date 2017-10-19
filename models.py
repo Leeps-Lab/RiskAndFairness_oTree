@@ -124,6 +124,7 @@ class Subsession(BaseSubsession):
             self.group_randomly()
             # set a random round to be the payoff round
             self.session.vars['paying_round'] = random.randint(1, Constants.num_rounds)
+            print('------PAYING ROUND------', self.session.vars['paying_round'])
         else:
             self.group_like_round(1)
 
