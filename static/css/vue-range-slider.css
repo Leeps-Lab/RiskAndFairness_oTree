@@ -31,7 +31,7 @@
 }
 
 .range-slider-fill {
-  background-color: #21fb92;
+  background-color: #e2e2e2; /* changed from #21fb92 */
 }
 
 .range-slider-knob {
