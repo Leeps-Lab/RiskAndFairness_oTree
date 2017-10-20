@@ -72,6 +72,7 @@ class Player(BasePlayer):
     me_b = models.FloatField()
     prob_a = models.FloatField()
     prob_b = models.FloatField()
+    outcome = models.CharField()
 
     def role(self):
         if self.id_in_group == 1:
@@ -104,19 +105,24 @@ class Group(BaseGroup):
             if round_data['mode'] == 'probability':
                 decider.payoff = \
                     (rnd < decider.prob_a / 100) * round_data['a_x'] + (rnd >= decider.prob_a / 100) * round_data['b_x']
+                decider.outcome = 'A' if rnd < decider.prob_a / 100 else 'B'
                 partner.payoff = \
                     (rnd < decider.prob_a / 100) * round_data['a_y'] + (rnd >= decider.prob_a / 100) * round_data['b_y']
+                partner.outcome = 'A' if rnd < decider.prob_a / 100 else 'B'
             elif round_data['mode'] == 'single':
                 decider.payoff = \
                     (rnd < round_data['prob_a'] / 100) * decider.me_a + (rnd >= round_data['prob_a'] / 100) * decider.me_b
+                decider.outcome = 'A' if rnd < round_data['prob_a'] / 100 else 'B'
                 partner.payoff = \
                     (rnd < round_data['prob_a'] / 100) * partner.partner_a + (rnd >= round_data['prob_a'] / 100) * partner.partner_b
+                partner.outcome = 'A' if rnd < round_data['prob_a'] / 100 else 'B'
             elif round_data['mode'] in ['positive', 'negative', 'independent']:
                 decider.payoff = \
                     (rnd < round_data['prob_a'] / 100) * decider.me_a + (rnd >= round_data['prob_a'] / 100) * decider.me_b
+                decider.outcome = 'A' if rnd < round_data['prob_a'] / 100 else 'B'
                 partner.payoff = \
                     (rnd < round_data['prob_a'] / 100) * decider.partner_a + (rnd >= round_data['prob_a'] / 100) * decider.partner_b
-
+                partner.outcome = 'A' if rnd < round_data['prob_a'] / 100 else 'B'
 
 class Subsession(BaseSubsession):
     def creating_session(self):

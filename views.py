@@ -61,10 +61,17 @@ class Results(Page):
     def is_displayed(self):
         return self.round_number == Constants.num_rounds
 
+    def vars_for_template(self):
+        # variables:
+        mode = Constants.dynamic_values[self.session.vars['paying_round'] - 1]['mode']
+        decision = self.group.get_player_by_id(1).me_a if mode != 'probability' else self.group.get_player_by_id(1).prob_a
+        decision = str(round(decision, 1)) + '% for A'
+        return {'mode': mode.capitalize(), 'decision': decision}
+
 
 page_sequence = [
     InitialInstructions,
-    TaskInstructions,
+    #TaskInstructions,
     Graph,
     ResultsWaitPage,
     Results
