@@ -203,13 +203,13 @@
                             <tbody>
                                 <tr>
                                     <td v-html="'A: ' + prob.a.toFixed(0) + '%'"></td>
-                                    <td v-html="selected[1].x"></td>
                                     <td v-html="selected[0].x"></td>
+                                    <td v-html="selected[1].x"></td>
                                 </tr>
                                 <tr>
                                     <td v-html="'B: ' + prob.b.toFixed(0) + '%'"></td>
-                                    <td v-html="selected[1].y"></td>
                                     <td v-html="selected[0].y"></td>
+                                    <td v-html="selected[1].y"></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -218,10 +218,10 @@
             </div>
             <div class="row" v-if="mode !== 'probability'">
                 <input type="hidden" name="mode" v-model="mode" />
-                <input type="hidden" name="partner_a" v-model="selected[0].x" />
-                <input type="hidden" name="partner_b" v-model="selected[0].y" />
-                <input type="hidden" name="me_a" v-model="selected[1].x" />
-                <input type="hidden" name="me_b" v-model="selected[1].y" />
+                <input type="hidden" name="partner_a" v-model="selected[1].x" />
+                <input type="hidden" name="partner_b" v-model="selected[1].y" />
+                <input type="hidden" name="me_a" v-model="selected[0].x" />
+                <input type="hidden" name="me_b" v-model="selected[0].y" />
                 <input type="hidden" name="prob_a" v-model="prob.a" />
                 <input type="hidden" name="prob_b" v-model="prob.b" />
             </div>

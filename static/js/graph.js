@@ -429,16 +429,6 @@ var vm = new Vue({
                         return;
                     }
                     if (index === 0) {
-                        return self.graph.svg.append('circle')
-                        .attr('r', 5)
-                        .attr('line-index', index)
-                        .attr('cx', function(d) {
-                            return self.graph.x(randomX)
-                        })
-                        .attr('cy', function(d) {
-                            return self.graph.y(self.fn(index, randomX))
-                        }).call(drag)
-                    }else{
                         return self.graph.svg.append('rect')
                         .attr('width', 10)
                         .attr('height', 10)
@@ -447,6 +437,16 @@ var vm = new Vue({
                             return self.graph.x(randomX)
                         })
                         .attr('y', function(d) {
+                            return self.graph.y(self.fn(index, randomX))
+                        }).call(drag)
+                    }else{
+                        return self.graph.svg.append('circle')
+                        .attr('r', 5)
+                        .attr('line-index', index)
+                        .attr('cx', function(d) {
+                            return self.graph.x(randomX)
+                        })
+                        .attr('cy', function(d) {
                             return self.graph.y(self.fn(index, randomX))
                         }).call(drag)
                     }
