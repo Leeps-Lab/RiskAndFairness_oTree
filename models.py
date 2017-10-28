@@ -135,4 +135,7 @@ class Subsession(BaseSubsession):
             self.group_like_round(1)
 
 
+# git add
+# cd .. && yes | otree resetdb && otree runserver && cd RiskAndFairness_oTree
 # yes | otree resetdb && otree runserver
+# git add ______ && git commit -m "_______________" && git push

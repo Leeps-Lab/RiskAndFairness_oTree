@@ -38,11 +38,18 @@ class Graph(Page):
         if round_data is not None and round_data['mode'] is not None:
             if round_data['mode'] == 'probability':
                 return ['mode', 'prob_a', 'prob_b']
+            elif round_data['mode'] == 'single':
+                return ['mode', 'me_a', 'me_b', 'prob_a', 'prob_b']
             else:
                 return ['mode', 'partner_a', 'partner_b', 'me_a', 'me_b', 'prob_a', 'prob_b']
         else:
             return ['mode', 'partner_a', 'partner_b', 'me_a', 'me_b', 'prob_a', 'prob_b']
 
+    def vars_for_template(self):
+        current_round = self.round_number
+        dynamic_values = config.getDynamicValues()
+        round_data = dynamic_values[current_round - 1]
+        return {'mode': round_data['mode']}
 
     def before_next_page(self):
         current_round = self.round_number

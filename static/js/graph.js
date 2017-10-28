@@ -12,6 +12,8 @@ var vm = new Vue({
     data: function() {
         return Object.assign({
             // DO NOT CHANGE THE FOLLOWING
+            circleRadius: 8,
+            squareLength: 16, // this must be the multiple of 2 of circleRadius
             radius: {
                 a: 0,
                 b: 100
@@ -66,8 +68,33 @@ var vm = new Vue({
             d3.select('[line-index="b"]')
             .attr('r', this.radius.b)
 
-            this.tip.a.text('(' + this.equation.a.x + ', ' + this.equation.a.y + ') ' + this.prob.a.toFixed(0) + '% ')
-            this.tip.b.text('(' + this.equation.b.x + ', ' + this.equation.b.y + ') ' + this.prob.b.toFixed(0) + '% ')
+            // TODO: clean up this fucking mess...
+
+            this.tip.a.text(null)
+            this.tip.a.append('tspan')
+            .attr('x', this.tip.a.attr('x'))
+            .text('A: ' + this.prob.a.toFixed(0) + '% change')
+            this.tip.a.append('tspan')
+            .attr('x', this.tip.a.attr('x'))
+            .attr('dy', '15px')
+            .text('You: ' + this.equation.a.x)
+            this.tip.a.append('tspan')
+            .attr('x', this.tip.a.attr('x'))
+            .attr('dy', '15px')
+            .text('Partner: ' + this.equation.a.y)
+
+            this.tip.b.text(null)
+            this.tip.b.append('tspan')
+            .attr('x', this.tip.b.attr('x'))
+            .text('B: ' + this.prob.b.toFixed(0) + '% change')
+            this.tip.b.append('tspan')
+            .attr('x', this.tip.b.attr('x'))
+            .attr('dy', '15px')
+            .text('You: ' + this.equation.b.x)
+            this.tip.b.append('tspan')
+            .attr('x', this.tip.b.attr('x'))
+            .attr('dy', '15px')
+            .text('Partner: ' + this.equation.b.y)
         }
     },
     methods: {
@@ -240,6 +267,7 @@ var vm = new Vue({
             this.graph.yAxis = d3.axisLeft(this.graph.y).tickValues(yTicks);
 
             this.graph.svg.append('g')
+            .attr('class', 'gray')
             .attr('transform', 'translate(0, ' + this.dimension.height + ')')
             .call(this.graph.xAxis)
 
@@ -249,6 +277,7 @@ var vm = new Vue({
             .text(this.label.x)
 
             this.graph.svg.append('g')
+            .attr('class', 'gray')
             .call(this.graph.yAxis)
 
             this.graph.svg.append('text')
@@ -271,9 +300,13 @@ var vm = new Vue({
                 this.graph.y.domain([0, this.scale.max])
             }
 
+            var color = 'MediumPurple'
+
+            if (this.mode === 'probability') color = 'PaleGreen'
+
             for (var index = 0; index < this.equations.length; index++) {
                 this.graph.svg.append('path')
-                .attr('class', 'line')
+                .style('stroke', color)
                 .attr('d', this.graph.line(this.graphData[index]))
             }
         },
@@ -296,12 +329,14 @@ var vm = new Vue({
                     randomX = this.equation.a.x;
                 }else{
                     if (index === 0) {
-                        randomX = (Math.random() * (this.graph.maxX - this.graph.minX) + this.graph.minX);
+                        randomX = (Math.random() * (this.minMax[index].maxX - this.minMax[index].minX) + this.minMax[index].minX);
                     }else{
-                        var currentXValue = self.fnInverse(index, randomX);
-                        if (currentXValue > self.minMax[index].maxX) currentXValue = self.minMax[index].maxX;
-                        if (currentXValue < self.minMax[index].minX) currentXValue = self.minMax[index].minX;
-                        randomX = currentXValue
+                        if (this.mode !== 'positive') {
+                            var currentXValue = self.fnInverse(index, randomX);
+                            if (currentXValue > self.minMax[index].maxX) currentXValue = self.minMax[index].maxX;
+                            if (currentXValue < self.minMax[index].minX) currentXValue = self.minMax[index].minX;
+                            randomX = currentXValue
+                        }
                     }
 
                     this.$set(this.selected, index, {
@@ -309,15 +344,26 @@ var vm = new Vue({
                         y: null
                     })
 
-
                     this.selected[index].x = randomX.toFixed(this.precision);
                     this.selected[index].y = self.fn(index, randomX).toFixed(this.precision);
 
+                    var text = ''
+
+                    if (['independent', 'single', 'negative'].indexOf(self.mode) !== -1) {
+                        if (index === 0) {
+                            text = 'You (A: ' + self.selected[index].x + ', B: ' + self.selected[index].y + ')'
+                        }else{
+                            text = 'Partner (A: ' + self.selected[index].x + ', B: ' + self.selected[index].y + ')'
+                        }
+                    }else if (self.mode === 'positive') {
+                        text = 'You = Partner (A: ' + self.selected[index].x + ', B: ' + self.selected[index].y + ')'
+                    }
+
                     self.tip[index] = this.graph.svg
                     .append('text')
-                    .attr('x', self.graph.x(randomX))
+                    .attr('x', self.graph.x(randomX) + 15)
                     .attr('y', self.graph.y(self.fn(index, randomX)) - 15)
-                    .text('(' + self.selected[index].x + ', ' + self.selected[index].y + ')')
+                    .text(text)
 
                 }
 
@@ -325,7 +371,8 @@ var vm = new Vue({
 
                     self.onChangeCallback()
 
-                    var index = d3.select(this).attr('line-index');
+                    var me = d3.select(this)
+                    var index = me.attr('line-index');
 
                     var xValue = self.graph.x.invert(d3.event.x);
                     if (xValue > self.minMax[index].maxX) xValue = self.minMax[index].maxX;
@@ -341,11 +388,23 @@ var vm = new Vue({
                     self.selected[index].x = xValue.toFixed(self.precision)
                     self.selected[index].y = yValue.toFixed(self.precision)
 
+                    var text = ''
+
+                    if (['independent', 'single', 'negative'].indexOf(self.mode) !== -1) {
+                        if (index == 0) {
+                            text = 'You (A: ' + xValue.toFixed(self.precision) + ', B: ' + yValue.toFixed(self.precision) + ')'
+                        }else{
+                            text = 'Partner (A: ' + xValue.toFixed(self.precision) + ', B: ' + yValue.toFixed(self.precision) + ')'
+                        }
+                    }else if (self.mode === 'positive') {
+                        text = 'You = Partner (A: ' + xValue.toFixed(self.precision) + ', B: ' + yValue.toFixed(self.precision) + ')'
+                    }
+
                     if (self.tip && self.tip[index]) {
                         self.tip[index]
-                        .attr('x', x)
+                        .attr('x', x + 15)
                         .attr('y', y - 15)
-                        .text('(' + xValue.toFixed(self.precision) + ', ' + yValue.toFixed(self.precision) + ')')
+                        .text(text)
                     }
 
                     if (self.mode !== 'probability') {
@@ -365,19 +424,31 @@ var vm = new Vue({
                             if (other.attr('cx')) {
                                 other.attr('cx', otherX)
                                 other.attr('cy', otherY)
+                                me.attr('x', x - self.circleRadius)
+                                me.attr('y', y - self.circleRadius)
                             }else{
-                                other.attr('x', otherX)
-                                other.attr('y', otherY)
+                                other.attr('x', otherX - self.circleRadius)
+                                other.attr('y', otherY - self.circleRadius)
+                                me.attr('cx', x)
+                                me.attr('cy', y)
                             }
 
                             self.selected[otherIndex].x = otherXValue.toFixed(self.precision)
                             self.selected[otherIndex].y = otherYValue.toFixed(self.precision)
 
+                            var otherText = ''
+
+                            if (otherIndex == 0) {
+                                otherText = 'You (A: ' + otherXValue.toFixed(self.precision) + ', B: ' + otherYValue.toFixed(self.precision) + ')'
+                            }else{
+                                otherText = 'Partner (A: ' + otherXValue.toFixed(self.precision) + ', B: ' + otherYValue.toFixed(self.precision) + ')'
+                            }
+
                             if (self.tip && self.tip[otherIndex]) {
                                 self.tip[otherIndex]
-                                .attr('x', otherX)
+                                .attr('x', otherX + 15)
                                 .attr('y', otherY - 15)
-                                .text('(' + otherXValue.toFixed(self.precision) + ', ' + otherYValue.toFixed(self.precision) + ')');
+                                .text(otherText);
                             }
 
                             break;
@@ -387,21 +458,35 @@ var vm = new Vue({
                             if (other.attr('cx')) {
                                 other.attr('cx', x)
                                 other.attr('cy', y)
+                                me.attr('x', x - self.circleRadius)
+                                me.attr('y', y - self.circleRadius)
                             }else{
-                                other.attr('x', x)
-                                other.attr('y', y)
+                                other.attr('x', x - self.circleRadius)
+                                other.attr('y', y - self.circleRadius)
+                                me.attr('cx', x)
+                                me.attr('cy', y)
                             }
 
                             self.selected[otherIndex].x = xValue.toFixed(self.precision)
                             self.selected[otherIndex].y = yValue.toFixed(self.precision)
 
-                            if (self.tip && self.tip[otherIndex]) {
-                                self.tip[otherIndex]
-                                .attr('x', x)
-                                .attr('y', y - 15)
-                                .text('(' + xValue.toFixed(self.precision) + ', ' + yValue.toFixed(self.precision) + ')')
+                            var otherText = ''
+
+                            if (otherIndex == 0) {
+                                otherText = 'You = Partner (A: ' + xValue.toFixed(self.precision) + ', B: ' + yValue.toFixed(self.precision) + ')'
                             }
 
+                            if (self.tip && self.tip[otherIndex]) {
+                                self.tip[otherIndex]
+                                .attr('x', x + 15)
+                                .attr('y', y - 15)
+                                .text(otherText)
+                            }
+
+                            break;
+                            default:
+                            me.attr('x', x - self.circleRadius)
+                            me.attr('y', y - self.circleRadius)
                             break;
                         }
                     }
@@ -422,31 +507,33 @@ var vm = new Vue({
                             })
                             self.tip[s] = self.graph.svg
                             .append('text')
-                            .attr('x', self.graph.x(self.equation[s].x))
-                            .attr('y', self.graph.y(self.fn(index, self.equation[s].x)) - 15)
-                            .text('(' + self.equation[s].x + ', ' + self.equation[s].y + ') ' + self.prob[s].toFixed(0) + '% ')
+                            .attr('x', self.graph.x(self.equation[s].x) + 15)
+                            .attr('y', self.graph.y(self.fn(index, self.equation[s].x)) - 45)
+                            .text(null)
                         })
                         return;
                     }
                     if (index === 0) {
+                        return self.graph.svg.append('rect')
+                        .style('fill', 'blue')
+                        .attr('width', self.squareLength)
+                        .attr('height', self.squareLength)
+                        .attr('line-index', index)
+                        .attr('x', function(d) {
+                            return self.graph.x(randomX) - self.circleRadius
+                        })
+                        .attr('y', function(d) {
+                            return self.graph.y(self.fn(index, randomX)) - self.circleRadius
+                        }).call(drag)
+                    }else{
                         return self.graph.svg.append('circle')
-                        .attr('r', 5)
+                        .style('fill', 'orange')
+                        .attr('r', self.circleRadius)
                         .attr('line-index', index)
                         .attr('cx', function(d) {
                             return self.graph.x(randomX)
                         })
                         .attr('cy', function(d) {
-                            return self.graph.y(self.fn(index, randomX))
-                        }).call(drag)
-                    }else{
-                        return self.graph.svg.append('rect')
-                        .attr('width', 10)
-                        .attr('height', 10)
-                        .attr('line-index', index)
-                        .attr('x', function(d) {
-                            return self.graph.x(randomX)
-                        })
-                        .attr('y', function(d) {
                             return self.graph.y(self.fn(index, randomX))
                         }).call(drag)
                     }
