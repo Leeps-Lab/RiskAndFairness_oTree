@@ -11,10 +11,14 @@
 {% block styles %}
     <link href="{% static "css/vue-range-slider.css" %}" rel="stylesheet">
     <style> /* set the CSS */
-    .line {
-      fill: none;
-      stroke: black;
-      stroke-width: 2px;
+    .gray line {
+        stroke: Gray;
+    }
+    .gray path {
+        stroke: Gray;
+    }
+    .gray text {
+        fill: Gray;
     }
     .range-slider {
         width: 290px !important;

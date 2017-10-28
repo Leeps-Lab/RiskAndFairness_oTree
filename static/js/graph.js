@@ -242,6 +242,7 @@ var vm = new Vue({
             this.graph.yAxis = d3.axisLeft(this.graph.y).tickValues(yTicks);
 
             this.graph.svg.append('g')
+            .attr('class', 'gray')
             .attr('transform', 'translate(0, ' + this.dimension.height + ')')
             .call(this.graph.xAxis)
 
@@ -251,6 +252,7 @@ var vm = new Vue({
             .text(this.label.x)
 
             this.graph.svg.append('g')
+            .attr('class', 'gray')
             .call(this.graph.yAxis)
 
             this.graph.svg.append('text')
@@ -280,7 +282,6 @@ var vm = new Vue({
             for (var index = 0; index < this.equations.length; index++) {
                 this.graph.svg.append('path')
                 .style('stroke', color)
-                .attr('class', 'line')
                 .attr('d', this.graph.line(this.graphData[index]))
             }
         },
