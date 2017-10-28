@@ -304,7 +304,7 @@ var vm = new Vue({
                     randomX = this.equation.a.x;
                 }else{
                     if (index === 0) {
-                        randomX = (Math.random() * (this.graph.maxX - this.graph.minX) + this.graph.minX);
+                        randomX = (Math.random() * (this.minMax[index].maxX - this.minMax[index].minX) + this.minMax[index].minX);
                     }else{
                         var currentXValue = self.fnInverse(index, randomX);
                         if (currentXValue > self.minMax[index].maxX) currentXValue = self.minMax[index].maxX;
@@ -316,7 +316,6 @@ var vm = new Vue({
                         x: null,
                         y: null
                     })
-
 
                     this.selected[index].x = randomX.toFixed(this.precision);
                     this.selected[index].y = self.fn(index, randomX).toFixed(this.precision);
