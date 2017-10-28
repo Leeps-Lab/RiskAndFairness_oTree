@@ -68,8 +68,33 @@ var vm = new Vue({
             d3.select('[line-index="b"]')
             .attr('r', this.radius.b)
 
-            this.tip.a.text('(' + this.equation.a.x + ', ' + this.equation.a.y + ') ' + this.prob.a.toFixed(0) + '% ')
-            this.tip.b.text('(' + this.equation.b.x + ', ' + this.equation.b.y + ') ' + this.prob.b.toFixed(0) + '% ')
+            // TODO: clean up this fucking mess...
+
+            this.tip.a.text(null)
+            this.tip.a.append('tspan')
+            .attr('x', this.tip.a.attr('x'))
+            .text('A: ' + this.prob.a.toFixed(0) + '% change')
+            this.tip.a.append('tspan')
+            .attr('x', this.tip.a.attr('x'))
+            .attr('dy', '15px')
+            .text('You: ' + this.equation.a.x)
+            this.tip.a.append('tspan')
+            .attr('x', this.tip.a.attr('x'))
+            .attr('dy', '15px')
+            .text('Partner: ' + this.equation.a.y)
+
+            this.tip.b.text(null)
+            this.tip.b.append('tspan')
+            .attr('x', this.tip.b.attr('x'))
+            .text('B: ' + this.prob.b.toFixed(0) + '% change')
+            this.tip.b.append('tspan')
+            .attr('x', this.tip.b.attr('x'))
+            .attr('dy', '15px')
+            .text('You: ' + this.equation.b.x)
+            this.tip.b.append('tspan')
+            .attr('x', this.tip.b.attr('x'))
+            .attr('dy', '15px')
+            .text('Partner: ' + this.equation.b.y)
         }
     },
     methods: {
@@ -482,9 +507,9 @@ var vm = new Vue({
                             })
                             self.tip[s] = self.graph.svg
                             .append('text')
-                            .attr('x', self.graph.x(self.equation[s].x))
-                            .attr('y', self.graph.y(self.fn(index, self.equation[s].x)) - 15)
-                            .text('(' + self.equation[s].x + ', ' + self.equation[s].y + ') ' + self.prob[s].toFixed(0) + '% ')
+                            .attr('x', self.graph.x(self.equation[s].x) + 15)
+                            .attr('y', self.graph.y(self.fn(index, self.equation[s].x)) - 45)
+                            .text(null)
                         })
                         return;
                     }
