@@ -19,7 +19,6 @@ class InitialInstructions(Page):
 class TaskInstructions(Page):
 
     def vars_for_template(self):
-        print("ROUND NUMBER", self.round_number - 1)
         mode = Constants.dynamic_values[self.round_number - 1]['mode']
         return {'mode': mode}
 
@@ -46,10 +45,8 @@ class Graph(Page):
             return ['mode', 'partner_a', 'partner_b', 'me_a', 'me_b', 'prob_a', 'prob_b']
 
     def vars_for_template(self):
-        current_round = self.round_number
-        dynamic_values = config.getDynamicValues()
-        round_data = dynamic_values[current_round - 1]
-        return {'mode': round_data['mode']}
+        mode = Constants.dynamic_values[self.round_number - 1]['mode']
+        return {'mode': mode}
 
     def before_next_page(self):
         current_round = self.round_number
