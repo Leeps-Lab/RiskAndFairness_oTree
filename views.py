@@ -3,7 +3,6 @@ from . import models
 from ._builtin import Page, WaitPage
 from .models import Constants
 from . import config
-from . import models
 
 """
 Principal maintainer: Rachel Chen <me@rachelchen.me>
@@ -18,6 +17,12 @@ class InitialInstructions(Page):
 
 
 class TaskInstructions(Page):
+
+    def vars_for_template(self):
+        print("ROUND NUMBER", self.round_number - 1)
+        mode = Constants.dynamic_values[self.round_number - 1]['mode']
+        return {'mode': mode}
+
     def is_displayed(self):
         return self.round_number == 1
 
@@ -71,7 +76,7 @@ class Results(Page):
 
 page_sequence = [
     InitialInstructions,
-    #TaskInstructions,
+    TaskInstructions,
     Graph,
     ResultsWaitPage,
     Results
