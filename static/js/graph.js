@@ -419,6 +419,10 @@ var vm = new Vue({
                             }
 
                             break;
+                            default:
+                            me.attr('x', x - self.circleRadius)
+                            me.attr('y', y - self.circleRadius)
+                            break;
                         }
                     }
                 })
