@@ -12,12 +12,13 @@ Contributors:
 """
 
 class InitialInstructions(Page):
+    form_fields = ['time_InitialInstructions']
     def is_displayed(self):
         return self.round_number == 1
 
 
 class TaskInstructions(Page):
-
+    form_fields = ['time_TaskInstructions']
     def vars_for_template(self):
         mode = Constants.dynamic_values[self.round_number - 1]['mode']
         return {'mode': mode}
@@ -30,6 +31,7 @@ class TaskInstructions(Page):
 
 
 class Graph(Page):
+    form_fields = ['time_Graph']
 
     form_model = models.Player
 
@@ -69,6 +71,7 @@ class ResultsWaitPage(WaitPage):
         pass
 
 class Results(Page):
+    form_fields = ['time_Results']
 
     def is_displayed(self):
         return self.round_number == Constants.num_rounds

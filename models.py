@@ -79,6 +79,8 @@ class Player(BasePlayer):
     #time_ResultsWaitPage = models.TextField(widget=widgets.HiddenInput(attrs={'id': 'arrive_time'}))
     time_Results =  models.TextField(widget=widgets.HiddenInput(attrs={'id': 'arrive_time'}))
 
+
+
     def role(self):
         if self.id_in_group == 1:
             return 'Decider'
