@@ -12,6 +12,8 @@ var vm = new Vue({
     data: function() {
         return Object.assign({
             // DO NOT CHANGE THE FOLLOWING
+            circleRadius: 8,
+            squareLength: 16, // this must be the multiple of 2 of circleRadius
             radius: {
                 a: 0,
                 b: 100
@@ -271,8 +273,13 @@ var vm = new Vue({
                 this.graph.y.domain([0, this.scale.max])
             }
 
+            var color = 'MediumPurple'
+
+            if (this.mode === 'probability') color = PaleGreen
+
             for (var index = 0; index < this.equations.length; index++) {
                 this.graph.svg.append('path')
+                .style('stroke', color)
                 .attr('class', 'line')
                 .attr('d', this.graph.line(this.graphData[index]))
             }
@@ -325,7 +332,8 @@ var vm = new Vue({
 
                     self.onChangeCallback()
 
-                    var index = d3.select(this).attr('line-index');
+                    var me = d3.select(this)
+                    var index = me.attr('line-index');
 
                     var xValue = self.graph.x.invert(d3.event.x);
                     if (xValue > self.minMax[index].maxX) xValue = self.minMax[index].maxX;
@@ -365,9 +373,13 @@ var vm = new Vue({
                             if (other.attr('cx')) {
                                 other.attr('cx', otherX)
                                 other.attr('cy', otherY)
+                                me.attr('x', x - self.circleRadius)
+                                me.attr('y', y - self.circleRadius)
                             }else{
-                                other.attr('x', otherX)
-                                other.attr('y', otherY)
+                                other.attr('x', otherX - self.circleRadius)
+                                other.attr('y', otherY - self.circleRadius)
+                                me.attr('cx', x)
+                                me.attr('cy', y)
                             }
 
                             self.selected[otherIndex].x = otherXValue.toFixed(self.precision)
@@ -387,9 +399,13 @@ var vm = new Vue({
                             if (other.attr('cx')) {
                                 other.attr('cx', x)
                                 other.attr('cy', y)
+                                me.attr('x', x - self.circleRadius)
+                                me.attr('y', y - self.circleRadius)
                             }else{
-                                other.attr('x', x)
-                                other.attr('y', y)
+                                other.attr('x', x - self.circleRadius)
+                                other.attr('y', y - self.circleRadius)
+                                me.attr('cx', x)
+                                me.attr('cy', y)
                             }
 
                             self.selected[otherIndex].x = xValue.toFixed(self.precision)
@@ -430,18 +446,20 @@ var vm = new Vue({
                     }
                     if (index === 0) {
                         return self.graph.svg.append('rect')
-                        .attr('width', 10)
-                        .attr('height', 10)
+                        .style('fill', 'blue')
+                        .attr('width', self.squareLength)
+                        .attr('height', self.squareLength)
                         .attr('line-index', index)
                         .attr('x', function(d) {
-                            return self.graph.x(randomX)
+                            return self.graph.x(randomX) - self.circleRadius
                         })
                         .attr('y', function(d) {
-                            return self.graph.y(self.fn(index, randomX))
+                            return self.graph.y(self.fn(index, randomX)) - self.circleRadius
                         }).call(drag)
                     }else{
                         return self.graph.svg.append('circle')
-                        .attr('r', 5)
+                        .style('fill', 'orange')
+                        .attr('r', self.circleRadius)
                         .attr('line-index', index)
                         .attr('cx', function(d) {
                             return self.graph.x(randomX)
