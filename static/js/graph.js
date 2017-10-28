@@ -277,7 +277,7 @@ var vm = new Vue({
 
             var color = 'MediumPurple'
 
-            if (this.mode === 'probability') color = PaleGreen
+            if (this.mode === 'probability') color = 'PaleGreen'
 
             for (var index = 0; index < this.equations.length; index++) {
                 this.graph.svg.append('path')
@@ -306,10 +306,12 @@ var vm = new Vue({
                     if (index === 0) {
                         randomX = (Math.random() * (this.minMax[index].maxX - this.minMax[index].minX) + this.minMax[index].minX);
                     }else{
-                        var currentXValue = self.fnInverse(index, randomX);
-                        if (currentXValue > self.minMax[index].maxX) currentXValue = self.minMax[index].maxX;
-                        if (currentXValue < self.minMax[index].minX) currentXValue = self.minMax[index].minX;
-                        randomX = currentXValue
+                        if (this.mode !== 'positive') {
+                            var currentXValue = self.fnInverse(index, randomX);
+                            if (currentXValue > self.minMax[index].maxX) currentXValue = self.minMax[index].maxX;
+                            if (currentXValue < self.minMax[index].minX) currentXValue = self.minMax[index].minX;
+                            randomX = currentXValue
+                        }
                     }
 
                     this.$set(this.selected, index, {
@@ -320,11 +322,23 @@ var vm = new Vue({
                     this.selected[index].x = randomX.toFixed(this.precision);
                     this.selected[index].y = self.fn(index, randomX).toFixed(this.precision);
 
+                    var text = ''
+
+                    if (['independent', 'single', 'negative'].indexOf(self.mode) !== -1) {
+                        if (index === 0) {
+                            text = 'You (A: ' + self.selected[index].x + ', B: ' + self.selected[index].y + ')'
+                        }else{
+                            text = 'Partner (A: ' + self.selected[index].x + ', B: ' + self.selected[index].y + ')'
+                        }
+                    }else if (self.mode === 'positive') {
+                        text = 'You = Partner (A: ' + self.selected[index].x + ', B: ' + self.selected[index].y + ')'
+                    }
+
                     self.tip[index] = this.graph.svg
                     .append('text')
                     .attr('x', self.graph.x(randomX))
                     .attr('y', self.graph.y(self.fn(index, randomX)) - 15)
-                    .text('(' + self.selected[index].x + ', ' + self.selected[index].y + ')')
+                    .text(text)
 
                 }
 
@@ -349,11 +363,23 @@ var vm = new Vue({
                     self.selected[index].x = xValue.toFixed(self.precision)
                     self.selected[index].y = yValue.toFixed(self.precision)
 
+                    var text = ''
+
+                    if (['independent', 'single', 'negative'].indexOf(self.mode) !== -1) {
+                        if (index == 0) {
+                            text = 'You (A: ' + xValue.toFixed(self.precision) + ', B: ' + yValue.toFixed(self.precision) + ')'
+                        }else{
+                            text = 'Partner (A: ' + xValue.toFixed(self.precision) + ', B: ' + yValue.toFixed(self.precision) + ')'
+                        }
+                    }else if (self.mode === 'positive') {
+                        text = 'You = Partner (A: ' + xValue.toFixed(self.precision) + ', B: ' + yValue.toFixed(self.precision) + ')'
+                    }
+
                     if (self.tip && self.tip[index]) {
                         self.tip[index]
                         .attr('x', x)
                         .attr('y', y - 15)
-                        .text('(' + xValue.toFixed(self.precision) + ', ' + yValue.toFixed(self.precision) + ')')
+                        .text(text)
                     }
 
                     if (self.mode !== 'probability') {
@@ -385,11 +411,19 @@ var vm = new Vue({
                             self.selected[otherIndex].x = otherXValue.toFixed(self.precision)
                             self.selected[otherIndex].y = otherYValue.toFixed(self.precision)
 
+                            var otherText = ''
+
+                            if (otherIndex == 0) {
+                                otherText = 'You (A: ' + otherXValue.toFixed(self.precision) + ', B: ' + otherYValue.toFixed(self.precision) + ')'
+                            }else{
+                                otherText = 'Partner (A: ' + otherXValue.toFixed(self.precision) + ', B: ' + otherYValue.toFixed(self.precision) + ')'
+                            }
+
                             if (self.tip && self.tip[otherIndex]) {
                                 self.tip[otherIndex]
                                 .attr('x', otherX)
                                 .attr('y', otherY - 15)
-                                .text('(' + otherXValue.toFixed(self.precision) + ', ' + otherYValue.toFixed(self.precision) + ')');
+                                .text(otherText);
                             }
 
                             break;
@@ -411,11 +445,17 @@ var vm = new Vue({
                             self.selected[otherIndex].x = xValue.toFixed(self.precision)
                             self.selected[otherIndex].y = yValue.toFixed(self.precision)
 
+                            var otherText = ''
+
+                            if (otherIndex == 0) {
+                                otherText = 'You = Partner (A: ' + xValue.toFixed(self.precision) + ', B: ' + yValue.toFixed(self.precision) + ')'
+                            }
+
                             if (self.tip && self.tip[otherIndex]) {
                                 self.tip[otherIndex]
                                 .attr('x', x)
                                 .attr('y', y - 15)
-                                .text('(' + xValue.toFixed(self.precision) + ', ' + yValue.toFixed(self.precision) + ')')
+                                .text(otherText)
                             }
 
                             break;
