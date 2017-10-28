@@ -1,15 +1,15 @@
 '''
 Please use lowercase for dictionary keys in the future // Rachel
+
+# default probability in Security mode is prob_a: 0, prob_b: 100
+
 '''
 
 data = [
-    #{'mode': 'probability', 'a_x': 80, 'a_y':0, 'b_x': 0, 'b_y': 80, 'label': {
-    #   'x': 'Something 1',
-    #    'y': 'Something 2'
-    #}}, # example usage for label
+    {'mode': 'probability', 'a_x': 70, 'a_y':10, 'b_x': 10, 'b_y': 80, 'label': {'x': 'lbl x','y': 'lbl y'}},
     {'mode': 'independent', 'm': 100, 'p_x': 2, 'p_y': 1, 'prob_a': 50},
-    # default probability in Security mode is prob_a: 0, prob_b: 100
-    #{'mode': 'positive'   , 'm': 100, 'p_x': 1, 'p_y': 3}
+    {'mode': 'positive'   , 'm': 100, 'p_x': 1, 'p_y': 3, 'prob_a': 50},
+    {'mode': 'negative'   , 'm': 100, 'p_x': 1, 'p_y': 3, 'prob_a': 50}
 ]
 
 def checkValidity():
