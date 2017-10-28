@@ -16,7 +16,7 @@ def checkValidity():
     for period in data:
         if 'prob_a' in period:
             if period['prob_a'] < 0 or period['prob_a'] > 100:
-                print('ERROR: invalid prob_a in round', data.index(period), ': prob_a is: ', \
+                print('ERROR: invalid prob_a in round', data.index(period), ': prob_a is: ',
                     period['prob_a'], ' but must be a number between 0 and 100')
                 return 0
     return 1
