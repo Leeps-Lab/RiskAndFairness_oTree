@@ -361,7 +361,7 @@ var vm = new Vue({
 
                     self.tip[index] = this.graph.svg
                     .append('text')
-                    .attr('x', self.graph.x(randomX))
+                    .attr('x', self.graph.x(randomX) + 15)
                     .attr('y', self.graph.y(self.fn(index, randomX)) - 15)
                     .text(text)
 
@@ -402,7 +402,7 @@ var vm = new Vue({
 
                     if (self.tip && self.tip[index]) {
                         self.tip[index]
-                        .attr('x', x)
+                        .attr('x', x + 15)
                         .attr('y', y - 15)
                         .text(text)
                     }
@@ -446,7 +446,7 @@ var vm = new Vue({
 
                             if (self.tip && self.tip[otherIndex]) {
                                 self.tip[otherIndex]
-                                .attr('x', otherX)
+                                .attr('x', otherX + 15)
                                 .attr('y', otherY - 15)
                                 .text(otherText);
                             }
@@ -478,7 +478,7 @@ var vm = new Vue({
 
                             if (self.tip && self.tip[otherIndex]) {
                                 self.tip[otherIndex]
-                                .attr('x', x)
+                                .attr('x', x + 15)
                                 .attr('y', y - 15)
                                 .text(otherText)
                             }
