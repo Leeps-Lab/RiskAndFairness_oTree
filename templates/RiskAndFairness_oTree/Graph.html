@@ -38,6 +38,8 @@
         <add your name here>
     */
 
+    var somethingChanged = false;
+
     var currentRound = {{ player.round_number | json }}
     var constantValues = {{ Constants.static_values | json }}
     var defaultValues  = {{ Constants.default_values | json }}
@@ -123,7 +125,7 @@
             equation: getEquation(),
             prob: getProb(),
             onChangeCallback: function() {
-                console.log('hi')
+                somethingChanged = true
             }
         })
 
@@ -238,5 +240,16 @@
     </div>
 
     {% next_button %}
+
+    <script type="text/javascript">
+    $(document).ready(function() {
+        $('.next-button').click(function() {
+            if (somethingChanged === false) {
+                alert('Please make a selection.')
+                return false
+            }
+        })
+    })
+    </script>
 
 {% endblock %}
