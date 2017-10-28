@@ -74,6 +74,8 @@ class Player(BasePlayer):
     prob_b = models.FloatField()
     outcome = models.CharField()
 
+
+
     def role(self):
         if self.id_in_group == 1:
             return 'Decider'
