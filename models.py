@@ -73,6 +73,11 @@ class Player(BasePlayer):
     prob_a = models.FloatField()
     prob_b = models.FloatField()
     outcome = models.CharField()
+    time_InitialInstructions = models.TextField(widget=widgets.HiddenInput(attrs={'id': 'arrive_time'}))
+    time_TaskInstructions =  models.TextField(widget=widgets.HiddenInput(attrs={'id': 'arrive_time'}))
+    time_Graph =  models.TextField(widget=widgets.HiddenInput(attrs={'id': 'arrive_time'}))
+    #time_ResultsWaitPage = models.TextField(widget=widgets.HiddenInput(attrs={'id': 'arrive_time'}))
+    time_Results =  models.TextField(widget=widgets.HiddenInput(attrs={'id': 'arrive_time'}))
 
     def role(self):
         if self.id_in_group == 1:

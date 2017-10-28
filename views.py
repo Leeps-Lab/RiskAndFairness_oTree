@@ -23,7 +23,10 @@ class TaskInstructions(Page):
         return {'mode': mode}
 
     def is_displayed(self):
-        return self.round_number == 1
+        mode = Constants.dynamic_values[self.round_number - 1]['mode']
+        if self.round_number > 1:
+            prevmode = Constants.dynamic_values[self.round_number - 2]['mode']
+        return self.round_number == 1 or mode != prevmode
 
 
 class Graph(Page):
