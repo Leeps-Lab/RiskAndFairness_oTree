@@ -55,6 +55,9 @@ var vm = new Vue({
     },
     watch: {
         'prob.a': function(val, old) {
+
+            this.onChangeCallback()
+
             this.prob.b = this.constants.maxArea - val;
 
             var areaA = this.constants.k * val
