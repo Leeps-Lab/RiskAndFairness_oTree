@@ -189,6 +189,7 @@ var vm = new Vue({
                 break;
                 case 'independent':
                 case 'positive':
+                this.equations.push(this.equation)
                 this.equations.push({
                     m: this.equations[0].m,
                     py: this.equations[0].py,
@@ -196,6 +197,7 @@ var vm = new Vue({
                 })
                 break;
                 case 'negative':
+                this.equations.push(this.equation)
                 this.equations.push({
                     m: this.equations[0].m,
                     py: this.equations[0].px,
