@@ -144,13 +144,6 @@
     </script>
     <script src="{% static "js/graph.js" %}"></script>
 
-    <script type="text/javascript">
-      window.onload = function ()
-      {
-        document.getElementById("arrive_time").value = (new Date()).toISOString();
-      }
-    </script>
-
 {% endblock %}
 
 
@@ -258,6 +251,7 @@
 
     <script type="text/javascript">
     $(document).ready(function() {
+        $('#arrive_time').val((new Date()).toISOString())
         $('.next-button').click(function() {
             if (somethingChanged === false) {
                 alert('Please make a selection.')
