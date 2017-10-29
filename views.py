@@ -51,7 +51,17 @@ class Graph(Page):
 
     def vars_for_template(self):
         mode = Constants.dynamic_values[self.round_number - 1]['mode']
-        return {'mode': mode}
+        if self.round_number > 1:
+            counter = 1
+            prevmode = Constants.dynamic_values[self.round_number - 2]['mode']
+            while mode == prevmode:
+                counter += 1;
+                if counter == self.round_number:
+                    break
+                prevmode = Constants.dynamic_values[self.round_number - (counter + 1)]['mode']
+        else:
+            counter = 1
+        return {'mode': mode, 'counter': counter}
 
     def before_next_page(self):
         current_round = self.round_number

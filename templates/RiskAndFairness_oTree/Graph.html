@@ -2,7 +2,17 @@
 {% load staticfiles otree_tags %}
 
 {% block title %}
-    Risk Preference
+    {% if mode == 'probability' %}
+        <h1 style="color:#BFBFBF">PR - Decision {{ counter }}</h1>
+    {% elif mode == 'positive' %}
+        <h1 style="color:#BFBFBF">S-1B-1Ch - Decision {{ counter }}</h1>
+    {% elif mode == 'negative' %}
+        <h1 style="color:#BFBFBF">S-2B-1Ch - Decision {{ counter }}</h1>
+    {% elif mode == 'independent' %}
+        <h1 style="color:#BFBFBF">S-1B-2Ch - Decision {{ counter }}</h1>
+    {% elif mode == 'single' %}
+        <h1 style="color:#BFBFBF">S-OwnRisk - Decision {{ counter }}</h1>
+    {% endif %}
 {% endblock %}
 
 
