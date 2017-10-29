@@ -54,7 +54,8 @@
         'sec_1bl_2ch': 'independent',
         'sec_ownrisk': 'single',
         'sec_ownrisk_fixedother': 'single_fixedcircle',
-        'sec_otherrisk_ownfixed': 'single_fixedsquare'
+        'sec_otherrisk_ownfixed': 'single_fixedsquare',
+        'det_giv': 'single_given'
     }
 
     var somethingChanged = false;
@@ -236,7 +237,26 @@
                         </table>
                     </div>
                 </div>
-                <div class="col-md-6" v-if="mode !== 'probability'">
+                <div class="col-md-6" v-if="mode === 'single_given'">
+                    <h5>This is your choice:</h5>
+                    <div class="row col-md-6" style="margin-top: 50px">
+                        <table class="table table-bordered table-condensed small">
+                            <thead>
+                                <tr>
+                                    <td>Your Tokens</td>
+                                    <td v-if="mode !== 'single'">Partner's Tokens</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td v-html="selected[0].x"></td>
+                                    <td v-html="selected[0].y"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="col-md-6" v-if="mode !== 'probability' && mode !== 'single_given'">
                     <h5>This is your choice:</h5>
                     <div class="row col-md-6" style="margin-top: 50px">
                         <table class="table table-bordered table-condensed small">
