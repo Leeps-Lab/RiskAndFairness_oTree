@@ -36,6 +36,15 @@
         <add your name here>
     */
 
+    // Keeping Graph.Js's code base unchange
+    var modeMap = {
+        'probability': 'probability',
+        'sec_1bl_1ch': 'positive',
+        'sec_2bl_1ch': 'negative',
+        'sec_1bl_2ch': 'independent',
+        'sec_ownrisk': 'single'
+    }
+
     var somethingChanged = false;
 
     var currentRound = {{ player.round_number | json }}
@@ -47,7 +56,7 @@
 
     var getMode = function() {
         var roundData = dynamicValues[currentRound - 1]
-        if (roundData && roundData.mode) return roundData.mode
+        if (roundData && roundData.mode) return modeMap[roundData.mode]
         return 'negative'
     }
 
@@ -91,7 +100,7 @@
     var getProb = function() {
         var roundData = dynamicValues[currentRound - 1]
 
-        if (roundData.mode && roundData.mode === 'probability') {
+        if (getMode() === 'probability') {
             return defaultValues.prob
         }
 
@@ -136,7 +145,7 @@
     <script src="{% static "js/graph.js" %}"></script>
 
     <script type="text/javascript">
-      window.onload = function () 
+      window.onload = function ()
       {
         document.getElementById("arrive_time").value = (new Date()).toISOString();
       }
