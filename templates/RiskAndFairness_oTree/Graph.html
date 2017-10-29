@@ -167,7 +167,7 @@
             label: getLabels(),
             equation: getEquation(),
             prob: getProb(),
-            onChangeCallback: function() {
+            onChangeCallBack: function() {
                 somethingChanged = true
             }
         })
@@ -185,6 +185,7 @@
 
 
 {% block content %}
+
     {% formfield player.time_Graph with label=None %}
     <div id="app">
         <div class="container">
@@ -283,6 +284,11 @@
         </div>
     </div>
 
+    <!-- 
+    <div>
+        <button name="submit" value="True" class="btn btn-primary btn-large">Submit Decision</button>
+    </div>
+     -->
     {% next_button %}
 
     <script type="text/javascript">
