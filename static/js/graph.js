@@ -12,6 +12,7 @@ var vm = new Vue({
     data: function() {
         return Object.assign({
             // DO NOT CHANGE THE FOLLOWING
+            fixed: {},
             circleRadius: 8,
             squareLength: 16, // this must be the multiple of 2 of circleRadius
             radius: {
@@ -42,6 +43,7 @@ var vm = new Vue({
                 y: null
             }],
             equations: [],
+            once: false,
             onChangeCallback: function() {}
         }, appSpecific);
     },
@@ -55,6 +57,11 @@ var vm = new Vue({
     },
     watch: {
         'prob.a': function(val, old) {
+
+            if (this.once !== false) this.onChangeCallback()
+
+            this.once = true // invalidated changes on initialization
+
             this.prob.b = this.constants.maxArea - val;
 
             var areaA = this.constants.k * val
@@ -163,6 +170,8 @@ var vm = new Vue({
                     px: 0
                 });
                 break;
+                case 'single_fixedcircle':
+                case 'single_fixedsquare':
                 case 'independent':
                 case 'positive':
                 this.equations.push({
@@ -329,9 +338,17 @@ var vm = new Vue({
                     randomX = this.equation.a.x;
                 }else{
                     if (index === 0) {
-                        randomX = (Math.random() * (this.minMax[index].maxX - this.minMax[index].minX) + this.minMax[index].minX);
+                        if (this.mode === 'single_fixedsquare') {
+                            randomX = self.fixed.x
+                        }else{
+                            randomX = (Math.random() * (this.minMax[index].maxX - this.minMax[index].minX) + this.minMax[index].minX);
+                        }
                     }else{
-                        if (this.mode !== 'positive') {
+                        if (this.mode === 'single_fixedcircle') {
+                            randomX = self.fixed.x
+                        }else if (this.mode === 'single_fixedsquare') {
+                            randomX = (Math.random() * (this.minMax[index].maxX - this.minMax[index].minX) + this.minMax[index].minX);
+                        }else if (this.mode !== 'positive') {
                             var currentXValue = self.fnInverse(index, randomX);
                             if (currentXValue > self.minMax[index].maxX) currentXValue = self.minMax[index].maxX;
                             if (currentXValue < self.minMax[index].minX) currentXValue = self.minMax[index].minX;
@@ -349,7 +366,7 @@ var vm = new Vue({
 
                     var text = ''
 
-                    if (['independent', 'single', 'negative'].indexOf(self.mode) !== -1) {
+                    if (['independent', 'single', 'negative', 'single_fixedcircle', 'single_fixedsquare'].indexOf(self.mode) !== -1) {
                         if (index === 0) {
                             text = 'You (A: ' + self.selected[index].x + ', B: ' + self.selected[index].y + ')'
                         }else{
@@ -390,7 +407,7 @@ var vm = new Vue({
 
                     var text = ''
 
-                    if (['independent', 'single', 'negative'].indexOf(self.mode) !== -1) {
+                    if (['independent', 'single', 'negative', 'single_fixedcircle', 'single_fixedsquare'].indexOf(self.mode) !== -1) {
                         if (index == 0) {
                             text = 'You (A: ' + xValue.toFixed(self.precision) + ', B: ' + yValue.toFixed(self.precision) + ')'
                         }else{
@@ -514,7 +531,7 @@ var vm = new Vue({
                         return;
                     }
                     if (index === 0) {
-                        return self.graph.svg.append('rect')
+                        var me = self.graph.svg.append('rect')
                         .style('fill', 'blue')
                         .attr('width', self.squareLength)
                         .attr('height', self.squareLength)
@@ -524,9 +541,13 @@ var vm = new Vue({
                         })
                         .attr('y', function(d) {
                             return self.graph.y(self.fn(index, randomX)) - self.circleRadius
-                        }).call(drag)
+                        })
+
+                        if (self.mode === 'single_fixedsquare') return
+
+                        me.call(drag)
                     }else{
-                        return self.graph.svg.append('circle')
+                        var other = self.graph.svg.append('circle')
                         .style('fill', 'orange')
                         .attr('r', self.circleRadius)
                         .attr('line-index', index)
@@ -535,7 +556,11 @@ var vm = new Vue({
                         })
                         .attr('cy', function(d) {
                             return self.graph.y(self.fn(index, randomX))
-                        }).call(drag)
+                        })
+
+                        if (self.mode === 'single_fixedcircle') return
+
+                        other.call(drag)
                     }
                 }
                 generate();

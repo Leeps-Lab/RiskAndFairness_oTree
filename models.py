@@ -40,7 +40,7 @@ class Constants(BaseConstants):
         }
     }
     default_values = {
-        'mode': 'negative',
+        'mode': 'sec_2bl_1ch',
         'label': {
             'x': 'State A',
             'y': 'State B'
