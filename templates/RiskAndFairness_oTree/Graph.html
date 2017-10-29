@@ -1,11 +1,9 @@
 {% extends "global/Base.html" %}
 {% load staticfiles otree_tags %}
 
-
 {% block title %}
     Risk Preference
 {% endblock %}
-
 
 
 {% block styles %}
@@ -137,11 +135,19 @@
     </script>
     <script src="{% static "js/graph.js" %}"></script>
 
+    <script type="text/javascript">
+      window.onload = function () 
+      {
+        document.getElementById("arrive_time").value = (new Date()).toISOString();
+      }
+    </script>
+
 {% endblock %}
 
 
 
 {% block content %}
+    {% formfield player.time_Graph with label=None %}
     <div id="app">
         <div class="container">
             <div class="row">

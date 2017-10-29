@@ -1,11 +1,21 @@
 {% extends "global/Base.html" %}
 {% load staticfiles otree_tags %}
 
+{% block scripts %}
+    <script type="text/javascript">
+      window.onload = function () 
+      {
+        document.getElementById("arrive_time").value = (new Date()).toISOString();
+      }
+    </script>
+{% endblock %}
+
 {% block title %}
     Result has been recorded
 {% endblock %}
 
 {% block content %}
+    {% formfield player.time_Results with label=None %}
     <hr>
 	<table style="width:50%">
 		<tr>

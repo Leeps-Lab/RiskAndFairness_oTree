@@ -73,6 +73,13 @@ class Player(BasePlayer):
     prob_a = models.FloatField()
     prob_b = models.FloatField()
     outcome = models.CharField()
+    time_InitialInstructions = models.TextField(widget=widgets.HiddenInput(attrs={'id': 'arrive_time'}))
+    time_TaskInstructions =  models.TextField(widget=widgets.HiddenInput(attrs={'id': 'arrive_time'}))
+    time_Graph =  models.TextField(widget=widgets.HiddenInput(attrs={'id': 'arrive_time'}))
+    #time_ResultsWaitPage = models.TextField(widget=widgets.HiddenInput(attrs={'id': 'arrive_time'}))
+    time_Results =  models.TextField(widget=widgets.HiddenInput(attrs={'id': 'arrive_time'}))
+
+
 
     def role(self):
         if self.id_in_group == 1:
@@ -135,4 +142,7 @@ class Subsession(BaseSubsession):
             self.group_like_round(1)
 
 
+# git add
+# cd .. && yes | otree resetdb && otree runserver && cd RiskAndFairness_oTree
 # yes | otree resetdb && otree runserver
+# git add ______ && git commit -m "_______________" && git push
