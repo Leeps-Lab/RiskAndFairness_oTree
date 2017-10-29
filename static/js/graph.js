@@ -554,7 +554,7 @@ var vm = new Vue({
                     }
                     if (index === 0) {
                         var me = self.graph.svg.append('rect')
-                        .style('fill', 'blue')
+                        .style('fill', self.mode === 'single_given' ? 'red' : 'blue')
                         .attr('width', self.squareLength)
                         .attr('height', self.squareLength)
                         .attr('line-index', index)
