@@ -43,6 +43,7 @@ var vm = new Vue({
                 y: null
             }],
             equations: [],
+            once: false,
             onChangeCallback: function() {}
         }, appSpecific);
     },
@@ -57,7 +58,9 @@ var vm = new Vue({
     watch: {
         'prob.a': function(val, old) {
 
-            this.onChangeCallback()
+            if (this.once !== false) this.onChangeCallback()
+
+            this.once = true // invalidated changes on initialization
 
             this.prob.b = this.constants.maxArea - val;
 
