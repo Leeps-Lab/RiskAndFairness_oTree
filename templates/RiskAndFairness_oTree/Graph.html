@@ -42,7 +42,9 @@
         'sec_1bl_1ch': 'positive',
         'sec_2bl_1ch': 'negative',
         'sec_1bl_2ch': 'independent',
-        'sec_ownrisk': 'single'
+        'sec_ownrisk': 'single',
+        'sec_ownrisk_fixedother': 'single_fixedcircle',
+        'sec_otherrisk_ownfixed': 'single_fixedsquare'
     }
 
     var somethingChanged = false;
@@ -82,6 +84,29 @@
             }
         }else{
             return defaultValues.equation
+        }
+    }
+
+    var getFixed = function() {
+        var roundData = dynamicValues[currentRound - 1]
+        var mode = getMode()
+
+        switch (mode) {
+            case 'single_fixedsquare':
+            return {
+                x: roundData.you_a
+            }
+            break;
+            case 'single_fixedcircle':
+            return {
+                x: roundData.partner_a
+            }
+            break;
+            default:
+            return {
+                x: 0
+            }
+            break
         }
     }
 
@@ -127,6 +152,7 @@
         graphData = Object.assign({}, constantValues)
 
         Object.assign(graphData, {
+            fixed: getFixed(),
             mode: getMode(),
             label: getLabels(),
             equation: getEquation(),

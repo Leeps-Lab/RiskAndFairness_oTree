@@ -11,6 +11,8 @@ Please use lowercase for dictionary keys in the future // Rachel
 '''
 
 data = [
+    {'mode': 'sec_ownrisk_fixedother'   , 'm': 100, 'p_x': 2, 'p_y': 3, 'prob_a': 50, 'partner_a': 20},
+    {'mode': 'sec_otherrisk_ownfixed'   , 'm': 100, 'p_x': 2, 'p_y': 3, 'prob_a': 50, 'you_a': 30},
     {'mode': 'probability', 'a_x': 70, 'a_y':10, 'b_x': 10, 'b_y': 80, 'label': {'x': 'lbl x','y': 'lbl y'}},
     {'mode': 'sec_1bl_2ch', 'm': 100, 'p_x': 2, 'p_y': 1, 'prob_a': 50},
     {'mode': 'sec_1bl_1ch'   , 'm': 100, 'p_x': 1, 'p_y': 3, 'prob_a': 50},
