@@ -34,7 +34,6 @@ class TaskInstructions(Page):
 
 class Graph(Page):
     form_model = models.Player
-    form_fields = ['time_Graph']
 
     def get_form_fields(self):
         current_round = self.round_number
@@ -42,13 +41,13 @@ class Graph(Page):
         round_data = dynamic_values[current_round - 1]
         if round_data is not None and round_data['mode'] is not None:
             if round_data['mode'] == 'probability':
-                return ['mode', 'prob_a', 'prob_b']
+                return ['mode', 'prob_a', 'prob_b', 'time_Graph']
             elif round_data['mode'] == 'single':
-                return ['mode', 'me_a', 'me_b', 'prob_a', 'prob_b']
+                return ['mode', 'me_a', 'me_b', 'prob_a', 'prob_b', 'time_Graph']
             else:
-                return ['mode', 'partner_a', 'partner_b', 'me_a', 'me_b', 'prob_a', 'prob_b']
+                return ['mode', 'partner_a', 'partner_b', 'me_a', 'me_b', 'prob_a', 'prob_b', 'time_Graph']
         else:
-            return ['mode', 'partner_a', 'partner_b', 'me_a', 'me_b', 'prob_a', 'prob_b']
+            return ['mode', 'partner_a', 'partner_b', 'me_a', 'me_b', 'prob_a', 'prob_b', 'time_Graph']
 
     def vars_for_template(self):
         mode = Constants.dynamic_values[self.round_number - 1]['mode']
