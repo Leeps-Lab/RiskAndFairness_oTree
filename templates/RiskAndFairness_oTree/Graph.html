@@ -78,11 +78,12 @@
 
     var getEquation = function() {
         var roundData = dynamicValues[currentRound - 1]
+
         if (roundData) {
             return {
                 m: defaultValue(roundData, 'm', defaultValues.equation, 'm'),
-                px: defaultValue(roundData, 'py', defaultValues.equation, 'py'),
-                py: defaultValue(roundData, 'px', defaultValues.equation, 'px'),
+                px: defaultValue(roundData, 'p_x', defaultValues.equation, 'py'),
+                py: defaultValue(roundData, 'p_y', defaultValues.equation, 'px'),
                 a: {
                     x: defaultValue(roundData, 'a_x', defaultValues.equation, 'a_x'),
                     y: defaultValue(roundData, 'a_y', defaultValues.equation, 'a_y'),
@@ -97,29 +98,6 @@
         }
     }
 
-    var getFixed = function() {
-        var roundData = dynamicValues[currentRound - 1]
-        var mode = getMode()
-
-        switch (mode) {
-            case 'single_fixedsquare':
-            return {
-                x: roundData.you_a
-            }
-            break;
-            case 'single_fixedcircle':
-            return {
-                x: roundData.partner_a
-            }
-            break;
-            default:
-            return {
-                x: 0
-            }
-            break
-        }
-    }
-
     var getLabels = function() {
         var roundData = dynamicValues[currentRound - 1]
         if (roundData) {
@@ -129,6 +107,25 @@
             })
         }else{
             return defaultValues.label
+        }
+    }
+
+    var getFixed = function() {
+        var roundData = dynamicValues[currentRound - 1]
+        switch (getMode()) {
+            case 'single_fixedcircle':
+            case 'single_fixedsquare':
+            return {
+                m: roundData.fixed.m,
+                px: roundData.fixed.p_x,
+                py: roundData.fixed.p_y,
+                x: roundData.fixed.a,
+                y: roundData.fixed.b
+            }
+            break;
+            default:
+            return {}
+            break;
         }
     }
 

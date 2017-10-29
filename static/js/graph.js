@@ -12,7 +12,6 @@ var vm = new Vue({
     data: function() {
         return Object.assign({
             // DO NOT CHANGE THE FOLLOWING
-            fixed: {},
             circleRadius: 8,
             squareLength: 16, // this must be the multiple of 2 of circleRadius
             radius: {
@@ -44,6 +43,7 @@ var vm = new Vue({
             }],
             equations: [],
             once: false,
+            fixed: {},
             onChangeCallback: function() {}
         }, appSpecific);
     },
@@ -159,9 +159,10 @@ var vm = new Vue({
             this.equations = []
         },
         sanity: function() {
-            this.equations.push(this.equation)
-            if (this.mode === 'single') return;
             switch (this.mode) {
+                case 'single':
+                this.equations.push(this.equation)
+                break;
                 case 'probability':
                 this.equations = [];
                 this.equations.push({
@@ -170,8 +171,22 @@ var vm = new Vue({
                     px: 0
                 });
                 break;
-                case 'single_fixedcircle':
                 case 'single_fixedsquare':
+                this.equations.push({
+                    m: this.fixed.m,
+                    py: this.fixed.py,
+                    px: this.fixed.px
+                })
+                this.equations.push(this.equation)
+                break;
+                case 'single_fixedcircle':
+                this.equations.push(this.equation)
+                this.equations.push({
+                    m: this.fixed.m,
+                    py: this.fixed.py,
+                    px: this.fixed.px
+                })
+                break;
                 case 'independent':
                 case 'positive':
                 this.equations.push({
@@ -315,7 +330,7 @@ var vm = new Vue({
 
             for (var index = 0; index < this.equations.length; index++) {
                 this.graph.svg.append('path')
-                .style('stroke', color)
+                .style('stroke', ((index === 0 && this.mode === 'single_fixedsquare') || (index === 1 && this.mode === 'single_fixedcircle')) ? 'white': color)
                 .attr('d', this.graph.line(this.graphData[index]))
             }
         },
@@ -339,13 +354,13 @@ var vm = new Vue({
                 }else{
                     if (index === 0) {
                         if (this.mode === 'single_fixedsquare') {
-                            randomX = self.fixed.x
+                            randomX = this.fixed.x
                         }else{
                             randomX = (Math.random() * (this.minMax[index].maxX - this.minMax[index].minX) + this.minMax[index].minX);
                         }
                     }else{
                         if (this.mode === 'single_fixedcircle') {
-                            randomX = self.fixed.x
+                            randomX = this.fixed.x
                         }else if (this.mode === 'single_fixedsquare') {
                             randomX = (Math.random() * (this.minMax[index].maxX - this.minMax[index].minX) + this.minMax[index].minX);
                         }else if (this.mode !== 'positive') {
@@ -366,7 +381,7 @@ var vm = new Vue({
 
                     var text = ''
 
-                    if (['independent', 'single', 'negative', 'single_fixedcircle', 'single_fixedsquare'].indexOf(self.mode) !== -1) {
+                    if (['independent', 'single', 'negative', 'single_fixedsquare', 'single_fixedcircle'].indexOf(self.mode) !== -1) {
                         if (index === 0) {
                             text = 'You (A: ' + self.selected[index].x + ', B: ' + self.selected[index].y + ')'
                         }else{
@@ -407,7 +422,7 @@ var vm = new Vue({
 
                     var text = ''
 
-                    if (['independent', 'single', 'negative', 'single_fixedcircle', 'single_fixedsquare'].indexOf(self.mode) !== -1) {
+                    if (['independent', 'single', 'negative', 'single_fixedsquare', 'single_fixedcircle'].indexOf(self.mode) !== -1) {
                         if (index == 0) {
                             text = 'You (A: ' + xValue.toFixed(self.precision) + ', B: ' + yValue.toFixed(self.precision) + ')'
                         }else{
@@ -543,7 +558,7 @@ var vm = new Vue({
                             return self.graph.y(self.fn(index, randomX)) - self.circleRadius
                         })
 
-                        if (self.mode === 'single_fixedsquare') return
+                        if (self.mode === 'single_fixedsquare') return;
 
                         me.call(drag)
                     }else{
@@ -558,7 +573,7 @@ var vm = new Vue({
                             return self.graph.y(self.fn(index, randomX))
                         })
 
-                        if (self.mode === 'single_fixedcircle') return
+                        if (self.mode === 'single_fixedcircle') return;
 
                         other.call(drag)
                     }
