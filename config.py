@@ -11,7 +11,8 @@ Please use lowercase for dictionary keys in the future // Rachel
 '''
 
 data = [
-    #Logically, m, p_x, and p_y are for your equation, and under "fixed" are for other's equation
+    {'mode': 'det_giv'   , 'm': 100, 'p_x': 2, 'p_y': 3, 'prob_a': 50,'label': {'x': 'lbl x','y': 'lbl y'}},
+    # Logically, m, p_x, and p_y are for your equation, and under "fixed" are for other's equation
     {'mode': 'sec_ownrisk_fixedother', 'm': 100, 'p_x': 2, 'p_y': 3, 'prob_a': 50, 'fixed': {
         'm': 50,
         'p_x': 1,

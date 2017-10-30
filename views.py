@@ -40,9 +40,11 @@ class Graph(Page):
         dynamic_values = config.getDynamicValues()
         round_data = dynamic_values[current_round - 1]
         if round_data is not None and round_data['mode'] is not None:
-            if round_data['mode'] == 'probability':
+            if round_data['mode'] == 'det_giv':
+                return ['mode', 'me_a', 'time_Graph']
+            elif round_data['mode'] == 'probability':
                 return ['mode', 'prob_a', 'prob_b', 'time_Graph']
-            elif round_data['mode'] == 'single':
+            elif round_data['mode'] == 'sec_ownrisk':
                 return ['mode', 'me_a', 'me_b', 'prob_a', 'prob_b', 'time_Graph']
             else:
                 return ['mode', 'partner_a', 'partner_b', 'me_a', 'me_b', 'prob_a', 'prob_b', 'time_Graph']

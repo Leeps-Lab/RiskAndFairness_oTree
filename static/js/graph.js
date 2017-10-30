@@ -161,6 +161,7 @@ var vm = new Vue({
         sanity: function() {
             switch (this.mode) {
                 case 'single':
+                case 'single_given':
                 this.equations.push(this.equation)
                 break;
                 case 'probability':
@@ -389,6 +390,8 @@ var vm = new Vue({
                         }else{
                             text = 'Partner (A: ' + self.selected[index].x + ', B: ' + self.selected[index].y + ')'
                         }
+                    }else if (self.mode === 'single_given') {
+                        text = 'You: ' + self.selected[index].x + ', Partner: ' + self.selected[index].y
                     }else if (self.mode === 'positive') {
                         text = 'You = Partner (A: ' + self.selected[index].x + ', B: ' + self.selected[index].y + ')'
                     }
@@ -430,6 +433,8 @@ var vm = new Vue({
                         }else{
                             text = 'Partner (A: ' + xValue.toFixed(self.precision) + ', B: ' + yValue.toFixed(self.precision) + ')'
                         }
+                    }else if (self.mode === 'single_given') {
+                        text = 'You: ' + xValue.toFixed(self.precision) + ', Partner: ' + yValue.toFixed(self.precision)
                     }else if (self.mode === 'positive') {
                         text = 'You = Partner (A: ' + xValue.toFixed(self.precision) + ', B: ' + yValue.toFixed(self.precision) + ')'
                     }
@@ -549,7 +554,7 @@ var vm = new Vue({
                     }
                     if (index === 0) {
                         var me = self.graph.svg.append('rect')
-                        .style('fill', 'blue')
+                        .style('fill', self.mode === 'single_given' ? 'red' : 'blue')
                         .attr('width', self.squareLength)
                         .attr('height', self.squareLength)
                         .attr('line-index', index)
