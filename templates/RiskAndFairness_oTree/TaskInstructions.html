@@ -25,6 +25,8 @@
         own risk fixed other temp
     {% elif mode == 'sec_otherrisk_ownfixed' %}
        other risk fixed own temp
+    {% elif mode == 'det_giv' %}
+        deterministic given/dictator game temp
     {% endif %}
 
 {% endblock %}
@@ -67,6 +69,11 @@
         <h3>otherrisk temp</h3>
         <p>
             otherrisk temp temp
+        </p>
+    {% elif mode == 'det_giv' %}
+        <h3>deterministic given temp</h3>
+        <p>
+            deterministic given temp temp
         </p>
     {% endif %}
 

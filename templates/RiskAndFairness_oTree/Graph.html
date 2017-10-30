@@ -16,6 +16,8 @@
         <h1 style="color:#BFBFBF">S-OwnRisk-FixedOther - Decision {{ counter }}
     {% elif mode == 'sec_otherrisk_ownfixed' %}
         <h1 style="color:#BFBFBF">S-OtherRisk-OwnFixed - Decision {{ counter }}
+    {% elif mode == 'det_giv' %}
+         <h1 style="color:#BFBFBF">DG - Decision {{ counter }}
     {% endif %}
 {% endblock %}
 
@@ -305,12 +307,11 @@
         </div>
     </div>
 
-    <!-- 
+    
     <div>
-        <button name="submit" value="True" class="btn btn-primary btn-large">Submit Decision</button>
+        <button id="submit" value="True" class="otree-button-next btn btn-primary next-button otree-next-button">Submit Decision</button>
     </div>
-     -->
-    {% next_button %}
+     
 
     <script type="text/javascript">
     $(document).ready(function() {
