@@ -4,14 +4,18 @@
 {% block title %}
     {% if mode == 'probability' %}
         <h1 style="color:#BFBFBF">PR - Decision {{ counter }}</h1>
-    {% elif mode == 'positive' %}
+    {% elif mode == 'sec_1bl_1ch' %}
         <h1 style="color:#BFBFBF">S-1B-1Ch - Decision {{ counter }}</h1>
-    {% elif mode == 'negative' %}
+    {% elif mode == 'sec_2bl_1ch' %}
         <h1 style="color:#BFBFBF">S-2B-1Ch - Decision {{ counter }}</h1>
-    {% elif mode == 'independent' %}
+    {% elif mode == 'sec_1bl_2ch' %}
         <h1 style="color:#BFBFBF">S-1B-2Ch - Decision {{ counter }}</h1>
-    {% elif mode == 'single' %}
+    {% elif mode == 'sec_ownrisk' %}
         <h1 style="color:#BFBFBF">S-OwnRisk - Decision {{ counter }}</h1>
+    {% elif mode == 'sec_ownrisk_fixedother' %}
+        <h1 style="color:#BFBFBF">S-OwnRisk-FixedOther - Decision {{ counter }}
+    {% elif mode == 'sec_otherrisk_ownfixed' %}
+        <h1 style="color:#BFBFBF">S-OtherRisk-OwnFixed - Decision {{ counter }}
     {% endif %}
 {% endblock %}
 

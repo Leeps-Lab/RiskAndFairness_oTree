@@ -11,26 +11,20 @@
 {% endblock %}
 {% block title %}
     
-    {% if mode == 'independent' %}
+    {% if mode == 'sec_1bl_2ch' %}
         independent temp
-    {% endif %}
-    
-    {% if mode == 'probability' %}
-
+    {% elif mode == 'probability' %}
         Task Type 1 (Prob)
-
-    {% endif %}
-
-    {% if mode == 'single' %}
+    {% elif mode == 'sec_ownrisk' %}
         single temp
-    {% endif %}
-
-    {% if mode == 'positive' %}
+    {% elif mode == 'sec_1bl_1ch' %}
         positive temp
-    {% endif %}
-
-    {% if mode == 'negative' %}
+    {% elif mode == 'sec_2bl_1ch' %}
         negative temp
+    {% elif mode == 'sec_ownrisk_fixedother' %}
+        own risk fixed other temp
+    {% elif mode == 'sec_otherrisk_ownfixed' %}
+       other risk fixed own temp
     {% endif %}
 
 {% endblock %}
@@ -39,38 +33,40 @@
 
 {% block content %}
     {% formfield player.time_TaskInstructions with label=None %}
-    {% if mode == 'independent' %}
+    {% if mode == 'sec_1bl_2ch' %}
         <h3>independent temp</h3>
         <p>
             independent temp temp
         </p>
-    {% endif %}
-
-    {% if mode == 'probability' %}
+    {% elif mode == 'probability' %}
         <h3>probability temp</h3>
         <p>
             probability temp temp
         </p>
-    {% endif %}
-
-    {% if mode == 'single' %}
+    {% elif mode == 'sec_ownrisk' %}
         <h3>single temp</h3>
         <p>
             single temp temp
         </p>
-    {% endif %}
-
-    {% if mode == 'positive' %}
+    {% elif mode == 'sec_1bl_1ch' %}
         <h3>positive temp</h3>
         <p>
             positive temp temp
         </p>
-    {% endif %}    
-
-    {% if mode == 'negative' %}
+    {% elif mode == 'sec_2bl_1ch' %}
         <h3>negative temp</h3>
         <p>
             negative temp temp
+        </p>
+    {% elif mode == 'sec_ownrisk_fixedother' %}
+        <h3>ownrisk temp</h3>
+        <p>
+            ownrisk temp temp
+        </p>
+    {% elif mode == 'sec_otherrisk_ownfixed' %}
+        <h3>otherrisk temp</h3>
+        <p>
+            otherrisk temp temp
         </p>
     {% endif %}
 
