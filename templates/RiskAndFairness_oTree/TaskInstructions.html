@@ -9,30 +9,24 @@
       }
     </script>
 {% endblock %}
-{% block title %}
 
-{#    {% if mode == 'probability' %}#}
-{##}
-{#        Instructions for Task Type PR#}
-{##}
-{#    {% endif %}#}
-{##}
-{#    {% if mode == 'independent' %}#}
-{##}
+{% block title %}
+{#    {% if mode == 'sec_1bl_2ch' %}#}
 {#        independent temp#}
-{##}
-{#    {% endif %}#}
-{##}
-{#    {% if mode == 'single' %}#}
+{#    {% elif mode == 'probability' %}#}
+{#        Task Type 1 (Prob)#}
+{#    {% elif mode == 'sec_ownrisk' %}#}
 {#        single temp#}
-{#    {% endif %}#}
-{##}
-{#    {% if mode == 'positive' %}#}
+{#    {% elif mode == 'sec_1bl_1ch' %}#}
 {#        positive temp#}
-{#    {% endif %}#}
-{##}
-{#    {% if mode == 'negative' %}#}
+{#    {% elif mode == 'sec_2bl_1ch' %}#}
 {#        negative temp#}
+{#    {% elif mode == 'sec_ownrisk_fixedother' %}#}
+{#        own risk fixed other temp#}
+{#    {% elif mode == 'sec_otherrisk_ownfixed' %}#}
+{#       other risk fixed own temp#}
+{#    {% elif mode == 'det_giv' %}#}
+{#        deterministic given/dictator game temp#}
 {#    {% endif %}#}
 
 {% endblock %}
@@ -42,39 +36,30 @@
 {% block content %}
     {% formfield player.time_TaskInstructions with label=None %}
 
+
+
     {% if mode == 'probability' %}
         {% include Constants.instructions_probability %}
+
+    {% elif mode == 'sec_1bl_2ch' %}
+
+    {% elif mode == 'sec_ownrisk' %}
+
+    {% elif mode == 'sec_1bl_1ch' %}
+
+    {% elif mode == 'sec_2bl_1ch' %}
+
+    {% elif mode == 'sec_ownrisk_fixedother' %}
+
+    {% elif mode == 'sec_otherrisk_ownfixed' %}
+
+    {% elif mode == 'det_giv' %}
+
     {% endif %}
 
-    {% if mode == 'independent' %}
-        <h3>independent temp</h3>
-        <p>
-            independent temp temp
-        </p>
-    {% endif %}
 
-
-    {% if mode == 'single' %}
-        <h3>single temp</h3>
-        <p>
-            single temp temp
-        </p>
-    {% endif %}
-
-    {% if mode == 'positive' %}
-        <h3>positive temp</h3>
-        <p>
-            positive temp temp
-        </p>
-    {% endif %}    
-
-    {% if mode == 'negative' %}
-        <h3>negative temp</h3>
-        <p>
-            negative temp temp
-        </p>
-    {% endif %}
 
     {% next_button %}
-{% endblock %}
+
+git {% endblock %}
 

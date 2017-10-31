@@ -20,8 +20,11 @@ data = [
     {'mode': 'sec_otherrisk_ownfixed', 'm': 50, 'p_x': 1, 'p_y': 2, 'prob_a': 50, 'fixed': {'m': 100, 'p_x': 2, 'p_y': 3, 'a': 30}},
     {'mode': 'sec_1bl_2ch', 'm': 100, 'p_x': 2, 'p_y': 1, 'prob_a': 50},
     {'mode': 'sec_1bl_1ch'   , 'm': 100, 'p_x': 1, 'p_y': 3, 'prob_a': 50},
+    {'mode': 'sec_1bl_1ch'   , 'm': 100, 'p_x': 1, 'p_y': 3, 'prob_a': 50},
     {'mode': 'sec_2bl_1ch'   , 'm': 100, 'p_x': 1, 'p_y': 3, 'prob_a': 50},
     {'mode': 'sec_ownrisk'   , 'm': 100, 'p_x': 2, 'p_y': 3, 'prob_a': 50}
+    # {'mode': 'sec_ownrisk_fixedother'   , 'm': 100, 'p_x': 2, 'p_y': 3, 'prob_a': 50, 'partner_a': 20},
+    # {'mode': 'sec_otherrisk_ownfixed'   , 'm': 100, 'p_x': 2, 'p_y': 3, 'prob_a': 50, 'you_a': 30}
 ]
 
 # patch

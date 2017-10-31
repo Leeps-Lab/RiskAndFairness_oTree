@@ -4,14 +4,20 @@
 {% block title %}
     {% if mode == 'probability' %}
         <h1 style="color:#BFBFBF">PR - Decision {{ counter }}</h1>
-    {% elif mode == 'positive' %}
+    {% elif mode == 'sec_1bl_1ch' %}
         <h1 style="color:#BFBFBF">S-1B-1Ch - Decision {{ counter }}</h1>
-    {% elif mode == 'negative' %}
+    {% elif mode == 'sec_2bl_1ch' %}
         <h1 style="color:#BFBFBF">S-2B-1Ch - Decision {{ counter }}</h1>
-    {% elif mode == 'independent' %}
+    {% elif mode == 'sec_1bl_2ch' %}
         <h1 style="color:#BFBFBF">S-1B-2Ch - Decision {{ counter }}</h1>
-    {% elif mode == 'single' %}
+    {% elif mode == 'sec_ownrisk' %}
         <h1 style="color:#BFBFBF">S-OwnRisk - Decision {{ counter }}</h1>
+    {% elif mode == 'sec_ownrisk_fixedother' %}
+        <h1 style="color:#BFBFBF">S-OwnRisk-FixedOther - Decision {{ counter }}
+    {% elif mode == 'sec_otherrisk_ownfixed' %}
+        <h1 style="color:#BFBFBF">S-OtherRisk-OwnFixed - Decision {{ counter }}
+    {% elif mode == 'det_giv' %}
+         <h1 style="color:#BFBFBF">DG - Decision {{ counter }}
     {% endif %}
 {% endblock %}
 
@@ -165,7 +171,7 @@
             label: getLabels(),
             equation: getEquation(),
             prob: getProb(),
-            onChangeCallback: function() {
+            onChangeCallBack: function() {
                 somethingChanged = true
             }
         })
@@ -183,6 +189,7 @@
 
 
 {% block content %}
+
     {% formfield player.time_Graph with label=None %}
     <div id="app">
         <div class="container">
@@ -300,7 +307,11 @@
         </div>
     </div>
 
-    {% next_button %}
+    
+    <div>
+        <button id="submit" value="True" class="otree-button-next btn btn-primary next-button otree-next-button">Submit Decision</button>
+    </div>
+     
 
     <script type="text/javascript">
     $(document).ready(function() {
