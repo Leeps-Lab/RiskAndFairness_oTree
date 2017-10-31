@@ -17,6 +17,7 @@ class Constants(BaseConstants):
     name_in_url = 'RiskAndFairness_oTree'
     players_per_group = 2
     num_rounds = config.numberOfPeriod()
+    participation_fee = c(5)
 
     # I'm offloading the heavy lifting to JavaScript because I'm very bad at Python
     static_values = {
@@ -61,6 +62,15 @@ class Constants(BaseConstants):
         }
     }
     dynamic_values = config.getDynamicValues()
+
+
+    # number of different task types
+    number_types_of_tasks = len(set([d['mode'] for d in dynamic_values]))
+
+
+    # INSTRUCTIONS PATHS
+    # list instruction templates
+    instructions_probability = 'RiskAndFairness_oTree/Probability.html'
 
 
 class Player(BasePlayer):

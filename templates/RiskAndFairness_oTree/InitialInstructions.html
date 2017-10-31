@@ -12,23 +12,27 @@
 
 
 {% block title %}
-    Initial Instructions
+    Welcome to the Laboratory
 {% endblock %}
 
 {% block content %}
     {% formfield player.time_InitialInstructions with label=None %}
 
-    <h2>Experimental Instructions</h2>
+    <h3>General Instructions</h3>
 
     <p>
-        This is an experiment in decision-making. Several research foundations have provided
-        funds for this study. Your final earnings today will depend partly on your decisions,
-        partly on the decisions of others and partly on chance. Precise rules will be explained
-        below. Please pay careful attention to the instructions. At the end of the experiment,
-        you will be paid in cash. All payments will be made in private. Also, you will receive
-        $7 as a participation fee, simply for showing up on time.
-
-        During the experiment we will use Experimental Tokens instead of dollars.
+        Please pay careful attention to the instructions. You will be asked to make decisions
+        in a series of different tasks and precise rules will be provided before you start each
+        type of task.
+    </p>
+    <p>
+        Your final earnings today will depend partly on your decisions, partly on the decisions
+        of others and partly on chance. At the end of the experiment, you will be paid in cash.
+        All payments will be made in private using and envelope. Also, you will receive
+        additional {{ participation_fee }} as a participation fee.
+    </p>
+    <p>
+        During the experiment we will use <strong>Experimental Tokens</strong> instead of dollars.
         At the end of the experiment, your earnings in tokens will be translated into dollars.
         You will receive 1 dollar for every 5 tokens you have earned in the session.
         It is important that you do not talk or in any way try to communicate with other
@@ -42,25 +46,28 @@
     <p>
         At the beginning of the experiment, you will be randomly and anonymously matched with
         one other participant to form a pair. Within each pair there will be one person with
-        the role of “Decider” and another person with the role of “Partner.” These roles will
-        be assigned randomly, and will remain for the entire session. No participant will
-        learn in any way the identity of his/her counterpart at any moment of the session.
-        In each pair, only choices made by the Decider will determine final payoffs. Although
-        the Partner will face the same kinds of tasks, his/her choices will not determine
-        anyone’s payoffs.
+        the role of <i style="color: #1b6d85">Decider</i> and another person with the role of
+        <i style="color: #1b6d85">Partner</i>. These roles will
+        be assigned randomly within each pair, and will remain for the entire session.
+        Only choices made by the Decider will determine final payoffs. Partner choices
+        will not determine anyone’s payoffs.
+        Roles, however, will be disclosed after the last decision has been made.
+        Finally, participants will not learn the identity of his/her counterpart at any moment of the session.
+
     </p>
 
     <h3>Tasks, Decision Rounds and Earnings</h3>
 
     <p>
-        This experiment will consist of a series of decision rounds of five
-        different types of tasks. Each kind of task will be detailed below.
-        At the end of all decisions, the computer will randomly select one choice
-        made by the Decider and generate payoffs for both Decider and Partner based
-        on that selected choice. The selected choice as well as the final payoffs it
-        generates will be disclosed to both participants.
+        This experiment will consist of a series of decision rounds of {{ Constants.number_types_of_tasks }}
+        different types of tasks. Each kind of task will be explained later.
+        At the end of all decisions, your role (Decider or Partner) will be disclosed.
+        Then the computer will randomly select one choice made by the Decider and generate payoffs
+        for both member of the pair based on that selected choice.
+        The selected choice as well as the final payoffs it generates will be disclosed to both participants.
     </p>
 
+    </br>
 
     {% next_button %}
 {% endblock %}

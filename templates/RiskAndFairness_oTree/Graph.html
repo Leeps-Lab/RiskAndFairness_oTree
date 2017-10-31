@@ -217,9 +217,9 @@
                         <table class="table table-bordered table-condensed small">
                             <thead>
                                 <tr>
-                                    <td>State: Probability (%)</td>
-                                    <td>Your Tokens</td>
-                                    <td>Partner's Tokens</td>
+                                    <td>Outcome Probability (%)</td>
+                                    <td><b style="color: blue">Your Tokens<b></td>
+                                    <td><b style="color: orange">Partner's Tokens<b></td>
                                 </tr>
                             </thead>
                             <tbody>
@@ -244,7 +244,7 @@
                             <thead>
                                 <tr>
                                     <td>Your Tokens</td>
-                                    <td v-if="mode !== 'single'">Partner's Tokens</td>
+                                    <td v-if="mode !== 'single'"><b style="color: orange">Partner's Tokens<b></td>
                                 </tr>
                             </thead>
                             <tbody>

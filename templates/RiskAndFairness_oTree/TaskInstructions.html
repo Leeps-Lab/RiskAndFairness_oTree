@@ -10,28 +10,30 @@
     </script>
 {% endblock %}
 {% block title %}
-    
-    {% if mode == 'independent' %}
-        independent temp
-    {% endif %}
-    
-    {% if mode == 'probability' %}
 
-        Task Type 1 (Prob)
-
-    {% endif %}
-
-    {% if mode == 'single' %}
-        single temp
-    {% endif %}
-
-    {% if mode == 'positive' %}
-        positive temp
-    {% endif %}
-
-    {% if mode == 'negative' %}
-        negative temp
-    {% endif %}
+{#    {% if mode == 'probability' %}#}
+{##}
+{#        Instructions for Task Type PR#}
+{##}
+{#    {% endif %}#}
+{##}
+{#    {% if mode == 'independent' %}#}
+{##}
+{#        independent temp#}
+{##}
+{#    {% endif %}#}
+{##}
+{#    {% if mode == 'single' %}#}
+{#        single temp#}
+{#    {% endif %}#}
+{##}
+{#    {% if mode == 'positive' %}#}
+{#        positive temp#}
+{#    {% endif %}#}
+{##}
+{#    {% if mode == 'negative' %}#}
+{#        negative temp#}
+{#    {% endif %}#}
 
 {% endblock %}
 
@@ -39,6 +41,11 @@
 
 {% block content %}
     {% formfield player.time_TaskInstructions with label=None %}
+
+    {% if mode == 'probability' %}
+        {% include Constants.instructions_probability %}
+    {% endif %}
+
     {% if mode == 'independent' %}
         <h3>independent temp</h3>
         <p>
@@ -46,12 +53,6 @@
         </p>
     {% endif %}
 
-    {% if mode == 'probability' %}
-        <h3>probability temp</h3>
-        <p>
-            probability temp temp
-        </p>
-    {% endif %}
 
     {% if mode == 'single' %}
         <h3>single temp</h3>
