@@ -43,8 +43,7 @@ var vm = new Vue({
             }],
             equations: [],
             once: false,
-            fixed: {},
-            onChangeCallback: function() {}
+            fixed: {}
         }, appSpecific);
     },
     computed: {
@@ -58,7 +57,7 @@ var vm = new Vue({
     watch: {
         'prob.a': function(val, old) {
 
-            if (this.once !== false) this.onChangeCallback()
+            if (this.once !== false && typeof this.onChangeCallback === 'function') this.onChangeCallback()
 
             this.once = true // invalidated changes on initialization
 
@@ -406,7 +405,7 @@ var vm = new Vue({
 
                 var drag = d3.drag().on('drag', function(d) {
 
-                    self.onChangeCallback()
+                    if (typeof self.onChangeCallback === 'function') self.onChangeCallback()
 
                     var me = d3.select(this)
                     var index = me.attr('line-index');

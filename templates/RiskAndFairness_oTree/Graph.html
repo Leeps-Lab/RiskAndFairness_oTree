@@ -171,8 +171,9 @@
             label: getLabels(),
             equation: getEquation(),
             prob: getProb(),
-            onChangeCallBack: function() {
+            onChangeCallback: function() {
                 somethingChanged = true
+                console.log('changed cb')
             }
         })
 
@@ -182,11 +183,11 @@
     var appSpecific = getGraphData()
 
     </script>
-    
+
     <script src="{% static "js/graph.js" %}"></script>
 
     <script type="text/javascript">
-      window.onload = function () 
+      window.onload = function ()
       {
         document.getElementById("arrive_time").value = (new Date()).toISOString();
       }
@@ -317,10 +318,18 @@
 
 
     <div>
-        <button id="submit" class="btn btn-primary btn-large">Submit Decision</button>
+        <button id="submit" class="btn btn-primary btn-large next-button">Submit Decision</button>
     </div>
 
-    
-    
+    <script type="text/javascript">
+    $(document).ready(function() {
+        $('.next-button').click(function() {
+            if (somethingChanged === false) {
+                alert('Please make a selection.')
+                return false
+            }
+        })
+    })
+    </script>
 
 {% endblock %}
