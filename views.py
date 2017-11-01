@@ -44,7 +44,7 @@ class Graph(Page):
         round_data = dynamic_values[current_round - 1]
         if round_data is not None and round_data['mode'] is not None:
             if round_data['mode'] == 'det_giv':
-                return ['mode', 'me_a', 'time_Graph']
+                return ['mode', 'me_a', 'me_b', 'time_Graph']
             elif round_data['mode'] == 'probability':
                 return ['mode', 'prob_a', 'prob_b', 'time_Graph']
             elif round_data['mode'] == 'sec_ownrisk':
@@ -103,9 +103,10 @@ class Results(Page):
         elif mode == 'det_giv':
             if self.player.id_in_group == 1:
                 dec_a = round(self.group.in_round(pr).get_player_by_id(1).me_a, 1) 
+                dec_b = None
             else:
-                #dec_a = round(self.group.in_round(pr).get_player_by_id(1).partner_a, 1) # this does not exist -- DG issue
-                dec_a = 99999
+                dec_a = round(self.group.in_round(pr).get_player_by_id(1).me_b, 1)
+                dec_b = None
         else:
             if self.player.id_in_group == 1:
                 dec_a = round(self.group.in_round(pr).get_player_by_id(1).me_a, 1)

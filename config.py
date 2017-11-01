@@ -13,13 +13,14 @@ Please use lowercase for dictionary keys in the future // Rachel
 data = [
     # {'mode': 'probability', 'a_x': 70, 'a_y':10, 'b_x': 10, 'b_y': 80, 'label': {'x': 'Your Tokens','y': 'Partner\'s Tokens'}},
     # {'mode': 'probability', 'a_x': 70, 'a_y':10, 'b_x': 10, 'b_y': 80, 'label': {'x': 'Your Tokens','y': 'Partner\'s Tokens'}},
-    # {'mode': 'det_giv'   , 'm': 100, 'p_x': 2, 'p_y': 3, 'prob_a': 50,'label': {'x': 'lbl x','y': 'lbl y'}},
+    {'mode': 'det_giv'   , 'm': 100, 'p_x': 2, 'p_y': 3, 'prob_a': 50,'label': {'x': 'lbl x','y': 'lbl y'}},
+    {'mode': 'det_giv'   , 'm': 100, 'p_x': 2, 'p_y': 3, 'prob_a': 50,'label': {'x': 'lbl x','y': 'lbl y'}},
     # # Logically, m, p_x, and p_y are for your equation, and under "fixed" are for other's equation
     # {'mode': 'sec_ownrisk_fixedother', 'm': 100, 'p_x': 2, 'p_y': 3, 'prob_a': 50, 'fixed': {'m': 50, 'p_x': 1, 'p_y': 2, 'a': 10}},
     # # Logically, m, p_x, and p_y are for other's equation, and under "fixed" are for your equation
     # {'mode': 'sec_otherrisk_ownfixed', 'm': 50, 'p_x': 1, 'p_y': 2, 'prob_a': 50, 'fixed': {'m': 100, 'p_x': 2, 'p_y': 3, 'a': 30}},
-    {'mode': 'sec_1bl_2ch', 'm': 100, 'p_x': 2, 'p_y': 1, 'prob_a': 50},
-    {'mode': 'sec_1bl_1ch'   , 'm': 100, 'p_x': 1, 'p_y': 3, 'prob_a': 50},
+    # {'mode': 'sec_1bl_2ch', 'm': 100, 'p_x': 2, 'p_y': 1, 'prob_a': 50},
+    # {'mode': 'sec_1bl_1ch'   , 'm': 100, 'p_x': 1, 'p_y': 3, 'prob_a': 50},
     # {'mode': 'sec_1bl_1ch'   , 'm': 100, 'p_x': 1, 'p_y': 3, 'prob_a': 50},
     # {'mode': 'sec_2bl_1ch'   , 'm': 100, 'p_x': 1, 'p_y': 3, 'prob_a': 50},
     # {'mode': 'sec_ownrisk'   , 'm': 100, 'p_x': 2, 'p_y': 3, 'prob_a': 50}
@@ -29,6 +30,14 @@ data = [
 
 # patch
 
+# prob
+# DG
+# sec_ownrisk
+# sec_otherrisk_ownfixed
+# sec_ownrisk_fixedother
+# sec_1bl_1ch
+# sec_1bl_2ch
+# sec_2bl_1ch
 
 print('temp')
 def checkValidity():

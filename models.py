@@ -165,7 +165,7 @@ class Group(BaseGroup):
                 partner.outcome = 'A' if rnd < round_data['prob_a'] / 100 else 'B'
             elif modeMap[round_data['mode']] == 'single_given':
                 decider.payoff = decider.me_a
-                partner.payoff = decider.partner_a ## this is going to throw an error
+                partner.payoff = decider.me_b # this is really partner_a, but the javascript automatically exports this so its a hacky but easy and clean way to do it
 
 class Subsession(BaseSubsession):
     def creating_session(self):

@@ -182,7 +182,15 @@
     var appSpecific = getGraphData()
 
     </script>
+    
     <script src="{% static "js/graph.js" %}"></script>
+
+    <script type="text/javascript">
+      window.onload = function () 
+      {
+        document.getElementById("arrive_time").value = (new Date()).toISOString();
+      }
+    </script>
 
 {% endblock %}
 
@@ -307,14 +315,14 @@
         </div>
     </div>
 
-    
-    {% next_button %}
-     
+
+    <div>
+        <button id="submit" class="btn btn-primary btn-large">Submit Decision</button>
+    </div>
 
     <script type="text/javascript">
     $(document).ready(function() {
-        $('#arrive_time').val((new Date()).toISOString())
-        $('temp-string').click(function() {
+        $('button').click(function() {
             if (somethingChanged === false) {
                 alert('Please make a selection.')
                 return false
@@ -322,5 +330,6 @@
         })
     })
     </script>
+    
 
 {% endblock %}
