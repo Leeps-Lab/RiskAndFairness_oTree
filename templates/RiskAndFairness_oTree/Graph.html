@@ -311,16 +311,16 @@
     {% next_button %}
      
 
-    <script type="text/javascript">
-    $(document).ready(function() {
-        $('#arrive_time').val((new Date()).toISOString())
-        $('.next-button').click(function() {
-            if (somethingChanged === false) {
-                alert('Please make a selection.')
-                return false
-            }
-        })
-    })
-    </script>
+{#    <script type="text/javascript">#}
+{#    $(document).ready(function() {#}
+{#        $('#arrive_time').val((new Date()).toISOString())#}
+{#        $('.next-button').click(function() {#}
+{#            if (somethingChanged === false) {#}
+{#                alert('Please make a selection.')#}
+{#                return false#}
+{#            }#}
+{#        })#}
+{#    })#}
+{#    </script>#}
 
 {% endblock %}

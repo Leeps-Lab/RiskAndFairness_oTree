@@ -71,6 +71,7 @@ class Constants(BaseConstants):
     # INSTRUCTIONS PATHS
     # list instruction templates
     instructions_probability = 'RiskAndFairness_oTree/Probability.html'
+    instructions_sec_1bl_1ch = 'RiskAndFairness_oTree/sec_1bl_1ch.html'
 
 
 class Player(BasePlayer):

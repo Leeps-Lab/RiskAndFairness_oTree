@@ -36,16 +36,16 @@
 {% block content %}
     {% formfield player.time_TaskInstructions with label=None %}
 
-
-
     {% if mode == 'probability' %}
         {% include Constants.instructions_probability %}
+
+    {% elif mode == 'sec_1bl_1ch' or mode == 'sec_1bl_2ch' or mode == 'sec_2bl_1ch' or mode == 'sec_2bl_2ch' %}
+        {% include Constants.instructions_sec_1bl_1ch %}
 
     {% elif mode == 'sec_1bl_2ch' %}
 
     {% elif mode == 'sec_ownrisk' %}
 
-    {% elif mode == 'sec_1bl_1ch' %}
 
     {% elif mode == 'sec_2bl_1ch' %}
 

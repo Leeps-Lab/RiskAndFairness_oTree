@@ -15,18 +15,24 @@ Your decision will be represented by a point on a graph like the one in the figu
     </p>
 
     <p>
-    The position of a point on this graph represents a lottery. For example, the point on location (40, 27) indicates that if State A is realized, the lottery pays 40 tokens; and if State B is realized, the lottery pays 27 tokens. <i style="color: blue"> your lottery  will be depicted by a blue square, and </i> and <i style="color: orange"> Partner’s lottery by an orange circle </i>.
+    The position of a point on this graph represents a lottery. For example, the point on location (40, 20) indicates that if State A is realized, the lottery pays 40 tokens; and if State B is realized, the lottery pays 20 tokens. <i style="color: blue"> your lottery  will be depicted by a blue square, and </i> and <i style="color: orange"> Partner’s lottery by an orange circle </i>.
     </p>
 
-    </br>
+    {% if mode == 'sec_1bl_1ch' %}
+        <img src="{% static "sec_1bl_1ch.png" %}" width="500" align="center"/>
 
-    <p>
-        <img alt="Sample Screenshot - Task PR"
-             src="{% static "probability.png" %}"
-             width="500"
-             align="center"/>
-    </p> </br>
+    {% endif %}
 
+    {% if sec2 == "1ch" %}
+<p>
+    For this next task, both you and your partner
+    {% if sec1 == 1bl %} share the same
+    fortune: in each state, the amount of tokens both receive is the same. See for example, Figure 2. Here states A and B each occur with a 50% chance. Also, since both participants face the exact same fate, Decider’s blue square and Partner’s orange circle are always located on the same spot. In Figure 2, they both are on location (40, 27). This means, if State A happens, you and your Partner will both get 40 tokens and if State B occurs instead, you both get 27 tokens.
+
+For Task 3, Decider and Partner have opposite fortunes. What Decider would get in State A equals what Partner would receive in State B. Similarly, what Decider would get in State B is what Partner would get in State A.
+
+
+    </p>
     <p>
     </p>
 
@@ -47,5 +53,4 @@ Your decision will be represented by a point on a graph like the one in the figu
     </p>
 
 </div>
-
 

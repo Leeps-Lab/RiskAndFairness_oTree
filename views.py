@@ -34,6 +34,13 @@ class TaskInstructions(Page):
             prevmode = Constants.dynamic_values[self.round_number - 2]['mode']
         return self.round_number == 1 or mode != prevmode
 
+    def vars_for_template(self):
+        mode = Constants.dynamic_values[self.round_number - 1]['mode']
+        # this will be used in the conditional display of instructions
+        return {'mode': mode,
+                'sec1': mode.split('_')[1],
+                'sec2': mode.split('_')[2]
+                }
 
 class Graph(Page):
     form_model = models.Player
@@ -66,7 +73,11 @@ class Graph(Page):
                 prevmode = Constants.dynamic_values[self.round_number - (counter + 1)]['mode']
         else:
             counter = 1
-        return {'mode': mode, 'counter': counter}
+        return {'mode': mode,
+                'counter': counter,
+                'sec1': mode.split(_)[1],
+                'sec2': mode.split(_)[2]
+                }
 
     def before_next_page(self):
         current_round = self.round_number
