@@ -28,6 +28,8 @@ data = [
 ]
 
 # patch
+
+
 print('temp')
 def checkValidity():
     for period in data:

@@ -224,21 +224,21 @@
                         <table class="table table-bordered table-condensed small">
                             <thead>
                                 <tr>
-                                    <td>Outcome Probability (%)</td>
-                                    <td><b style="color: blue">Your Tokens<b></td>
-                                    <td><b style="color: orange">Partner's Tokens<b></td>
+                                    <td style = "text-align: left;">Outcome Probability (%)</td>
+                                    <td style = "text-align: center;" ><b style="color: blue">Your Tokens<b></td>
+                                    <td style = "text-align: center;" ><b style="color: orange">Partner's Tokens<b></td>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td v-html="'A: ' + prob.a.toFixed(0) + '%'"></td>
-                                    <td v-html="equation.a.x"></td>
-                                    <td v-html="equation.a.y"></td>
+                                    <td style = "text-align: center;" v-html="'A: ' + prob.a.toFixed(0) + '%'"></td>
+                                    <td style = "text-align: center; color: blue" v-html="equation.a.x"></td>
+                                    <td style = "text-align: center; color: orange" v-html="equation.a.y"></td>
                                 </tr>
                                 <tr>
-                                    <td v-html="'B: ' + prob.b.toFixed(0) + '%'"></td>
-                                    <td v-html="equation.b.x"></td>
-                                    <td v-html="equation.b.y"></td>
+                                    <td style = "text-align: center;" v-html="'B: ' + prob.b.toFixed(0) + '%'"></td>
+                                    <td style = "text-align: center; color: blue" v-html="equation.b.x"></td>
+                                    <td style = "text-align: center; color: orange" v-html="equation.b.y"></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -269,21 +269,21 @@
                         <table class="table table-bordered table-condensed small">
                             <thead>
                                 <tr>
-                                    <td>State: Probability (%)</td>
-                                    <td>Your Tokens</td>
-                                    <td v-if="mode !== 'single'">Partner's Tokens</td>
+                                    <td style = "text-align: left;"> State: Probability (%)</td>
+                                    <td style = "text-align: center; color: blue">Your Tokens</td>
+                                    <td style = "text-align: center; color: orange" v-if="mode !== 'single'">Partner's Tokens</td>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td v-html="'A: ' + prob.a.toFixed(0) + '%'"></td>
-                                    <td v-html="selected[0].x"></td>
-                                    <td v-html="selected[1].x" v-if="mode !== 'single'"></td>
+                                    <td style = "text-align: center;" v-html="'State A: ' + prob.a.toFixed(0) + '%'"></td>
+                                    <td style = "text-align: center; color: blue" v-html="selected[0].x"></td>
+                                    <td style = "text-align: center; color: orange" v-html="selected[1].x" v-if="mode !== 'single'"></td>
                                 </tr>
                                 <tr>
-                                    <td v-html="'B: ' + prob.b.toFixed(0) + '%'"></td>
-                                    <td v-html="selected[0].y"></td>
-                                    <td v-html="selected[1].y" v-if="mode !== 'single'"></td>
+                                    <td style = "text-align: center;" v-html="'State B: ' + prob.b.toFixed(0) + '%'"></td>
+                                    <td style = "text-align: center; color: blue" v-html="selected[0].y"></td>
+                                    <td style = "text-align: center; color: orange" v-html="selected[1].y" v-if="mode !== 'single'"></td>
                                 </tr>
                             </tbody>
                         </table>
