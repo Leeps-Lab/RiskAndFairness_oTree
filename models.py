@@ -98,6 +98,17 @@ class Player(BasePlayer):
 class Group(BaseGroup):
 
     def set_payoffs(self):
+
+        modeMap = {
+        'probability': 'probability',
+        'sec_1bl_1ch': 'positive',
+        'sec_2bl_1ch': 'negative',
+        'sec_1bl_2ch': 'independent',
+        'sec_ownrisk': 'single',
+        'sec_ownrisk_fixedother': 'single_fixedcircle',
+        'sec_otherrisk_ownfixed': 'single_fixedsquare',
+        'det_giv': 'single_given'}
+
         current_round = self.round_number
         print('current_round in set payoffs', current_round)
 
@@ -117,27 +128,44 @@ class Group(BaseGroup):
             decider = self.get_player_by_role('Decider')
             partner = self.get_player_by_role('Partner')
 
-            if round_data['mode'] == 'probability':
+            if modeMap[round_data['mode']] == 'probability':
                 decider.payoff = \
                     (rnd < decider.prob_a / 100) * round_data['a_x'] + (rnd >= decider.prob_a / 100) * round_data['b_x']
                 decider.outcome = 'A' if rnd < decider.prob_a / 100 else 'B'
                 partner.payoff = \
                     (rnd < decider.prob_a / 100) * round_data['a_y'] + (rnd >= decider.prob_a / 100) * round_data['b_y']
                 partner.outcome = 'A' if rnd < decider.prob_a / 100 else 'B'
-            elif round_data['mode'] == 'single':
+            elif modeMap[round_data['mode']] == 'single':
                 decider.payoff = \
                     (rnd < round_data['prob_a'] / 100) * decider.me_a + (rnd >= round_data['prob_a'] / 100) * decider.me_b
                 decider.outcome = 'A' if rnd < round_data['prob_a'] / 100 else 'B'
                 partner.payoff = \
-                    (rnd < round_data['prob_a'] / 100) * partner.partner_a + (rnd >= round_data['prob_a'] / 100) * partner.partner_b
+                    (rnd < round_data['prob_a'] / 100) * partner.me_a + (rnd >= round_data['prob_a'] / 100) * partner.me_b
                 partner.outcome = 'A' if rnd < round_data['prob_a'] / 100 else 'B'
-            elif round_data['mode'] in ['positive', 'negative', 'independent']:
+            elif modeMap[round_data['mode']] in ['positive', 'negative', 'independent']:
                 decider.payoff = \
                     (rnd < round_data['prob_a'] / 100) * decider.me_a + (rnd >= round_data['prob_a'] / 100) * decider.me_b
                 decider.outcome = 'A' if rnd < round_data['prob_a'] / 100 else 'B'
                 partner.payoff = \
                     (rnd < round_data['prob_a'] / 100) * decider.partner_a + (rnd >= round_data['prob_a'] / 100) * decider.partner_b
                 partner.outcome = 'A' if rnd < round_data['prob_a'] / 100 else 'B'
+            elif modeMap[round_data['mode']] == 'single_fixedsquare':
+                decider.payoff = \
+                    (rnd < round_data['prob_a'] / 100) * decider.me_a + (rnd >= round_data['prob_a'] / 100) * decider.me_b
+                decider.outcome = 'A' if rnd < round_data['prob_a'] / 100 else 'B'
+                partner.payoff = \
+                    (rnd < round_data['prob_a'] / 100) * decider.partner_a + (rnd >= round_data['prob_a'] / 100) * decider.partner_b
+                partner.outcome = 'A' if rnd < round_data['prob_a'] / 100 else 'B'
+            elif modeMap[round_data['mode']] == 'single_fixedcircle':
+                decider.payoff = \
+                    (rnd < round_data['prob_a'] / 100) * decider.me_a + (rnd >= round_data['prob_a'] / 100) * decider.me_b
+                decider.outcome = 'A' if rnd < round_data['prob_a'] / 100 else 'B'
+                partner.payoff = \
+                    (rnd < round_data['prob_a'] / 100) * decider.partner_a + (rnd >= round_data['prob_a'] / 100) * decider.partner_b
+                partner.outcome = 'A' if rnd < round_data['prob_a'] / 100 else 'B'
+            elif modeMap[round_data['mode']] == 'single_given':
+                decider.payoff = decider.me_a
+                partner.payoff = decider.partner_a ## this is going to throw an error
 
 class Subsession(BaseSubsession):
     def creating_session(self):
