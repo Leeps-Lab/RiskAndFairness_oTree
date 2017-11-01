@@ -51,7 +51,7 @@ class Graph(Page):
         round_data = dynamic_values[current_round - 1]
         if round_data is not None and round_data['mode'] is not None:
             if round_data['mode'] == 'det_giv':
-                return ['mode', 'me_a', 'time_Graph']
+                return ['mode', 'me_a', 'me_b', 'time_Graph']
             elif round_data['mode'] == 'probability':
                 return ['mode', 'prob_a', 'prob_b', 'time_Graph']
             elif round_data['mode'] == 'sec_ownrisk':
@@ -106,9 +106,42 @@ class Results(Page):
     def vars_for_template(self):
         # variables:
         mode = Constants.dynamic_values[self.session.vars['paying_round'] - 1]['mode']
-        decision = self.group.get_player_by_id(1).me_a if mode != 'probability' else self.group.get_player_by_id(1).prob_a
-        decision = str(round(decision, 1)) + '% for A'
-        return {'mode': mode.capitalize(), 'decision': decision}
+        pr = self.session.vars['paying_round']
+
+        if mode == 'probability':
+            dec_a = round(self.group.in_round(pr).get_player_by_id(1).prob_a, 1)
+            dec_b = round(self.group.in_round(pr).get_player_by_id(1).prob_b, 1)
+        elif mode == 'det_giv':
+            if self.player.id_in_group == 1:
+                dec_a = round(self.group.in_round(pr).get_player_by_id(1).me_a, 1) 
+                dec_b = None
+            else:
+                dec_a = round(self.group.in_round(pr).get_player_by_id(1).me_b, 1)
+                dec_b = None
+        else:
+            if self.player.id_in_group == 1:
+                dec_a = round(self.group.in_round(pr).get_player_by_id(1).me_a, 1)
+                dec_b = round(self.group.in_round(pr).get_player_by_id(1).me_b, 1)
+            else:
+                dec_a = round(self.group.in_round(pr).get_player_by_id(1).partner_a, 1)
+                dec_b = round(self.group.in_round(pr).get_player_by_id(1).partner_b, 1)
+
+        outcome = self.player.in_round(pr).outcome
+        payoff = self.player.in_round(pr).payoff
+        
+        role = 'decider' if self.player.id_in_group == 1 else 'partner'
+
+        if self.session.vars['paying_round'] > 1:
+            counter = 1
+            prevmode = Constants.dynamic_values[self.session.vars['paying_round'] - 2]['mode']
+            while mode == prevmode:
+                counter += 1;
+                if counter == self.session.vars['paying_round']:
+                    break
+                prevmode = Constants.dynamic_values[self.round_number - (counter + 1)]['mode']
+        else:
+            counter = 1
+        return {'mode': mode, 'dec_a': dec_a, 'dec_b': dec_b, 'role': role, 'counter': counter, 'outcome': outcome, 'payoff': payoff}
 
 
 page_sequence = [
