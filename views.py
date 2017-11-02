@@ -38,6 +38,7 @@ class TaskInstructions(Page):
         mode = Constants.dynamic_values[self.round_number - 1]['mode']
         # this will be used in the conditional display of instructions
         return {'mode': mode,
+                'sec0': '' if mode in ['probability', 'det_giv'] else mode.split('_')[0],
                 'sec1': '' if mode in ['probability', 'det_giv'] else mode.split('_')[1],
                 'sec2': '' if mode in ['probability', 'det_giv', 'sec_ownrisk'] else mode.split('_')[2]
                 }
