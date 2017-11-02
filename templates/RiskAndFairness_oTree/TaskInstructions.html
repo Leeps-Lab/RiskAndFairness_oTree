@@ -10,60 +10,18 @@
     </script>
 {% endblock %}
 
-{% block title %}
-{#    {% if mode == 'sec_1bl_2ch' %}#}
-{#        independent temp#}
-{#    {% elif mode == 'probability' %}#}
-{#        Task Type 1 (Prob)#}
-{#    {% elif mode == 'sec_ownrisk' %}#}
-{#        single temp#}
-{#    {% elif mode == 'sec_1bl_1ch' %}#}
-{#        positive temp#}
-{#    {% elif mode == 'sec_2bl_1ch' %}#}
-{#        negative temp#}
-{#    {% elif mode == 'sec_ownrisk_fixedother' %}#}
-{#        own risk fixed other temp#}
-{#    {% elif mode == 'sec_otherrisk_ownfixed' %}#}
-{#       other risk fixed own temp#}
-{#    {% elif mode == 'det_giv' %}#}
-{#        deterministic given/dictator game temp#}
-{#    {% endif %}#}
-
-{% endblock %}
-
-
 
 {% block content %}
     {% formfield player.time_TaskInstructions with label=None %}
 
     {% if mode == 'probability' %}
         {% include Constants.instructions_probability %}
-
     {% elif sec0 == 'sec' %}
-
         {% include Constants.instructions_sec %}
-
     {% elif mode == 'det_giv' %}
-
         {% include Constants.instructions_det_giv %}
-
     {% endif %}
-
-
 
     {% next_button %}
 
-
 {% endblock %}
-
-
-
-
-{#    {% elif mode == 'sec_ownrisk' %}#}
-{#        #}
-{#    {% elif mode == 'sec_2bl_1ch' %}#}
-{##}
-{#    {% elif mode == 'sec_ownrisk_fixedother' %}#}
-{##}
-{#    {% elif mode == 'sec_otherrisk_ownfixed' %}#}
-
