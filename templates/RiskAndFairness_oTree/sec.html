@@ -64,31 +64,35 @@ Please beware that the probabilities of each State might vary across different d
         </p>
 
         <!-- Budget lines -->
-        {% if sec1 == '1bl' %}
-
+         {% if sec1 == '1bl' %}
+            <!--
             <p>
-                1BL 1BL 1BL ---- Instructions for 1 budget line only. Will be followed by either: instructions for 1 choice, or instructions for 2 choices.
+                1BL 1BL 1BL :::: Instructions for 1 budget line only. Will be followed by either: instructions for 1 choice, or instructions for 2 choices.
             </p>
-
+            -->
         {% elif sec1 == '2bl' %}
+            <!--
             <p>
-                2BL 2BL 2BL ---- Instructions for 1 budget line only. Will be followed by either: instructions for 1 choice, or instructions for 2 choices.
+                2BL 2BL 2BL :::: Instructions for 1 budget line only. Will be followed by either: instructions for 1 choice, or instructions for 2 choices.
             </p>
+            -->
         {% endif %}
 
         <!-- Choices -->
         {% if sec2 == '1ch' %}
+            <!--
             <p>
-                1CH 1CH 1CH ---- Instructions for 1 choice only. Will follow either: instructions for 1 budget line, or instructions for 2 budget lines.
+                1CH 1CH 1CH :::: Instructions for 1 choice only. Will follow either: instructions for 1 budget line, or instructions for 2 budget lines.
             </p>
+        -->
         {% elif sec2 == '2ch' %}
+        <!--
             <p>
-                2CH 2CH 2CH ---- Instructions for 2 choices only. Will follow either: instructions for 1 budget line, or instructions for 2 budget lines.
+                2CH 2CH 2CH :::: Instructions for 2 choices only. Will follow either: instructions for 1 budget line, or instructions for 2 budget lines.
             </p>
+        -->
         {% endif %}
-
-
-
+        
 
         <!-- other security modes -->
         {% if mode == 'sec_ownrisk' %}
@@ -114,7 +118,7 @@ Please beware that the probabilities of each State might vary across different d
 
 {# IMAGES #}
             {% if mode == 'sec_1bl_1ch' %}
-                <img src="{% static "sec_1bl_1ch.png" %}" width="500" align="center"/>
+                <img src="{% static "sec_1bl_1ch_1.png" %}" width="500" align="center"/>
             {% elif mode == 'sec_1bl_2ch' %}
                 <img src="{% static "sec_1bl_2ch.png" %}" width="500" align="center"/>
             {% elif mode == 'sec_2bl_1ch' %}
