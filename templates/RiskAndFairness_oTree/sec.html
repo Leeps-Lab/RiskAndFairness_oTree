@@ -4,6 +4,7 @@
 
 
     {% if mode == 'sec_1bl_1ch' or mode == 'sec_1bl_2ch' or mode == 'sec_2bl_1ch' or mode == 'sec_2bl_2ch' or mode == 'sec_ownrisk' or mode == 'sec_ownrisk_fixedother' or mode == 'sec_otherrisk_ownfixed' %}
+
         <h2 class="panel-sub-heading">
             {% if mode == 'sec_1bl_1ch'%}
                 Instructions for S-1B-1C
@@ -42,7 +43,7 @@
         {% endif %}
 
         <!-- Choices -->
-        {% if sec2 == '1ch'}
+        {% if sec2 == '1ch' %}
             <p>
                 1CH 1CH 1CH ---- Instructions for 1 choice only. Will follow either: instructions for 1 budget line, or instructions for 2 budget lines.
             </p>
@@ -76,12 +77,6 @@
             </p>
         {% endif %}
 
-    {% elif mode == 'det_giv %}
-        <h2 class="panel-sub-heading">
-                Instructions for DG
-        <p>
-            DETERMINISTIC GIVEN INSTRUCTIONS
-        </p>
     {% endif %}
 
 
