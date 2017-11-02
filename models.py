@@ -95,7 +95,19 @@ class Player(BasePlayer):
             return 'Decider'
         else:
             return 'Partner'
+    
+    def set_payoffs(self):
+        round_data = config.getDynamicValues()[self.round_number - 1]
+        print('round data in set payoffs', round_data)
 
+        rnd = random.random()
+        print('random rnd', rnd)
+
+        if self.round_number == self.session.vars['paying_round'] and round_data['mode'] == 'sec_ownrisk':
+            self.payoff = \
+                (rnd < round_data['prob_a'] / 100) * self.me_a + (rnd >= round_data['prob_a'] / 100) * self.me_b
+            self.outcome = 'A' if rnd < round_data['prob_a'] / 100 else 'B'
+            
 class Group(BaseGroup):
 
     def set_payoffs(self):
@@ -136,13 +148,6 @@ class Group(BaseGroup):
                 partner.payoff = \
                     (rnd < decider.prob_a / 100) * round_data['a_y'] + (rnd >= decider.prob_a / 100) * round_data['b_y']
                 partner.outcome = 'A' if rnd < decider.prob_a / 100 else 'B'
-            elif modeMap[round_data['mode']] == 'single':
-                decider.payoff = \
-                    (rnd < round_data['prob_a'] / 100) * decider.me_a + (rnd >= round_data['prob_a'] / 100) * decider.me_b
-                decider.outcome = 'A' if rnd < round_data['prob_a'] / 100 else 'B'
-                partner.payoff = \
-                    (rnd < round_data['prob_a'] / 100) * partner.me_a + (rnd >= round_data['prob_a'] / 100) * partner.me_b
-                partner.outcome = 'A' if rnd < round_data['prob_a'] / 100 else 'B'
             elif modeMap[round_data['mode']] in ['positive', 'negative', 'independent']:
                 decider.payoff = \
                     (rnd < round_data['prob_a'] / 100) * decider.me_a + (rnd >= round_data['prob_a'] / 100) * decider.me_b

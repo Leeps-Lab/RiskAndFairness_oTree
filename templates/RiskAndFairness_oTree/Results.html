@@ -17,10 +17,10 @@
 {% block content %}
 {% formfield player.time_Results with label=None %}
     <h5>Your role for the experiment was {{ role | json }}.</h5>
-    <h5>The paying round was {{ mode | json }} - decision {{ counter | json }}.
+    <h5>The paying round was {{ mode | json }} - Decision {{ counter | json }}.
     <hr>
-    {% if mode == 'probability' %}
-	<table style="width:50%">
+    {% if mode == 'PR' %}
+	<table style="width:60%">
 		<tr>
             {% if role == 'decider' %}
 			<th>Your decision</th>
@@ -39,8 +39,8 @@
 		</tr>
     </table>
     
-    {% elif mode == 'det_giv' %}
-    <table style="width:50%">
+    {% elif mode == 'DG' %}
+    <table style="width:60%">
         <tr>
             {% if role == 'decider' %}
             <th>Your decision</th>
@@ -56,9 +56,9 @@
     </table>
     
     {% else %}
-    <table style="width:50%">
+    <table style="width:60%">
         <tr>
-            {% if role == 'decider' %}
+            {% if role == 'decider' or mode == 'S-OwnRisk' %}
             <th>Your decision</th>
             {% else %}
             <th>Decider's decision</th>

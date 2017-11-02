@@ -38,8 +38,8 @@ class TaskInstructions(Page):
         mode = Constants.dynamic_values[self.round_number - 1]['mode']
         # this will be used in the conditional display of instructions
         return {'mode': mode,
-                'sec1': mode.split('_')[1],
-                'sec2': mode.split('_')[2]
+                'sec1': '' if mode in ['probability', 'det_giv'] else mode.split('_')[1],
+                'sec2': '' if mode in ['probability', 'det_giv', 'sec_ownrisk'] else mode.split('_')[2]
                 }
 
 class Graph(Page):
@@ -75,16 +75,16 @@ class Graph(Page):
             counter = 1
         return {'mode': mode,
                 'counter': counter,
-                'sec1': mode.split(_)[1],
-                'sec2': mode.split(_)[2]
+                'sec1': '' if mode in ['probability', 'det_giv'] else mode.split('_')[1],
+                'sec2': '' if mode in ['probability', 'det_giv', 'sec_ownrisk'] else mode.split('_')[2]
                 }
 
     def before_next_page(self):
         current_round = self.round_number
         dynamic_values = config.getDynamicValues()
         round_data = dynamic_values[current_round - 1]
-        if round_data['mode'] == 'single':
-            self.group.set_payoffs()
+        if round_data['mode'] == 'sec_ownrisk':
+            self.player.set_payoffs()
         elif self.player.id_in_group == 1:
             self.group.set_payoffs()
 
@@ -97,6 +97,7 @@ class ResultsWaitPage(WaitPage):
         pass
 
 class Results(Page):
+
     form_model = models.Player
     form_fields = ['time_Results']
 
@@ -104,6 +105,17 @@ class Results(Page):
         return self.round_number == Constants.num_rounds
 
     def vars_for_template(self):
+
+        modeMap = {
+        'probability': 'PR',
+        'sec_1bl_1ch': 'S-1B-1C',
+        'sec_1bl_2ch': 'S-1B-2C',
+        'sec_2bl_1ch': 'S-2B-1C',
+        'sec_ownrisk': 'S-OwnRisk',
+        'det_giv': 'DG',
+        'sec_ownrisk_fixedother': 'S-OwnRisk-FixedOther',
+        'sec_otherrisk_ownfixed': 'S-OtherRisk-OwnFixed'}
+
         # variables:
         mode = Constants.dynamic_values[self.session.vars['paying_round'] - 1]['mode']
         pr = self.session.vars['paying_round']
@@ -122,9 +134,12 @@ class Results(Page):
             if self.player.id_in_group == 1:
                 dec_a = round(self.group.in_round(pr).get_player_by_id(1).me_a, 1)
                 dec_b = round(self.group.in_round(pr).get_player_by_id(1).me_b, 1)
-            else:
+            elif mode != 'sec_ownrisk':
                 dec_a = round(self.group.in_round(pr).get_player_by_id(1).partner_a, 1)
                 dec_b = round(self.group.in_round(pr).get_player_by_id(1).partner_b, 1)
+            else:
+                dec_a = round(self.group.in_round(pr).get_player_by_id(2).me_a, 1)
+                dec_b = round(self.group.in_round(pr).get_player_by_id(2).me_b, 1)
 
         outcome = self.player.in_round(pr).outcome
         payoff = self.player.in_round(pr).payoff
@@ -141,7 +156,7 @@ class Results(Page):
                 prevmode = Constants.dynamic_values[self.round_number - (counter + 1)]['mode']
         else:
             counter = 1
-        return {'mode': mode, 'dec_a': dec_a, 'dec_b': dec_b, 'role': role, 'counter': counter, 'outcome': outcome, 'payoff': payoff}
+        return {'mode': modeMap[mode], 'dec_a': dec_a, 'dec_b': dec_b, 'role': role, 'counter': counter, 'outcome': outcome, 'payoff': payoff}
 
 
 page_sequence = [
