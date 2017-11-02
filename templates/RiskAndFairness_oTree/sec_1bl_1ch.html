@@ -2,56 +2,93 @@
 
 <div class="instructions well well-lg">
 
-    <h2 class="panel-sub-heading">
-        Instructions - Task S-1B-1C
-    </h2>
+    {% if mode == 'probability' %}
+        <h2 class="panel-sub-heading">
+            Instructions for Probability
+        </h2>
+        <p>
+            PROBABILITY INSTRUCTIONS
+        </p>
 
-    <p>
-       In each decision round, there will be two probable states: State A and State B. Think of these states as the weather: it could be either sunny or cloudy. However, when you make your decision, it is uncertain which state will occur.
-    </p>
+    {% else if mode == 'sec_1bl_1ch' or mode == 'sec_1bl_2ch' or mode == 'sec_2bl_1ch' or mode == 'sec_2bl_2ch' or mode == 'sec_ownrisk' or mode == 'sec_ownrisk_fixedother' or mode == 'sec_otherrisk_ownfixed' %}
+        <h2 class="panel-sub-heading">
+            {% if mode == 'sec_1bl_1ch'%}
+                Instructions for S-1B-1C
+            {% elif mode == 'sec_1bl_2ch'%}
+                Instructions for S-1B-2C
+            {% elif mode == 'sec_2bl_1ch'%}
+                Instructions for S-2B-1C
+            {% elif mode == 'sec_2bl_2ch'%}
+                Instructions for S-2B-2C
+            {% endif %}
+        </h2>
 
-    <p>
-Your decision will be represented by a point on a graph like the one in the figure below. In this graph, the horizontal axis indicates Tokens paid if State A occurs, and the vertical axis indicates Tokens paid if State B occurs. The chance that each state will occur is displayed in parentheses on the corresponding axis label. In sample screen-shot, for instance, the probability of State A is 50%, and the probability of State B is 50%, as well. However, beware that these probabilities might be different in different decision rounds.
-    </p>
+        <p>
+           In each decision round, there will be two probable states: State A and State B. Think of these states as the weather: it could be either sunny or cloudy. However, when you make your decision, it is uncertain which state will occur.
+        </p>
+        <p>
+            Your decision will be represented by a point on a graph like the one in the figure below. In this graph, the horizontal axis indicates Tokens paid if State A occurs, and the vertical axis indicates Tokens paid if State B occurs. The chance that each state will occur is displayed in parentheses on the corresponding axis label. In sample screen-shot, for instance, the probability of State A is 50%, and the probability of State B is 50%, as well. However, be aware that these probabilities might be different in different decision rounds.
+        </p>
+        <p>
+            The position of a point on this graph represents a lottery. For example, the point on location (40, 20) indicates that if State A is realized, the lottery pays 40 tokens; and if State B is realized, the lottery pays 20 tokens. <i style="color: blue"> your lottery  will be depicted by a blue square, and </i> and <i style="color: orange"> Partner’s lottery by an orange circle </i>.
+        </p>
 
-    <p>
-    The position of a point on this graph represents a lottery. For example, the point on location (40, 20) indicates that if State A is realized, the lottery pays 40 tokens; and if State B is realized, the lottery pays 20 tokens. <i style="color: blue"> your lottery  will be depicted by a blue square, and </i> and <i style="color: orange"> Partner’s lottery by an orange circle </i>.
-    </p>
+            {% if mode == 'sec_1bl_1ch' %}
+                <img src="{% static "sec_1bl_1ch.png" %}" width="500" align="center"/>
+            {% endif %}
+        
+        <!-- Budget lines -->
+        {% if sec1 == '1bl' %}
+            <p>
+                1BL 1BL 1BL ---- Instructions for 1 budget line only. Will be followed by either: instructions for 1 choice, or instructions for 2 choices.
+            </p>
+        {% else if sec1 == '2bl' %}
+            <p>
+                2BL 2BL 2BL ---- Instructions for 1 budget line only. Will be followed by either: instructions for 1 choice, or instructions for 2 choices.
+            </p>
+        {% endif %}
 
-    {% if mode == 'sec_1bl_1ch' %}
-        <img src="{% static "sec_1bl_1ch.png" %}" width="500" align="center"/>
+        <!-- Choices -->
+        {% if sec2 == '1ch'}
+            <p>
+                1CH 1CH 1CH ---- Instructions for 1 choice only. Will follow either: instructions for 1 budget line, or instructions for 2 budget lines.
+            </p>
+        {% else if sec2 == '2ch'}
+            <p>
+                2CH 2CH 2CH ---- Instructions for 2 choices only. Will follow either: instructions for 1 budget line, or instructions for 2 budget lines.
+            </p>
+        {% endif %}
 
+        <!-- other security modes -->
+        {% if mode == 'sec_ownrisk' %}
+            <h2 class="panel-sub-heading">
+                Instructions for S-OwnRisk
+            </h2>
+            <p>
+                OWNRISK INSTRUCTIONS
+            </p>
+        {% else if mode == 'sec_ownrisk_fixedother' %}
+            <h2 class="panel-sub-heading">
+                Instructions for S-OwnRisk-FixedOther
+            </h2>
+            <p>
+                OWNRISK FIXEDOTHER INSTRUCTIONS
+            </p>
+        {% else if mode == 'sec_otherrisk_ownfixed' %}
+            <h2 class="panel-sub-heading">
+                Instructions for S-OtherRisk-OwnFixed
+            </h2>
+            <p>
+                OTHERRISK OWNFIXED INSTRUCTIONS
+            </p>
+        {% endif %}
+
+    {% else if mode == 'det_giv %}
+        <h2 class="panel-sub-heading">
+                Instructions for DG
+        <p>
+            DETERMINISTIC GIVEN INSTRUCTIONS
+        </p>
     {% endif %}
 
-    {% if sec2 == "1ch" %}
-    {% endif %}
-<p>
-    For this next task, both you and your partner
-    {% if sec1 == 1bl %} {% endif %} share the same
-    fortune: in each state, the amount of tokens both receive is the same. See for example, Figure 2. Here states A and B each occur with a 50% chance. Also, since both participants face the exact same fate, Decider’s blue square and Partner’s orange circle are always located on the same spot. In Figure 2, they both are on location (40, 27). This means, if State A happens, you and your Partner will both get 40 tokens and if State B occurs instead, you both get 27 tokens.
-
-For Task 3, Decider and Partner have opposite fortunes. What Decider would get in State A equals what Partner would receive in State B. Similarly, what Decider would get in State B is what Partner would get in State A.
-
-
-    </p>
-    <p>
-    </p>
-
-    <p>
-        In the graph, the size of each outcome bubble will increase with the chances it is given.
-        You can try as many combinations as you want before you submit your decision.
-        The same information of the graph is displayed in the table below the slider bar.
-        Throughout this session, <b style="color: blue"> your tokens will be represented in blue </b> and
-        your <b style="color: orange"> Partner's tokens in orange</b>.
-    </p>
-
-    <p>
-        Once you make your choice, press the submit decision button and continue to the next round.
-        If you do not make a choice (do not move the slider to your preferred position, the computer will return an error.
-        Please think your decisions carefully. If at the end of the session, this Decision Round is selected to be paid.
-        The computer will randomly choose outcome A or B according with the probabilities you decided
-        and will pay you and your partner accordingly.
-    </p>
-
-</div>
 
