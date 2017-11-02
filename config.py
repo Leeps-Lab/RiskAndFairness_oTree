@@ -21,7 +21,7 @@ data = [
     
     {'mode': 'probability', 'a_x': 70, 'a_y':10, 'b_x': 10, 'b_y': 80, 'label': {'x': 'Your Tokens','y': 'Partner\'s Tokens'}},
     
-    {'mode': 'det_giv'   , 'm': 100, 'p_x': 2, 'p_y': 3, 'prob_a': 50,'label': {'x': 'lbl x','y': 'lbl y'}},
+    {'mode': 'det_giv'   , 'm': 100, 'p_x': 2, 'p_y': 3, 'prob_a': 50,'label': {'x': 'Your Tokens','y': 'Partner\'s Tokens'}},
     
     {'mode': 'sec_ownrisk_fixedother', 'm': 100, 'p_x': 2, 'p_y': 3, 'prob_a': 50, 'fixed': {'m': 50, 'p_x': 1, 'p_y': 2, 'a': 10}},
 

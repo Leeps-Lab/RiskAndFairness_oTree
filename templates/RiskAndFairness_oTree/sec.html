@@ -120,5 +120,15 @@
 {# IMAGES #}
             {% if mode == 'sec_1bl_1ch' %}
                 <img src="{% static "sec_1bl_1ch.png" %}" width="500" align="center"/>
+            {% elif mode == 'sec_1bl_2ch' %}
+                <img src="{% static "sec_1bl_2ch.png" %}" width="500" align="center"/>
+            {% elif mode == 'sec_2bl_1ch' %}
+                <img src="{% static "sec_2bl_1ch.png" %}" width="500" align="center"/>
+            {% elif mode == 'sec_ownrisk' %}
+                <img src="{% static "sec_ownrisk.png" %}" width="500" align="center"/>
+            {% elif mode == 'sec_ownrisk_fixedother' %}
+                <img src="{% static "sec_ownrisk_fixedother.png" %}" width="500" align="center"/>
+            {% elif mode == 'sec_otherrisk_ownfixed' %}
+                <img src="{% static "sec_otherrisk_ownfixed.png" %}" width="500" align="center"/>
             {% endif %}
 
