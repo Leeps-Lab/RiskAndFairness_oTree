@@ -39,21 +39,13 @@
     {% if mode == 'probability' %}
         {% include Constants.instructions_probability %}
 
-    {% elif mode == 'sec_1bl_1ch' or mode == 'sec_1bl_2ch' or mode == 'sec_2bl_1ch' or mode == 'sec_2bl_2ch' %}
-        {% include Constants.instructions_sec_1bl_1ch %}
+    {% elif sec0 == 'sec' %}
 
-    {% elif mode == 'sec_1bl_2ch' %}
-
-    {% elif mode == 'sec_ownrisk' %}
-
-
-    {% elif mode == 'sec_2bl_1ch' %}
-
-    {% elif mode == 'sec_ownrisk_fixedother' %}
-
-    {% elif mode == 'sec_otherrisk_ownfixed' %}
+        {% include Constants.instructions_sec %}
 
     {% elif mode == 'det_giv' %}
+
+        {% include Constants.instructions_det_giv %}
 
     {% endif %}
 
@@ -64,4 +56,14 @@
 
 {% endblock %}
 
+
+
+
+{#    {% elif mode == 'sec_ownrisk' %}#}
+{#        #}
+{#    {% elif mode == 'sec_2bl_1ch' %}#}
+{##}
+{#    {% elif mode == 'sec_ownrisk_fixedother' %}#}
+{##}
+{#    {% elif mode == 'sec_otherrisk_ownfixed' %}#}
 
