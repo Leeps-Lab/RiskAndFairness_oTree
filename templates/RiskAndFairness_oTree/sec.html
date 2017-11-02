@@ -7,13 +7,19 @@
 
         <h2 class="panel-sub-heading">
             {% if mode == 'sec_1bl_1ch'%}
-                Instructions for S-1B-1C
+                Instructions - Task S-1B-1C
             {% elif mode == 'sec_1bl_2ch'%}
-                Instructions for S-1B-2C
+                Instructions - Task S-1B-2C
             {% elif mode == 'sec_2bl_1ch'%}
-                Instructions for S-2B-1C
+                Instructions - Task S-2B-1C
             {% elif mode == 'sec_2bl_2ch'%}
-                Instructions for S-2B-2C
+                Instructions - Task S-2B-2C
+            {% elif mode == 'sec_ownrisk' %}
+                Instructions - Task Sec-OwnRisk
+            {% elif mode == 'sec_ownrisk_fixedother' %}
+                Instrucitons - Task Sec-OwnRisk-FixedOther
+            {% elif mode == 'sec_otherrisk_ownfixed' %}
+                Instructions - Task Sec-OtherRisk-OwnFixed
             {% endif %}
         </h2>
 
@@ -75,7 +81,7 @@ Please beware that the probabilities of each State might vary across different d
             <p>
                 1CH 1CH 1CH ---- Instructions for 1 choice only. Will follow either: instructions for 1 budget line, or instructions for 2 budget lines.
             </p>
-        {% elif sec2 == '2ch'}
+        {% elif sec2 == '2ch' %}
             <p>
                 2CH 2CH 2CH ---- Instructions for 2 choices only. Will follow either: instructions for 1 budget line, or instructions for 2 budget lines.
             </p>
@@ -86,23 +92,14 @@ Please beware that the probabilities of each State might vary across different d
 
         <!-- other security modes -->
         {% if mode == 'sec_ownrisk' %}
-            <h2 class="panel-sub-heading">
-                Instructions for S-OwnRisk
-            </h2>
             <p>
                 OWNRISK INSTRUCTIONS
             </p>
         {% elif mode == 'sec_ownrisk_fixedother' %}
-            <h2 class="panel-sub-heading">
-                Instructions for S-OwnRisk-FixedOther
-            </h2>
             <p>
                 OWNRISK FIXEDOTHER INSTRUCTIONS
             </p>
         {% elif mode == 'sec_otherrisk_ownfixed' %}
-            <h2 class="panel-sub-heading">
-                Instructions for S-OtherRisk-OwnFixed
-            </h2>
             <p>
                 OTHERRISK OWNFIXED INSTRUCTIONS
             </p>
