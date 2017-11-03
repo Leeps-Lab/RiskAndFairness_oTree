@@ -22,8 +22,8 @@ data = [
     {'mode': 'det_giv', 'm': 75, 'p_x': 1.75, 'p_y': 1, 'prob_a': 50, 'label': {'x': 'Your Tokens', 'y': 'Partner\'s Tokens'}},
     {'mode': 'det_giv', 'm': 80, 'p_x': 2.00, 'p_y': 1, 'prob_a': 50, 'label': {'x': 'Your Tokens', 'y': 'Partner\'s Tokens'}},
     {'mode': 'det_giv', 'm': 85, 'p_x': 2.25, 'p_y': 1, 'prob_a': 50, 'label': {'x': 'Your Tokens', 'y': 'Partner\'s Tokens'}},
-    {'mode': 'det_giv', 'm': 90, 'p_x': 2.50, 'p_y': 1, 'prob_a': 50, 'label': {'x': 'Your Tokens', 'y': 'Partner\'s Tokens'}}
-    {'mode': 'det_giv', 'm': 95, 'p_x': 2.75, 'p_y': 1, 'prob_a': 50, 'label': {'x': 'Your Tokens', 'y': 'Partner\'s Tokens'}},
+    {'mode': 'det_giv', 'm': 90, 'p_x': 2.50, 'p_y': 1, 'prob_a': 50, 'label': {'x': 'Your Tokens', 'y': 'Partner\'s Tokens'}},
+    {'mode': 'det_giv', 'm': 95, 'p_x': 2.75, 'p_y': 1, 'prob_a': 50, 'label': {'x': 'Your Tokens', 'y': 'Partner\'s Tokens'}}
     ],
     [
     {'mode': 'sec_1bl_1ch'   , 'm': 50, 'p_x': 0.60, 'p_y': 1, 'prob_a': 50, 'label': {'x': 'State A (50%)','y': 'State B (50%)'}},
