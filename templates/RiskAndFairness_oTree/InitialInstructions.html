@@ -28,7 +28,7 @@
     <p>
         Your final earnings today will depend partly on your decisions, partly on the decisions
         of others and partly on chance. At the end of the experiment, you will be paid in cash.
-        All payments will be made in private using and envelope. Also, you will receive
+        All payments will be made in private using an envelope. You will also receive an
         additional {{ participation_fee }} as a participation fee.
     </p>
     <p>
@@ -47,9 +47,9 @@
         At the beginning of the experiment, you will be randomly and anonymously matched with
         one other participant to form a pair. Within each pair there will be one person with
         the role of <i style="color: #1b6d85">Decider</i> and another person with the role of
-        <i style="color: #1b6d85">Partner</i>. These roles will
+        <i style="color: #1b6d85">Non-decider</i>. These roles will
         be assigned randomly within each pair, and will remain for the entire session.
-        Only choices made by the Decider will determine final payoffs. Partner choices
+        Only choices made by the Decider will determine final payoffs. Non-decider choices
         will not determine anyone’s payoffs.
         Roles, however, will be disclosed after the last decision has been made.
         Finally, participants will not learn the identity of his/her counterpart at any moment of the session.
@@ -59,9 +59,9 @@
     <h3>Tasks, Decision Rounds and Earnings</h3>
 
     <p>
-        This experiment will consist of a series of decision rounds of {{ Constants.number_types_of_tasks }}
+        This experiment will consist of a series of decision rounds of {{ Constants.number_types_of_tasks | json }}
         different types of tasks. Each kind of task will be explained later.
-        At the end of all decisions, your role (Decider or Non-Decided) will be disclosed.
+        At the end of all decisions, your role (Decider or Non-Decider) will be disclosed.
         Then the computer will randomly select one choice made by the Decider and generate payoffs
         for both member of the pair based on that selected choice.
         The selected choice as well as the final payoffs it generates will be disclosed to both participants.

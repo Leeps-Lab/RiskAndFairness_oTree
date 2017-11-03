@@ -145,7 +145,7 @@ class Results(Page):
         outcome = self.player.in_round(pr).outcome
         payoff = self.player.in_round(pr).payoff
         
-        role = 'decider' if self.player.id_in_group == 1 else 'partner'
+        role = self.player.role()
 
         if self.session.vars['paying_round'] > 1:
             counter = 1
