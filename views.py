@@ -48,7 +48,7 @@ class Graph(Page):
 
     def get_form_fields(self):
         current_round = self.round_number
-        dynamic_values = config.getDynamicValues()
+        dynamic_values = config.getDynamicValues(shuf=False)
         round_data = dynamic_values[current_round - 1]
         if round_data is not None and round_data['mode'] is not None:
             if round_data['mode'] == 'det_giv':
@@ -82,7 +82,7 @@ class Graph(Page):
 
     def before_next_page(self):
         current_round = self.round_number
-        dynamic_values = config.getDynamicValues()
+        dynamic_values = config.getDynamicValues(shuf=False)
         round_data = dynamic_values[current_round - 1]
         if round_data['mode'] == 'sec_ownrisk':
             self.player.set_payoffs()

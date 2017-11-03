@@ -104,8 +104,8 @@ def checkValidity(flattened_shuffled_data):
 def numberOfPeriod():
     return len(data)
 
-def getDynamicValues(shuffle=True):
-    if shuffle = True:
+def getDynamicValues(shuf=True):
+    if shuf == True:
         dynamic_values = flatten(shuffle(data))
     else:
         dynamic_values = flatten(data)
