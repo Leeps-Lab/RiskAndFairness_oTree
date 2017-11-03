@@ -13,41 +13,41 @@ Please use lowercase for dictionary keys in the future // Rachel
 import random
 
 data = [
-[   {'mode': 'det_giv', 'm': 50, 'p_x': 1.50, 'p_y': 1, 'prob_a': 50, 'label': {'x': 'Your Tokens', 'y': 'Partner\'s Tokens'}},
-    {'mode': 'det_giv', 'm': 50, 'p_x': 1.75, 'p_y': 1, 'prob_a': 50, 'label': {'x': 'Your Tokens', 'y': 'Partner\'s Tokens'}},
-    {'mode': 'det_giv', 'm': 50, 'p_x': 2.00, 'p_y': 1, 'prob_a': 50, 'label': {'x': 'Your Tokens', 'y': 'Partner\'s Tokens'}},
-    {'mode': 'det_giv', 'm': 50, 'p_x': 2.25, 'p_y': 1, 'prob_a': 50, 'label': {'x': 'Your Tokens', 'y': 'Partner\'s Tokens'}},
-    {'mode': 'det_giv', 'm': 50, 'p_x': 2.50, 'p_y': 1, 'prob_a': 50, 'label': {'x': 'Your Tokens', 'y': 'Partner\'s Tokens'}},
-    {'mode': 'det_giv', 'm': 50, 'p_x': 2.75, 'p_y': 1, 'prob_a': 50, 'label': {'x': 'Your Tokens', 'y': 'Partner\'s Tokens'}}      ],
+# [   {'mode': 'det_giv', 'm': 50, 'p_x': 1.50, 'p_y': 1, 'prob_a': 50, 'label': {'x': 'Your Tokens', 'y': 'Partner\'s Tokens'}},
+#     {'mode': 'det_giv', 'm': 50, 'p_x': 1.75, 'p_y': 1, 'prob_a': 50, 'label': {'x': 'Your Tokens', 'y': 'Partner\'s Tokens'}},
+#     {'mode': 'det_giv', 'm': 50, 'p_x': 2.00, 'p_y': 1, 'prob_a': 50, 'label': {'x': 'Your Tokens', 'y': 'Partner\'s Tokens'}},
+#     {'mode': 'det_giv', 'm': 50, 'p_x': 2.25, 'p_y': 1, 'prob_a': 50, 'label': {'x': 'Your Tokens', 'y': 'Partner\'s Tokens'}},
+#     {'mode': 'det_giv', 'm': 50, 'p_x': 2.50, 'p_y': 1, 'prob_a': 50, 'label': {'x': 'Your Tokens', 'y': 'Partner\'s Tokens'}},
+#     {'mode': 'det_giv', 'm': 50, 'p_x': 2.75, 'p_y': 1, 'prob_a': 50, 'label': {'x': 'Your Tokens', 'y': 'Partner\'s Tokens'}}      ],
 
-[   {'mode': 'det_giv', 'm': 50, 'p_x': 0.50, 'p_y': 1, 'prob_a': 50,'label': {'x': 'Your Tokens','y': 'Partner\'s Tokens'}},
-    {'mode': 'det_giv', 'm': 50, 'p_x': 0.75, 'p_y': 1, 'prob_a': 50, 'label': {'x': 'Your Tokens', 'y': 'Partner\'s Tokens'}},
-    {'mode': 'det_giv', 'm': 50, 'p_x': 1.00, 'p_y': 1, 'prob_a': 50, 'label': {'x': 'Your Tokens', 'y': 'Partner\'s Tokens'}},
-    {'mode': 'det_giv', 'm': 50, 'p_x': 1.25, 'p_y': 1, 'prob_a': 50, 'label': {'x': 'Your Tokens', 'y': 'Partner\'s Tokens'}}      ],
+# [   {'mode': 'det_giv', 'm': 50, 'p_x': 0.50, 'p_y': 1, 'prob_a': 50,'label': {'x': 'Your Tokens','y': 'Partner\'s Tokens'}},
+#     {'mode': 'det_giv', 'm': 50, 'p_x': 0.75, 'p_y': 1, 'prob_a': 50, 'label': {'x': 'Your Tokens', 'y': 'Partner\'s Tokens'}},
+#     {'mode': 'det_giv', 'm': 50, 'p_x': 1.00, 'p_y': 1, 'prob_a': 50, 'label': {'x': 'Your Tokens', 'y': 'Partner\'s Tokens'}},
+#     {'mode': 'det_giv', 'm': 50, 'p_x': 1.25, 'p_y': 1, 'prob_a': 50, 'label': {'x': 'Your Tokens', 'y': 'Partner\'s Tokens'}}      ],
 
-[   {'mode': 'sec_1bl_1ch'   , 'm': 50, 'p_x': 1.75, 'p_y': 1, 'prob_a': 50, 'label': {'x': 'State A (50%)','y': 'State B (50%)'}},
-    {'mode': 'sec_1bl_1ch'   , 'm': 50, 'p_x': 2.00, 'p_y': 1, 'prob_a': 50, 'label': {'x': 'State A (50%)','y': 'State B (50%)'}},
-    {'mode': 'sec_1bl_1ch'   , 'm': 50, 'p_x': 2.25, 'p_y': 1, 'prob_a': 50, 'label': {'x': 'State A (50%)','y': 'State B (50%)'}},
-    {'mode': 'sec_1bl_1ch'   , 'm': 50, 'p_x': 2.50, 'p_y': 1, 'prob_a': 50, 'label': {'x': 'State A (50%)','y': 'State B (50%)'}},
-    {'mode': 'sec_1bl_1ch'   , 'm': 50, 'p_x': 2.75, 'p_y': 1, 'prob_a': 50, 'label': {'x': 'State A (50%)','y': 'State B (50%)'}}  ],
+# [   {'mode': 'sec_1bl_1ch'   , 'm': 50, 'p_x': 1.75, 'p_y': 1, 'prob_a': 50, 'label': {'x': 'State A (50%)','y': 'State B (50%)'}},
+#     {'mode': 'sec_1bl_1ch'   , 'm': 50, 'p_x': 2.00, 'p_y': 1, 'prob_a': 50, 'label': {'x': 'State A (50%)','y': 'State B (50%)'}},
+#     {'mode': 'sec_1bl_1ch'   , 'm': 50, 'p_x': 2.25, 'p_y': 1, 'prob_a': 50, 'label': {'x': 'State A (50%)','y': 'State B (50%)'}},
+#     {'mode': 'sec_1bl_1ch'   , 'm': 50, 'p_x': 2.50, 'p_y': 1, 'prob_a': 50, 'label': {'x': 'State A (50%)','y': 'State B (50%)'}},
+#     {'mode': 'sec_1bl_1ch'   , 'm': 50, 'p_x': 2.75, 'p_y': 1, 'prob_a': 50, 'label': {'x': 'State A (50%)','y': 'State B (50%)'}}  ],
 
-[   {'mode': 'sec_1bl_1ch'   , 'm': 50, 'p_x': 0.50, 'p_y': 1, 'prob_a': 50, 'label': {'x': 'State A (50%)','y': 'State B (50%)'}},
-    {'mode': 'sec_1bl_1ch'   , 'm': 50, 'p_x': 0.75, 'p_y': 1, 'prob_a': 50, 'label': {'x': 'State A (50%)','y': 'State B (50%)'}},
-    {'mode': 'sec_1bl_1ch'   , 'm': 50, 'p_x': 1.00, 'p_y': 1, 'prob_a': 50, 'label': {'x': 'State A (50%)','y': 'State B (50%)'}},
-    {'mode': 'sec_1bl_1ch'   , 'm': 50, 'p_x': 1.25, 'p_y': 1, 'prob_a': 50, 'label': {'x': 'State A (50%)','y': 'State B (50%)'}},
-    {'mode': 'sec_1bl_1ch'   , 'm': 50, 'p_x': 1.50, 'p_y': 1, 'prob_a': 50, 'label': {'x': 'State A (50%)','y': 'State B (50%)'}}  ],
+# [   {'mode': 'sec_1bl_1ch'   , 'm': 50, 'p_x': 0.50, 'p_y': 1, 'prob_a': 50, 'label': {'x': 'State A (50%)','y': 'State B (50%)'}},
+#     {'mode': 'sec_1bl_1ch'   , 'm': 50, 'p_x': 0.75, 'p_y': 1, 'prob_a': 50, 'label': {'x': 'State A (50%)','y': 'State B (50%)'}},
+#     {'mode': 'sec_1bl_1ch'   , 'm': 50, 'p_x': 1.00, 'p_y': 1, 'prob_a': 50, 'label': {'x': 'State A (50%)','y': 'State B (50%)'}},
+#     {'mode': 'sec_1bl_1ch'   , 'm': 50, 'p_x': 1.25, 'p_y': 1, 'prob_a': 50, 'label': {'x': 'State A (50%)','y': 'State B (50%)'}},
+#     {'mode': 'sec_1bl_1ch'   , 'm': 50, 'p_x': 1.50, 'p_y': 1, 'prob_a': 50, 'label': {'x': 'State A (50%)','y': 'State B (50%)'}}  ],
 
-[   {'mode': 'sec_2bl_1ch'   , 'm': 50, 'p_x': 1.75, 'p_y': 1, 'prob_a': 50, 'label': {'x': 'State A (50%)','y': 'State B (50%)'}},
-    {'mode': 'sec_2bl_1ch'   , 'm': 50, 'p_x': 2.00, 'p_y': 1, 'prob_a': 50, 'label': {'x': 'State A (50%)','y': 'State B (50%)'}},
-    {'mode': 'sec_2bl_1ch'   , 'm': 50, 'p_x': 2.25, 'p_y': 1, 'prob_a': 50, 'label': {'x': 'State A (50%)','y': 'State B (50%)'}},
-    {'mode': 'sec_2bl_1ch'   , 'm': 50, 'p_x': 2.50, 'p_y': 1, 'prob_a': 50, 'label': {'x': 'State A (50%)','y': 'State B (50%)'}},
-    {'mode': 'sec_2bl_1ch'   , 'm': 50, 'p_x': 2.75, 'p_y': 1, 'prob_a': 50, 'label': {'x': 'State A (50%)','y': 'State B (50%)'}}  ],
+# [   {'mode': 'sec_2bl_1ch'   , 'm': 50, 'p_x': 1.75, 'p_y': 1, 'prob_a': 50, 'label': {'x': 'State A (50%)','y': 'State B (50%)'}},
+#     {'mode': 'sec_2bl_1ch'   , 'm': 50, 'p_x': 2.00, 'p_y': 1, 'prob_a': 50, 'label': {'x': 'State A (50%)','y': 'State B (50%)'}},
+#     {'mode': 'sec_2bl_1ch'   , 'm': 50, 'p_x': 2.25, 'p_y': 1, 'prob_a': 50, 'label': {'x': 'State A (50%)','y': 'State B (50%)'}},
+#     {'mode': 'sec_2bl_1ch'   , 'm': 50, 'p_x': 2.50, 'p_y': 1, 'prob_a': 50, 'label': {'x': 'State A (50%)','y': 'State B (50%)'}},
+#     {'mode': 'sec_2bl_1ch'   , 'm': 50, 'p_x': 2.75, 'p_y': 1, 'prob_a': 50, 'label': {'x': 'State A (50%)','y': 'State B (50%)'}}  ],
 
-[   {'mode': 'sec_2bl_1ch'   , 'm': 50, 'p_x': 0.50, 'p_y': 1, 'prob_a': 50, 'label': {'x': 'State A (50%)','y': 'State B (50%)'}},
-    {'mode': 'sec_2bl_1ch'   , 'm': 50, 'p_x': 0.75, 'p_y': 1, 'prob_a': 50, 'label': {'x': 'State A (50%)','y': 'State B (50%)'}},
-    {'mode': 'sec_2bl_1ch'   , 'm': 50, 'p_x': 1.00, 'p_y': 1, 'prob_a': 50, 'label': {'x': 'State A (50%)','y': 'State B (50%)'}},
-    {'mode': 'sec_2bl_1ch'   , 'm': 50, 'p_x': 1.25, 'p_y': 1, 'prob_a': 50, 'label': {'x': 'State A (50%)','y': 'State B (50%)'}},
-    {'mode': 'sec_2bl_1ch'   , 'm': 50, 'p_x': 1.50, 'p_y': 1, 'prob_a': 50, 'label': {'x': 'State A (50%)','y': 'State B (50%)'}}  ],
+# [   {'mode': 'sec_2bl_1ch'   , 'm': 50, 'p_x': 0.50, 'p_y': 1, 'prob_a': 50, 'label': {'x': 'State A (50%)','y': 'State B (50%)'}},
+#     {'mode': 'sec_2bl_1ch'   , 'm': 50, 'p_x': 0.75, 'p_y': 1, 'prob_a': 50, 'label': {'x': 'State A (50%)','y': 'State B (50%)'}},
+#     {'mode': 'sec_2bl_1ch'   , 'm': 50, 'p_x': 1.00, 'p_y': 1, 'prob_a': 50, 'label': {'x': 'State A (50%)','y': 'State B (50%)'}},
+#     {'mode': 'sec_2bl_1ch'   , 'm': 50, 'p_x': 1.25, 'p_y': 1, 'prob_a': 50, 'label': {'x': 'State A (50%)','y': 'State B (50%)'}},
+#     {'mode': 'sec_2bl_1ch'   , 'm': 50, 'p_x': 1.50, 'p_y': 1, 'prob_a': 50, 'label': {'x': 'State A (50%)','y': 'State B (50%)'}}  ],
 
 [   {'mode': 'sec_ownrisk'   , 'm': 50, 'p_x': 2, 'p_y': 3, 'prob_a': 50, 'label': {'x': 'State A (50%)','y': 'State B (50%)'}}     ],
 
@@ -87,8 +87,8 @@ def checkValidity(flattened_shuffled_data):
 def numberOfPeriod():
     return len(data)
 
-def getDynamicValues(shuffle=True):
-    if shuffle = True:
+def getDynamicValues(shuf=True):
+    if shuf == True:
         dynamic_values = flatten(shuffle(data))
     else:
         dynamic_values = flatten(data)

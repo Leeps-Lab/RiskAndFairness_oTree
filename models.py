@@ -61,7 +61,7 @@ class Constants(BaseConstants):
             'b': 100
         }
     }
-    dynamic_values = config.getDynamicValues(shuffle=False)
+    dynamic_values = config.getDynamicValues(shuf=False)
 
 
     # number of different task types
@@ -76,8 +76,6 @@ class Constants(BaseConstants):
 
 
 class Player(BasePlayer):
-
-    shuffled_data = config.getDynamicValues()
 
     mode = models.CharField()
     partner_a = models.FloatField() # Circle is other
@@ -100,7 +98,7 @@ class Player(BasePlayer):
             return 'Non-Decider'
     
     def set_payoffs(self):
-        round_data = config.getDynamicValues()[self.round_number - 1]
+        round_data = config.getDynamicValues(shuf=False)[self.round_number - 1]
         print('round data in set payoffs', round_data)
 
         rnd = random.random()
@@ -131,7 +129,7 @@ class Group(BaseGroup):
         # check if current round is the preset payoff round
         if current_round == self.session.vars['paying_round']:
             # pull dictionary of values for current round from config.py
-            dynamic_values = config.getDynamicValues()
+            dynamic_values = config.getDynamicValues(shuf=False)
             round_data = dynamic_values[current_round - 1]
 
             print('round data in set payoffs', round_data)
