@@ -41,21 +41,36 @@
             <p>
             For this task, both Decider and Partner share the same fortune: in each state, the amount of tokens both receive is the same. See figure below for an example. Here states A and B each occur with a 50% chance. Also, since both participants face the exact same fate, Decider’s blue square and Partner’s orange circle are always located on the same spot. In the sample figure, they both are on location (50, 16.7). This means, if State A happens, you and your Partner will both get 50 tokens and if State B occurs instead, you both get 16.7 tokens.
             </p>
-
             <p>
-            At the beginning of each decision screen, the square and the circle will appear a random position. To make a choice drag the square or the circle to your chosen location. The other shape will follow.
+            At the beginning of each decision screen, the square and the circle will appear at a random position. To make a choice drag the square or the circle to your chosen location. The other shape will follow.
             </p>
 
         {% elif mode == 'sec_2bl_1ch' %}
 
             <p>
             For this task, both Decider and Partner share have opposite fortunes. What Decider would get in State A equals what Partner would receive in State B. Similarly, what Decider would get in State B is what Partner would get in State A. In this example, states A and B both occur with 50% chance. Here, since both counterparts face reverse fates, Decider’s blue square and Partner’s orange circle are always in mirror positions on the graph. In the figure, for example, Decider’s square is at (State A = 50, B = 16.7) and Partner’s circle at (State A = 16.7, B = 50). This means, if State A happens, You receive 50 and Partner gets 16.7; and if State B happens you get 16.7 and your Partner gets 50. Also, beware that the probabilities of each State might vary across different decision rounds.
-
             </p>
+            <p>
+            At the beginning of each decision screen, the square and the circle will appear at a random position. To make a choice drag the square and the circle to your chosen locations. The other shape will follow.
+            </p>
+
+        {% elif mode == 'sec_ownrisk' %}
 
             <p>
-            At the beginning of each decision screen, the square and the circle will appear a random position. To make a choice drag the square and the circle to your chosen locations. The other shape will follow.
+            For this task, you decide over lotteries that only affect you. See figure below for an example. Here states A and B each occur with a 50% chance. Your chosen lottery is represented by a blue square. In the sample figure, the square location is (40, 6.7). This means, if State A happens, you will get 40 tokens and if State B occurs instead, you get 6.7 tokens.
             </p>
+            <p>
+            At the beginning of each decision screen, the square will appear at random position. To make a choice, drag the square to your chosen location. The other shape will follow.
+            </p>
+
+        {% elif mode == 'sec_ownrisk_fixedother' %}
+            <p>
+            For this task, your partner's fortune is fixed, and you need to  In this example, states A and B both occur with 50% chance. Here, since both counterparts face reverse fates, Decider’s blue square and Partner’s orange circle are always in mirror positions on the graph. In the figure, for example, Decider’s square is at (State A = 50, B = 16.7) and Partner’s circle at (State A = 16.7, B = 50). This means, if State A happens, You receive 50 and Partner gets 16.7; and if State B happens you get 16.7 and your Partner gets 50. Also, beware that the probabilities of each State might vary across different decision rounds.
+            </p>
+            <p>
+            At the beginning of each decision screen, the square and the circle will appear at a random position. To make a choice drag the square and the circle to your chosen locations. The other shape will follow.
+            </p>
+        {% elif mode == 'sec_otherrisk_ownfixed' %}
 
         {% endif %}
 
@@ -65,7 +80,7 @@
         </p>
 
         <p>
-            At the beginning of each decision screen, the square and the circle will appear by the (0, 0) combination. To make a choice drag the square or the circle to your chosen location. The other shape will follow. Only combinations on the purple line are feasible choices. The computer will not let you choose a combination outside the purple line. The same information displayed in the graph is shown in the table next to it. Each row represents one possible state and the tokens paid if such state occurs. You can try as many combinations as you want before you decide. Once you make your choice, press the submit decision button and continue to the next round. Please think your decisions carefully.
+            At the beginning of each decision screen, the square and the circle will appear by the (0, 0) combination. To make a choice drag the square or the circle to your chosen location. The other shape will follow. Only combinations on the purple line are feasible choices. The computer will not let you choose a combination outside the purple line. The same information displayed in the graph is shown in the table next to it. Each row represents one possible state and the tokens paid if such state occurs. You can try as many combinations as you want before you decide. Once you make your choice, press the submit decision button and continue to the next round. Please think through your decisions carefully.
         </p>
 
         <!-- Budget lines -->
@@ -117,8 +132,6 @@
 
 
     {% endif %}
-
-
 
 
 {# IMAGES #}
