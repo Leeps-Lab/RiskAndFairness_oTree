@@ -22,7 +22,7 @@
     {% if mode == 'PR' %}
 	<table style="width:60%">
 		<tr>
-            {% if role == 'decider' %}
+            {% if role == 'Decider' %}
 			<th>Your decision</th>
             {% else %}
             <th>Decider's decision</th>
@@ -42,7 +42,7 @@
     {% elif mode == 'DG' %}
     <table style="width:60%">
         <tr>
-            {% if role == 'decider' %}
+            {% if role == 'Decider' %}
             <th>Your decision</th>
             {% else %}
             <th>Decider's decision</th>
@@ -58,7 +58,7 @@
     {% else %}
     <table style="width:60%">
         <tr>
-            {% if role == 'decider' or mode == 'S-OwnRisk' %}
+            {% if role == 'Decider' or mode == 'S-OwnRisk' %}
             <th>Your decision</th>
             {% else %}
             <th>Decider's decision</th>

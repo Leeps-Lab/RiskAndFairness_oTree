@@ -15,11 +15,11 @@
             {% elif mode == 'sec_2bl_2ch'%}
                 Instructions - Task S-2B-2C
             {% elif mode == 'sec_ownrisk' %}
-                Instructions - Task Sec-OwnRisk
+                Instructions - Task S-OwnRisk
             {% elif mode == 'sec_ownrisk_fixedother' %}
-                Instrucitons - Task Sec-OwnRisk-FixedOther
+                Instrucitons - Task S-OwnRisk-FixedOther
             {% elif mode == 'sec_otherrisk_ownfixed' %}
-                Instructions - Task Sec-OtherRisk-OwnFixed
+                Instructions - Task S-OtherRisk-OwnFixed
             {% endif %}
         </h2>
 
@@ -65,6 +65,7 @@
 
         {% elif mode == 'sec_ownrisk_fixedother' %}
             <p>
+<<<<<<< HEAD
             For this task, your partner's fortune is fixed, and you need to choose a lottery for you. In this example, states A and B both occur with 50% chance. Here, since both counterparts face reverse fates, Decider’s blue square and Partner’s orange circle are always in mirror positions on the graph. In the figure, for example, Decider’s square is at (State A = 50, B = 16.7) and Partner’s circle at (State A = 16.7, B = 50). This means, if State A happens, You receive 50 and Partner gets 16.7; and if State B happens you get 16.7 and your Partner gets 50. Also, beware that the probabilities of each State might vary across different decision rounds.
             </p>
             <p>
@@ -113,24 +114,6 @@
         -->
         {% endif %}
         
-
-        <!-- other security modes -->
-        {% if mode == 'sec_ownrisk' %}
-            <p>
-                OWNRISK INSTRUCTIONS
-            </p>
-        {% elif mode == 'sec_ownrisk_fixedother' %}
-            <p>
-                OWNRISK FIXEDOTHER INSTRUCTIONS
-            </p>
-        {% elif mode == 'sec_otherrisk_ownfixed' %}
-            <p>
-                OTHERRISK OWNFIXED INSTRUCTIONS
-            </p>
-        {% endif %}
-
-
-
     {% endif %}
 
 

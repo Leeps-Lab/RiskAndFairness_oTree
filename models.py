@@ -61,7 +61,7 @@ class Constants(BaseConstants):
             'b': 100
         }
     }
-    dynamic_values = config.getDynamicValues()
+    dynamic_values = config.getDynamicValues(shuffle=False)
 
 
     # number of different task types
@@ -76,6 +76,8 @@ class Constants(BaseConstants):
 
 
 class Player(BasePlayer):
+
+    shuffled_data = config.getDynamicValues()
 
     mode = models.CharField()
     partner_a = models.FloatField() # Circle is other
@@ -140,39 +142,39 @@ class Group(BaseGroup):
             print('random rnd', rnd)
 
             decider = self.get_player_by_role('Decider')
-            partner = self.get_player_by_role('Non-Decider')
+            nondecider = self.get_player_by_role('Non-Decider')
 
             if modeMap[round_data['mode']] == 'probability':
                 decider.payoff = \
                     (rnd < decider.prob_a / 100) * round_data['a_x'] + (rnd >= decider.prob_a / 100) * round_data['b_x']
                 decider.outcome = 'A' if rnd < decider.prob_a / 100 else 'B'
-                partner.payoff = \
+                nondecider.payoff = \
                     (rnd < decider.prob_a / 100) * round_data['a_y'] + (rnd >= decider.prob_a / 100) * round_data['b_y']
-                partner.outcome = 'A' if rnd < decider.prob_a / 100 else 'B'
+                nondecider.outcome = 'A' if rnd < decider.prob_a / 100 else 'B'
             elif modeMap[round_data['mode']] in ['positive', 'negative', 'independent']:
                 decider.payoff = \
                     (rnd < round_data['prob_a'] / 100) * decider.me_a + (rnd >= round_data['prob_a'] / 100) * decider.me_b
                 decider.outcome = 'A' if rnd < round_data['prob_a'] / 100 else 'B'
-                partner.payoff = \
+                nondecider.payoff = \
                     (rnd < round_data['prob_a'] / 100) * decider.partner_a + (rnd >= round_data['prob_a'] / 100) * decider.partner_b
-                partner.outcome = 'A' if rnd < round_data['prob_a'] / 100 else 'B'
+                nondecider.outcome = 'A' if rnd < round_data['prob_a'] / 100 else 'B'
             elif modeMap[round_data['mode']] == 'single_fixedsquare':
                 decider.payoff = \
                     (rnd < round_data['prob_a'] / 100) * decider.me_a + (rnd >= round_data['prob_a'] / 100) * decider.me_b
                 decider.outcome = 'A' if rnd < round_data['prob_a'] / 100 else 'B'
-                partner.payoff = \
+                nondecider.payoff = \
                     (rnd < round_data['prob_a'] / 100) * decider.partner_a + (rnd >= round_data['prob_a'] / 100) * decider.partner_b
-                partner.outcome = 'A' if rnd < round_data['prob_a'] / 100 else 'B'
+                nondecider.outcome = 'A' if rnd < round_data['prob_a'] / 100 else 'B'
             elif modeMap[round_data['mode']] == 'single_fixedcircle':
                 decider.payoff = \
                     (rnd < round_data['prob_a'] / 100) * decider.me_a + (rnd >= round_data['prob_a'] / 100) * decider.me_b
                 decider.outcome = 'A' if rnd < round_data['prob_a'] / 100 else 'B'
-                partner.payoff = \
+                nondecider.payoff = \
                     (rnd < round_data['prob_a'] / 100) * decider.partner_a + (rnd >= round_data['prob_a'] / 100) * decider.partner_b
-                partner.outcome = 'A' if rnd < round_data['prob_a'] / 100 else 'B'
+                nondecider.outcome = 'A' if rnd < round_data['prob_a'] / 100 else 'B'
             elif modeMap[round_data['mode']] == 'single_given':
                 decider.payoff = decider.me_a
-                partner.payoff = decider.me_b # this is really partner_a, but the javascript automatically exports this so its a hacky but easy and clean way to do it
+                nondecider.payoff = decider.me_b # this is really partner_a, but the javascript automatically exports this so its a hacky but easy and clean way to do it
 
 class Subsession(BaseSubsession):
     def creating_session(self):
