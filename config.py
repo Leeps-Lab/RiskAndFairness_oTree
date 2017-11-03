@@ -11,21 +11,53 @@ Please use lowercase for dictionary keys in the future // Rachel
 '''
 
 data = [
-    {'mode': 'sec_1bl_1ch'   , 'm': 100, 'p_x': 1, 'p_y': 3, 'prob_a': 50, 'label': {'x': 'State A (50%)','y': 'State B (50%)'}},
-    
-    {'mode': 'sec_1bl_2ch', 'm': 100, 'p_x': 2, 'p_y': 1, 'prob_a': 50, 'label': {'x': 'State A (50%)','y': 'State B (50%)'}},
-    
-    {'mode': 'sec_2bl_1ch'   , 'm': 100, 'p_x': 1, 'p_y': 3, 'prob_a': 50, 'label': {'x': 'State A (50%)','y': 'State B (50%)'}},
-    
-    {'mode': 'sec_ownrisk'   , 'm': 100, 'p_x': 2, 'p_y': 3, 'prob_a': 50, 'label': {'x': 'State A (50%)','y': 'State B (50%)'}},
-    
-    {'mode': 'probability', 'a_x': 70, 'a_y':10, 'b_x': 10, 'b_y': 80, 'label': {'x': 'Your Tokens','y': 'Partner\'s Tokens'}},
-    
-    {'mode': 'det_giv'   , 'm': 100, 'p_x': 2, 'p_y': 3, 'prob_a': 50,'label': {'x': 'Your Tokens','y': 'Partner\'s Tokens'}},
-    
+{'mode': 'det_giv', 'm': 50, 'p_x': 1.50, 'p_y': 1, 'prob_a': 50, 'label': {'x': 'Your Tokens', 'y': 'Partner\'s Tokens'}},
+{'mode': 'det_giv', 'm': 50, 'p_x': 1.75, 'p_y': 1, 'prob_a': 50, 'label': {'x': 'Your Tokens', 'y': 'Partner\'s Tokens'}},
+{'mode': 'det_giv', 'm': 50, 'p_x': 2.00, 'p_y': 1, 'prob_a': 50, 'label': {'x': 'Your Tokens', 'y': 'Partner\'s Tokens'}},
+{'mode': 'det_giv', 'm': 50, 'p_x': 2.25, 'p_y': 1, 'prob_a': 50, 'label': {'x': 'Your Tokens', 'y': 'Partner\'s Tokens'}},
+{'mode': 'det_giv', 'm': 50, 'p_x': 2.50, 'p_y': 1, 'prob_a': 50, 'label': {'x': 'Your Tokens', 'y': 'Partner\'s Tokens'}},
+{'mode': 'det_giv', 'm': 50, 'p_x': 2.75, 'p_y': 1, 'prob_a': 50, 'label': {'x': 'Your Tokens', 'y': 'Partner\'s Tokens'}},
+
+{'mode': 'det_giv', 'm': 50, 'p_x': 0.50, 'p_y': 1, 'prob_a': 50,'label': {'x': 'Your Tokens','y': 'Partner\'s Tokens'}},
+{'mode': 'det_giv', 'm': 50, 'p_x': 0.75, 'p_y': 1, 'prob_a': 50, 'label': {'x': 'Your Tokens', 'y': 'Partner\'s Tokens'}},
+{'mode': 'det_giv', 'm': 50, 'p_x': 1.00, 'p_y': 1, 'prob_a': 50, 'label': {'x': 'Your Tokens', 'y': 'Partner\'s Tokens'}},
+{'mode': 'det_giv', 'm': 50, 'p_x': 1.25, 'p_y': 1, 'prob_a': 50, 'label': {'x': 'Your Tokens', 'y': 'Partner\'s Tokens'}},
+
+{'mode': 'sec_1bl_1ch'   , 'm': 50, 'p_x': 1.75, 'p_y': 1, 'prob_a': 50, 'label': {'x': 'State A (50%)','y': 'State B (50%)'}},
+{'mode': 'sec_1bl_1ch'   , 'm': 50, 'p_x': 2.00, 'p_y': 1, 'prob_a': 50, 'label': {'x': 'State A (50%)','y': 'State B (50%)'}},
+{'mode': 'sec_1bl_1ch'   , 'm': 50, 'p_x': 2.25, 'p_y': 1, 'prob_a': 50, 'label': {'x': 'State A (50%)','y': 'State B (50%)'}},
+{'mode': 'sec_1bl_1ch'   , 'm': 50, 'p_x': 2.50, 'p_y': 1, 'prob_a': 50, 'label': {'x': 'State A (50%)','y': 'State B (50%)'}},
+{'mode': 'sec_1bl_1ch'   , 'm': 50, 'p_x': 2.75, 'p_y': 1, 'prob_a': 50, 'label': {'x': 'State A (50%)','y': 'State B (50%)'}},
+
+{'mode': 'sec_1bl_1ch'   , 'm': 50, 'p_x': 0.50, 'p_y': 1, 'prob_a': 50, 'label': {'x': 'State A (50%)','y': 'State B (50%)'}},
+{'mode': 'sec_1bl_1ch'   , 'm': 50, 'p_x': 0.75, 'p_y': 1, 'prob_a': 50, 'label': {'x': 'State A (50%)','y': 'State B (50%)'}},
+{'mode': 'sec_1bl_1ch'   , 'm': 50, 'p_x': 1.00, 'p_y': 1, 'prob_a': 50, 'label': {'x': 'State A (50%)','y': 'State B (50%)'}},
+{'mode': 'sec_1bl_1ch'   , 'm': 50, 'p_x': 1.25, 'p_y': 1, 'prob_a': 50, 'label': {'x': 'State A (50%)','y': 'State B (50%)'}},
+{'mode': 'sec_1bl_1ch'   , 'm': 50, 'p_x': 1.50, 'p_y': 1, 'prob_a': 50, 'label': {'x': 'State A (50%)','y': 'State B (50%)'}},
+
+
+{'mode': 'sec_1bl_1ch'   , 'm': 50, 'p_x': 1.75, 'p_y': 1, 'prob_a': 50, 'label': {'x': 'State A (50%)','y': 'State B (50%)'}},
+{'mode': 'sec_1bl_1ch'   , 'm': 50, 'p_x': 2.00, 'p_y': 1, 'prob_a': 50, 'label': {'x': 'State A (50%)','y': 'State B (50%)'}},
+{'mode': 'sec_1bl_1ch'   , 'm': 50, 'p_x': 2.25, 'p_y': 1, 'prob_a': 50, 'label': {'x': 'State A (50%)','y': 'State B (50%)'}},
+{'mode': 'sec_1bl_1ch'   , 'm': 50, 'p_x': 2.50, 'p_y': 1, 'prob_a': 50, 'label': {'x': 'State A (50%)','y': 'State B (50%)'}},
+{'mode': 'sec_1bl_1ch'   , 'm': 50, 'p_x': 2.75, 'p_y': 1, 'prob_a': 50, 'label': {'x': 'State A (50%)','y': 'State B (50%)'}},
+
+{'mode': 'sec_1bl_1ch'   , 'm': 50, 'p_x': 0.50, 'p_y': 1, 'prob_a': 50, 'label': {'x': 'State A (50%)','y': 'State B (50%)'}},
+{'mode': 'sec_1bl_1ch'   , 'm': 50, 'p_x': 0.75, 'p_y': 1, 'prob_a': 50, 'label': {'x': 'State A (50%)','y': 'State B (50%)'}},
+{'mode': 'sec_1bl_1ch'   , 'm': 50, 'p_x': 1.00, 'p_y': 1, 'prob_a': 50, 'label': {'x': 'State A (50%)','y': 'State B (50%)'}},
+{'mode': 'sec_1bl_1ch'   , 'm': 50, 'p_x': 1.25, 'p_y': 1, 'prob_a': 50, 'label': {'x': 'State A (50%)','y': 'State B (50%)'}},
+{'mode': 'sec_1bl_1ch'   , 'm': 50, 'p_x': 1.50, 'p_y': 1, 'prob_a': 50, 'label': {'x': 'State A (50%)','y': 'State B (50%)'}},
+
+
+    {'mode': 'sec_ownrisk'   , 'm': 50, 'p_x': 2, 'p_y': 3, 'prob_a': 50, 'label': {'x': 'State A (50%)','y': 'State B (50%)'}},
+
+
     {'mode': 'sec_ownrisk_fixedother', 'm': 100, 'p_x': 2, 'p_y': 3, 'prob_a': 50, 'fixed': {'m': 50, 'p_x': 1, 'p_y': 2, 'a': 10}},
 
-    {'mode': 'sec_otherrisk_ownfixed', 'm': 50, 'p_x': 1, 'p_y': 2, 'prob_a': 50, 'fixed': {'m': 100, 'p_x': 2, 'p_y': 3, 'a': 30}}
+    {'mode': 'sec_otherrisk_ownfixed', 'm': 50, 'p_x': 1, 'p_y': 2, 'prob_a': 50, 'fixed': {'m': 100, 'p_x': 2, 'p_y': 3, 'a': 30}},
+
+    {'mode': 'probability', 'a_x': 70, 'a_y': 10, 'b_x': 10, 'b_y': 80, 'label': {'x': 'Your Tokens', 'y': 'Partner\'s Tokens'}}
+    # {'mode': 'sec_1bl_2ch', 'm': 50, 'p_x': 2, 'p_y': 1, 'prob_a': 50, 'label': {'x': 'State A (50%)','y': 'State B (50%)'}},
 
 ]
 
