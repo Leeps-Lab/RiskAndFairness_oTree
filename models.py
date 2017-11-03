@@ -95,7 +95,7 @@ class Player(BasePlayer):
         if self.id_in_group == 1:
             return 'Decider'
         else:
-            return 'Partner'
+            return 'Non-Decider'
     
     def set_payoffs(self):
         round_data = config.getDynamicValues()[self.round_number - 1]
@@ -140,7 +140,7 @@ class Group(BaseGroup):
             print('random rnd', rnd)
 
             decider = self.get_player_by_role('Decider')
-            partner = self.get_player_by_role('Partner')
+            partner = self.get_player_by_role('Non-Decider')
 
             if modeMap[round_data['mode']] == 'probability':
                 decider.payoff = \
