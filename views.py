@@ -147,8 +147,8 @@ class Results(Page):
                 dec_b = round(decider.in_round(pr).partner_b, 1)
             # single mode
             else:
-                dec_a = round(nondecider.in_round(pr).me_a, 1)
-                dec_b = round(nondecider.in_round(pr).me_b, 1)
+                dec_a = round(nondecider.in_round(pr2).me_a, 1)
+                dec_b = round(nondecider.in_round(pr2).me_b, 1)
 
         outcome = self.player.in_round(self.player.participant.vars['dynamic_values'].index(self.group.get_player_by_id(1).participant.vars['pr_dict']) + 1).outcome
         payoff = self.player.in_round(self.player.participant.vars['dynamic_values'].index(self.group.get_player_by_id(1).participant.vars['pr_dict']) + 1).payoff

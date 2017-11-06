@@ -103,7 +103,7 @@ class Player(BasePlayer):
             return 'Non-Decider'
     
     def set_payoffs(self):
-        round_data = self.dynamic_values[self.round_number - 1]
+        round_data = self.participant.vars['dynamic_values'][self.round_number - 1]
         print('round data in set payoffs', round_data)
 
         rnd = random.random()
@@ -144,8 +144,11 @@ class Group(BaseGroup):
         rnd = random.random()
         print('random rnd', rnd)
 
-        decider = self.get_player_by_role('Decider')
-        nondecider = self.get_player_by_role('Non-Decider')
+        pr = self.get_player_by_id(1).participant.vars['dynamic_values'].index(self.get_player_by_id(1).participant.vars['pr_dict']) + 1
+        pr2 = self.get_player_by_id(2).participant.vars['dynamic_values'].index(self.get_player_by_id(1).participant.vars['pr_dict']) + 1
+
+        decider = self.get_player_by_role('Decider').in_round(pr)
+        nondecider = self.get_player_by_role('Non-Decider').in_round(pr2)
 
         # pull dictionary of values for current round from decider
         round_data = decider.participant.vars['dynamic_values'][self.round_number - 1]
