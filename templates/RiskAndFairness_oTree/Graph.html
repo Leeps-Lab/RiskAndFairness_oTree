@@ -71,7 +71,7 @@
     var defaultValues  = {{ Constants.default_values | json }}
 
     // Notes: these can probably be offloaded to Python
-    var dynamicValues  = {{ Constants.dynamic_values | json }}
+    var dynamicValues  = {{ dynamic_values | json }}
 
     var getMode = function() {
         var roundData = dynamicValues[currentRound - 1]
