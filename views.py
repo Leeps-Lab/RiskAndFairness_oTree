@@ -14,28 +14,31 @@ Contributors:
 class InitialInstructions(Page):
     form_model = models.Player
     form_fields = ['time_InitialInstructions']
+
     def is_displayed(self):
         return self.round_number == 1
 
     def vars_for_template(self):
+        numberOfPeriod = config.numberOfPeriod()
         return {'participation_fee': self.session.config['participation_fee']}
 
 
 class TaskInstructions(Page):
     form_model = models.Player
     form_fields = ['time_TaskInstructions']
-    def vars_for_template(self):
-        mode = Constants.dynamic_values[self.round_number - 1]['mode']
-        return {'mode': mode}
 
     def is_displayed(self):
-        mode = Constants.dynamic_values[self.round_number - 1]['mode']
+        # print('GROUP PAYING ROUND', self.group.paying_round)
+        # print('GROUP PAYING DICT', self.group.pr_dict)
+        #print('PLAYER', self.player.id_in_group, 'PAYING ROUND', self.player.dynamic_values.index(self.group.pr_dict) + 1)
+        # print('PLAYER', self.player.id_in_group, 'DYNAMIC VALUES', self.player.dynamic_values)
+        mode = self.player.participant.vars['dynamic_values'][self.round_number - 1]['mode']
         if self.round_number > 1:
-            prevmode = Constants.dynamic_values[self.round_number - 2]['mode']
+            prevmode = self.player.participant.vars['dynamic_values'][self.round_number - 2]['mode']
         return self.round_number == 1 or mode != prevmode
 
     def vars_for_template(self):
-        mode = Constants.dynamic_values[self.round_number - 1]['mode']
+        mode = self.player.participant.vars['dynamic_values'][self.round_number - 1]['mode']
         # this will be used in the conditional display of instructions
         return {'mode': mode,
                 'sec0': '' if mode in ['probability', 'det_giv'] else mode.split('_')[0],
@@ -47,9 +50,8 @@ class Graph(Page):
     form_model = models.Player
 
     def get_form_fields(self):
-        current_round = self.round_number
-        dynamic_values = config.getDynamicValues(shuf=False)
-        round_data = dynamic_values[current_round - 1]
+        dynamic_values = self.player.participant.vars['dynamic_values']
+        round_data = dynamic_values[self.round_number - 1]
         if round_data is not None and round_data['mode'] is not None:
             if round_data['mode'] == 'det_giv':
                 return ['mode', 'me_a', 'me_b', 'time_Graph']
@@ -63,30 +65,30 @@ class Graph(Page):
             return ['mode', 'partner_a', 'partner_b', 'me_a', 'me_b', 'prob_a', 'prob_b', 'time_Graph']
 
     def vars_for_template(self):
-        mode = Constants.dynamic_values[self.round_number - 1]['mode']
+        dynamic_values = self.player.participant.vars['dynamic_values']
+        mode = self.player.participant.vars['dynamic_values'][self.round_number - 1]['mode']
+        print('MODE MODE MODE', mode)
         if self.round_number > 1:
             counter = 1
-            prevmode = Constants.dynamic_values[self.round_number - 2]['mode']
+            prevmode = self.player.participant.vars['dynamic_values'][self.round_number - 2]['mode']
             while mode == prevmode:
                 counter += 1;
                 if counter == self.round_number:
                     break
-                prevmode = Constants.dynamic_values[self.round_number - (counter + 1)]['mode']
+                prevmode = self.player.participant.vars['dynamic_values'][self.round_number - (counter + 1)]['mode']
         else:
             counter = 1
-        return {'mode': mode,
+        return {'dynamic_values': dynamic_values,
+                'mode': mode,
                 'counter': counter,
                 'sec1': '' if mode in ['probability', 'det_giv'] else mode.split('_')[1],
                 'sec2': '' if mode in ['probability', 'det_giv', 'sec_ownrisk'] else mode.split('_')[2]
                 }
 
     def before_next_page(self):
-        current_round = self.round_number
-        dynamic_values = config.getDynamicValues(shuf=False)
-        round_data = dynamic_values[current_round - 1]
-        if round_data['mode'] == 'sec_ownrisk':
+        if self.group.get_player_by_id(1).participant.vars['pr_dict']['mode'] == 'sec_ownrisk' and self.round_number == self.player.participant.vars['dynamic_values'].index(self.group.get_player_by_id(1).participant.vars['pr_dict']) + 1:
             self.player.set_payoffs()
-        elif self.player.id_in_group == 1:
+        elif self.player.id_in_group == 1 and self.round_number == self.player.participant.vars['dynamic_values'].index(self.group.get_player_by_id(1).participant.vars['pr_dict']) + 1:
             self.group.set_payoffs()
 
 class ResultsWaitPage(WaitPage):
@@ -118,43 +120,49 @@ class Results(Page):
         'sec_otherrisk_ownfixed': 'S-OtherRisk-OwnFixed'}
 
         # variables:
-        mode = Constants.dynamic_values[self.session.vars['paying_round'] - 1]['mode']
-        pr = self.session.vars['paying_round']
+        mode = self.group.get_player_by_id(1).participant.vars['pr_dict']['mode']
+
+        decider = self.group.get_player_by_id(1)
+        nondecider = self.group.get_player_by_id(2)
+
+        pr = decider.participant.vars['dynamic_values'].index(self.group.get_player_by_id(1).participant.vars['pr_dict']) + 1
+        pr2 = nondecider.participant.vars['dynamic_values'].index(self.group.get_player_by_id(1).participant.vars['pr_dict']) + 1
 
         if mode == 'probability':
-            dec_a = round(self.group.in_round(pr).get_player_by_id(1).prob_a, 1)
-            dec_b = round(self.group.in_round(pr).get_player_by_id(1).prob_b, 1)
+            dec_a = round(decider.in_round(pr).prob_a, 1)
+            dec_b = round(decider.in_round(pr).prob_b, 1)
         elif mode == 'det_giv':
             if self.player.id_in_group == 1:
-                dec_a = round(self.group.in_round(pr).get_player_by_id(1).me_a, 1) 
+                dec_a = round(decider.in_round(pr).me_a, 1) 
                 dec_b = None
             else:
-                dec_a = round(self.group.in_round(pr).get_player_by_id(1).me_b, 1)
+                dec_a = round(decider.in_round(pr).me_b, 1)
                 dec_b = None
         else:
             if self.player.id_in_group == 1:
-                dec_a = round(self.group.in_round(pr).get_player_by_id(1).me_a, 1)
-                dec_b = round(self.group.in_round(pr).get_player_by_id(1).me_b, 1)
+                dec_a = round(decider.in_round(pr).me_a, 1)
+                dec_b = round(decider.in_round(pr).me_b, 1)
             elif mode != 'sec_ownrisk':
-                dec_a = round(self.group.in_round(pr).get_player_by_id(1).partner_a, 1)
-                dec_b = round(self.group.in_round(pr).get_player_by_id(1).partner_b, 1)
+                dec_a = round(decider.in_round(pr).partner_a, 1)
+                dec_b = round(decider.in_round(pr).partner_b, 1)
+            # single mode
             else:
-                dec_a = round(self.group.in_round(pr).get_player_by_id(2).me_a, 1)
-                dec_b = round(self.group.in_round(pr).get_player_by_id(2).me_b, 1)
+                dec_a = round(nondecider.in_round(pr2).me_a, 1)
+                dec_b = round(nondecider.in_round(pr2).me_b, 1)
 
-        outcome = self.player.in_round(pr).outcome
-        payoff = self.player.in_round(pr).payoff
+        outcome = self.player.in_round(self.player.participant.vars['dynamic_values'].index(self.group.get_player_by_id(1).participant.vars['pr_dict']) + 1).outcome
+        payoff = self.player.in_round(self.player.participant.vars['dynamic_values'].index(self.group.get_player_by_id(1).participant.vars['pr_dict']) + 1).payoff
         
         role = self.player.role()
 
-        if self.session.vars['paying_round'] > 1:
+        if self.player.participant.vars['dynamic_values'].index(self.group.get_player_by_id(1).participant.vars['pr_dict']) > 0:
             counter = 1
-            prevmode = Constants.dynamic_values[self.session.vars['paying_round'] - 2]['mode']
+            prevmode = self.player.participant.vars['dynamic_values'][self.player.participant.vars['dynamic_values'].index(self.group.get_player_by_id(1).participant.vars['pr_dict']) - 1]['mode']
             while mode == prevmode:
                 counter += 1;
-                if counter == self.session.vars['paying_round']:
+                if counter == self.player.participant.vars['dynamic_values'].index(self.group.get_player_by_id(1).participant.vars['pr_dict']) + 1:
                     break
-                prevmode = Constants.dynamic_values[self.round_number - (counter + 1)]['mode']
+                prevmode = self.player.participant.vars['dynamic_values'][self.player.participant.vars['dynamic_values'].index(self.group.get_player_by_id(1).participant.vars['pr_dict']) - counter]['mode']
         else:
             counter = 1
         return {'mode': modeMap[mode], 'dec_a': dec_a, 'dec_b': dec_b, 'role': role, 'counter': counter, 'outcome': outcome, 'payoff': payoff}
