@@ -64,7 +64,6 @@ class Constants(BaseConstants):
     
     # not flattened
     dynamic_values = config.getDynamicValues()
-    pr_dict = None
 
     # number of different task types
     number_types_of_tasks = len(set([d['mode'] for d in config.flatten(dynamic_values)]))
