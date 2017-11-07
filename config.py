@@ -62,16 +62,16 @@ data = [
     {'mode': 'sec_ownrisk'   , 'm': 68, 'p_x': 2.40, 'p_y': 1, 'prob_a': 50, 'label': {'x': 'State A (50%)','y': 'State B (50%)'}}
     ],
     [
-    {'mode': 'sec_ownrisk_fixedother'   , 'm': 50, 'p_x': 0.60, 'p_y': 1, 'prob_a': 50, 'label': {'x': 'State A (50%)','y': 'State B (50%)'}},
-    {'mode': 'sec_ownrisk_fixedother'   , 'm': 52, 'p_x': 0.80, 'p_y': 1, 'prob_a': 50, 'label': {'x': 'State A (50%)','y': 'State B (50%)'}},
-    {'mode': 'sec_ownrisk_fixedother'   , 'm': 54, 'p_x': 1.00, 'p_y': 1, 'prob_a': 50, 'label': {'x': 'State A (50%)','y': 'State B (50%)'}},
-    {'mode': 'sec_ownrisk_fixedother'   , 'm': 56, 'p_x': 1.20, 'p_y': 1, 'prob_a': 50, 'label': {'x': 'State A (50%)','y': 'State B (50%)'}},
-    {'mode': 'sec_ownrisk_fixedother'   , 'm': 58, 'p_x': 1.40, 'p_y': 1, 'prob_a': 50, 'label': {'x': 'State A (50%)','y': 'State B (50%)'}},
-    {'mode': 'sec_ownrisk_fixedother'   , 'm': 60, 'p_x': 1.60, 'p_y': 1, 'prob_a': 50, 'label': {'x': 'State A (50%)','y': 'State B (50%)'}},
-    {'mode': 'sec_ownrisk_fixedother'   , 'm': 62, 'p_x': 1.80, 'p_y': 1, 'prob_a': 50, 'label': {'x': 'State A (50%)','y': 'State B (50%)'}},
-    {'mode': 'sec_ownrisk_fixedother'   , 'm': 64, 'p_x': 2.00, 'p_y': 1, 'prob_a': 50, 'label': {'x': 'State A (50%)','y': 'State B (50%)'}},
-    {'mode': 'sec_ownrisk_fixedother'   , 'm': 66, 'p_x': 2.20, 'p_y': 1, 'prob_a': 50, 'label': {'x': 'State A (50%)','y': 'State B (50%)'}},
-    {'mode': 'sec_ownrisk_fixedother'   , 'm': 68, 'p_x': 2.40, 'p_y': 1, 'prob_a': 50, 'label': {'x': 'State A (50%)','y': 'State B (50%)'}}
+    {'mode': 'sec_ownrisk_fixedother'   , 'm': 50, 'p_x': 0.60, 'p_y': 1, 'prob_a': 50, 'fixed': {'m': 90, 'p_x': 1, 'p_y': 1, 'a': 45}},
+    {'mode': 'sec_ownrisk_fixedother'   , 'm': 52, 'p_x': 0.80, 'p_y': 1, 'prob_a': 50, 'fixed': {'m': 90, 'p_x': 1, 'p_y': 1, 'a': 45}},
+    {'mode': 'sec_ownrisk_fixedother'   , 'm': 54, 'p_x': 1.00, 'p_y': 1, 'prob_a': 50, 'fixed': {'m': 90, 'p_x': 1, 'p_y': 1, 'a': 45}},
+    {'mode': 'sec_ownrisk_fixedother'   , 'm': 56, 'p_x': 1.20, 'p_y': 1, 'prob_a': 50, 'fixed': {'m': 90, 'p_x': 1, 'p_y': 1, 'a': 45}},
+    {'mode': 'sec_ownrisk_fixedother'   , 'm': 58, 'p_x': 1.40, 'p_y': 1, 'prob_a': 50, 'fixed': {'m': 90, 'p_x': 1, 'p_y': 1, 'a': 45}},
+    {'mode': 'sec_ownrisk_fixedother'   , 'm': 60, 'p_x': 1.60, 'p_y': 1, 'prob_a': 50, 'fixed': {'m': 90, 'p_x': 1, 'p_y': 1, 'a': 45}},
+    {'mode': 'sec_ownrisk_fixedother'   , 'm': 62, 'p_x': 1.80, 'p_y': 1, 'prob_a': 50, 'fixed': {'m': 90, 'p_x': 1, 'p_y': 1, 'a': 45}},
+    {'mode': 'sec_ownrisk_fixedother'   , 'm': 64, 'p_x': 2.00, 'p_y': 1, 'prob_a': 50, 'fixed': {'m': 90, 'p_x': 1, 'p_y': 1, 'a': 45}},
+    {'mode': 'sec_ownrisk_fixedother'   , 'm': 66, 'p_x': 2.20, 'p_y': 1, 'prob_a': 50, 'fixed': {'m': 90, 'p_x': 1, 'p_y': 1, 'a': 45}},
+    {'mode': 'sec_ownrisk_fixedother'   , 'm': 68, 'p_x': 2.40, 'p_y': 1, 'prob_a': 50, 'fixed': {'m': 90, 'p_x': 1, 'p_y': 1, 'a': 45}}
     ],
 ]
 
