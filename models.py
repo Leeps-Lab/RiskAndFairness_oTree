@@ -61,11 +61,12 @@ class Constants(BaseConstants):
             'b': 100
         }
     }
-    dynamic_values = config.getDynamicValues(shuf=False)
-
+    
+    # not flattened
+    dynamic_values = config.getDynamicValues()
 
     # number of different task types
-    number_types_of_tasks = len(set([d['mode'] for d in dynamic_values]))
+    number_types_of_tasks = len(set([d['mode'] for d in config.flatten(dynamic_values)]))
 
 
     # INSTRUCTIONS PATHS
@@ -76,6 +77,9 @@ class Constants(BaseConstants):
 
 
 class Player(BasePlayer):
+
+    # each player has its own shuffled data, and its own paying round number (starting at 1)
+    # (the paying round is the same for all players, but the index of that round is unique for each shuffled dataset)
 
     mode = models.CharField()
     partner_a = models.FloatField() # Circle is other
@@ -98,18 +102,29 @@ class Player(BasePlayer):
             return 'Non-Decider'
     
     def set_payoffs(self):
-        round_data = config.getDynamicValues(shuf=False)[self.round_number - 1]
+        round_data = self.participant.vars['dynamic_values'][self.round_number - 1]
         print('round data in set payoffs', round_data)
 
         rnd = random.random()
         print('random rnd', rnd)
 
-        if self.round_number == self.session.vars['paying_round'] and round_data['mode'] == 'sec_ownrisk':
-            self.payoff = \
-                (rnd < round_data['prob_a'] / 100) * self.me_a + (rnd >= round_data['prob_a'] / 100) * self.me_b
-            self.outcome = 'A' if rnd < round_data['prob_a'] / 100 else 'B'
+        self.payoff = (rnd < round_data['prob_a'] / 100) * self.me_a + (rnd >= round_data['prob_a'] / 100) * self.me_b
+        self.outcome = 'A' if rnd < round_data['prob_a'] / 100 else 'B'
             
 class Group(BaseGroup):
+
+
+    def set_dv(self):
+        self.get_player_by_id(1).participant.vars['paying_round'] = random.randint(1, Constants.num_rounds)
+        print('GROUP PAYING ROUND', self.get_player_by_id(1).participant.vars['paying_round'])
+        self.get_player_by_id(1).participant.vars['pr_dict'] = config.flatten(Constants.dynamic_values)[self.get_player_by_id(1).participant.vars['paying_round'] - 1]
+        print('\nPR DICT', self.get_player_by_id(1).participant.vars['pr_dict'])
+        self.get_player_by_id(1).participant.vars['dynamic_values'] = config.flatten(config.shuffle(Constants.dynamic_values))
+        print('\nPLAYER 1 PAYING ROUND', self.get_player_by_id(1).participant.vars['dynamic_values'].index(self.get_player_by_id(1).participant.vars['pr_dict']) + 1)
+        print('\nPLAYER 1 DV', self.get_player_by_id(1).participant.vars['dynamic_values'])
+        self.get_player_by_id(2).participant.vars['dynamic_values'] = config.flatten(config.shuffle(Constants.dynamic_values))
+        print('\nPLAYER 2 PAYING ROUND', self.get_player_by_id(2).participant.vars['dynamic_values'].index(self.get_player_by_id(1).participant.vars['pr_dict']) + 1)
+        print('\nPLAYER 2 DV', self.get_player_by_id(2).participant.vars['dynamic_values'])
 
     def set_payoffs(self):
 
@@ -122,65 +137,61 @@ class Group(BaseGroup):
         'sec_ownrisk_fixedother': 'single_fixedcircle',
         'sec_otherrisk_ownfixed': 'single_fixedsquare',
         'det_giv': 'single_given'}
+        
+        # generate pseudo_random number to compare to probabilities  0 <= rnd <= 1
+        # !!!!  this is now run every round so rnd cant be here. !!!!
+        rnd = random.random()
+        print('random rnd', rnd)
 
-        current_round = self.round_number
-        print('current_round in set payoffs', current_round)
+        pr = self.get_player_by_id(1).participant.vars['dynamic_values'].index(self.get_player_by_id(1).participant.vars['pr_dict']) + 1
+        pr2 = self.get_player_by_id(2).participant.vars['dynamic_values'].index(self.get_player_by_id(1).participant.vars['pr_dict']) + 1
 
-        # check if current round is the preset payoff round
-        if current_round == self.session.vars['paying_round']:
-            # pull dictionary of values for current round from config.py
-            dynamic_values = config.getDynamicValues(shuf=False)
-            round_data = dynamic_values[current_round - 1]
+        decider = self.get_player_by_role('Decider').in_round(pr)
+        nondecider = self.get_player_by_role('Non-Decider').in_round(pr2)
 
-            print('round data in set payoffs', round_data)
+        # pull dictionary of values for current round from decider
+        round_data = decider.participant.vars['dynamic_values'][self.round_number - 1]
+        print('round data in set payoffs', round_data)
 
-            # generate pseudo_random number to compare to probabilities  0 <= rnd <= 1
-            # !!!!  this is now run every round so rnd cant be here. !!!!
-            rnd = random.random()
-            print('random rnd', rnd)
-
-            decider = self.get_player_by_role('Decider')
-            nondecider = self.get_player_by_role('Non-Decider')
-
-            if modeMap[round_data['mode']] == 'probability':
-                decider.payoff = \
-                    (rnd < decider.prob_a / 100) * round_data['a_x'] + (rnd >= decider.prob_a / 100) * round_data['b_x']
-                decider.outcome = 'A' if rnd < decider.prob_a / 100 else 'B'
-                nondecider.payoff = \
-                    (rnd < decider.prob_a / 100) * round_data['a_y'] + (rnd >= decider.prob_a / 100) * round_data['b_y']
-                nondecider.outcome = 'A' if rnd < decider.prob_a / 100 else 'B'
-            elif modeMap[round_data['mode']] in ['positive', 'negative', 'independent']:
-                decider.payoff = \
-                    (rnd < round_data['prob_a'] / 100) * decider.me_a + (rnd >= round_data['prob_a'] / 100) * decider.me_b
-                decider.outcome = 'A' if rnd < round_data['prob_a'] / 100 else 'B'
-                nondecider.payoff = \
-                    (rnd < round_data['prob_a'] / 100) * decider.partner_a + (rnd >= round_data['prob_a'] / 100) * decider.partner_b
-                nondecider.outcome = 'A' if rnd < round_data['prob_a'] / 100 else 'B'
-            elif modeMap[round_data['mode']] == 'single_fixedsquare':
-                decider.payoff = \
-                    (rnd < round_data['prob_a'] / 100) * decider.me_a + (rnd >= round_data['prob_a'] / 100) * decider.me_b
-                decider.outcome = 'A' if rnd < round_data['prob_a'] / 100 else 'B'
-                nondecider.payoff = \
-                    (rnd < round_data['prob_a'] / 100) * decider.partner_a + (rnd >= round_data['prob_a'] / 100) * decider.partner_b
-                nondecider.outcome = 'A' if rnd < round_data['prob_a'] / 100 else 'B'
-            elif modeMap[round_data['mode']] == 'single_fixedcircle':
-                decider.payoff = \
-                    (rnd < round_data['prob_a'] / 100) * decider.me_a + (rnd >= round_data['prob_a'] / 100) * decider.me_b
-                decider.outcome = 'A' if rnd < round_data['prob_a'] / 100 else 'B'
-                nondecider.payoff = \
-                    (rnd < round_data['prob_a'] / 100) * decider.partner_a + (rnd >= round_data['prob_a'] / 100) * decider.partner_b
-                nondecider.outcome = 'A' if rnd < round_data['prob_a'] / 100 else 'B'
-            elif modeMap[round_data['mode']] == 'single_given':
-                decider.payoff = decider.me_a
-                nondecider.payoff = decider.me_b # this is really partner_a, but the javascript automatically exports this so its a hacky but easy and clean way to do it
+        if modeMap[round_data['mode']] == 'probability':
+            decider.payoff = \
+                (rnd < decider.prob_a / 100) * round_data['a_x'] + (rnd >= decider.prob_a / 100) * round_data['b_x']
+            decider.outcome = 'A' if rnd < decider.prob_a / 100 else 'B'
+            nondecider.payoff = \
+                (rnd < decider.prob_a / 100) * round_data['a_y'] + (rnd >= decider.prob_a / 100) * round_data['b_y']
+            nondecider.outcome = decider.outcome
+        elif modeMap[round_data['mode']] in ['positive', 'negative', 'independent']:
+            decider.payoff = \
+                (rnd < round_data['prob_a'] / 100) * decider.me_a + (rnd >= round_data['prob_a'] / 100) * decider.me_b
+            decider.outcome = 'A' if rnd < round_data['prob_a'] / 100 else 'B'
+            nondecider.payoff = \
+                (rnd < round_data['prob_a'] / 100) * decider.partner_a + (rnd >= round_data['prob_a'] / 100) * decider.partner_b
+            nondecider.outcome = decider.outcome
+        elif modeMap[round_data['mode']] == 'single_fixedsquare':
+            decider.payoff = \
+                (rnd < round_data['prob_a'] / 100) * decider.me_a + (rnd >= round_data['prob_a'] / 100) * decider.me_b
+            decider.outcome = 'A' if rnd < round_data['prob_a'] / 100 else 'B'
+            nondecider.payoff = \
+                (rnd < round_data['prob_a'] / 100) * decider.partner_a + (rnd >= round_data['prob_a'] / 100) * decider.partner_b
+            nondecider.outcome = decider.outcome
+        elif modeMap[round_data['mode']] == 'single_fixedcircle':
+            decider.payoff = \
+                (rnd < round_data['prob_a'] / 100) * decider.me_a + (rnd >= round_data['prob_a'] / 100) * decider.me_b
+            decider.outcome = 'A' if rnd < round_data['prob_a'] / 100 else 'B'
+            nondecider.payoff = \
+                (rnd < round_data['prob_a'] / 100) * decider.partner_a + (rnd >= round_data['prob_a'] / 100) * decider.partner_b
+            nondecider.outcome = decider.outcome
+        elif modeMap[round_data['mode']] == 'single_given':
+            decider.payoff = decider.me_a
+            nondecider.payoff = decider.me_b # this is really partner_a, but the javascript automatically exports this so its a hacky but easy and clean way to do it
 
 class Subsession(BaseSubsession):
     def creating_session(self):
         if self.round_number == 1:
             self.group_randomly()
-            # set a random round to be the payoff round
-            self.session.vars['paying_round'] = random.randint(1, Constants.num_rounds)
-            print('------PAYING ROUND------', self.session.vars['paying_round'])
+            for group in self.get_groups():
+                group.set_dv()
+
         else:
             self.group_like_round(1)
 

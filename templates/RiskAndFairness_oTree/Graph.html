@@ -71,7 +71,7 @@
     var defaultValues  = {{ Constants.default_values | json }}
 
     // Notes: these can probably be offloaded to Python
-    var dynamicValues  = {{ Constants.dynamic_values | json }}
+    var dynamicValues  = {{ dynamic_values | json }}
 
     var getMode = function() {
         var roundData = dynamicValues[currentRound - 1]
@@ -318,7 +318,7 @@
 
 
     <div>
-        <button id="submit" class="btn btn-primary btn-large next-button">Submit Decision</button>
+        <button id="submit" class="btn btn-primary btn-large next-button" style="float: right;">Submit Decision</button>
     </div>
 
 
@@ -334,3 +334,5 @@
     </script>
 
 {% endblock %}
+
+{#cd RiskAndFairness_oTree/ && git add templates/RiskAndFairness_oTree/Graph.html && git commit -m "___________" && git pus#}
