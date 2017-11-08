@@ -15,27 +15,84 @@ import copy
 
 data = [
     [
-    {'mode': 'det_giv', 'm': 95, 'p_x': 2.75},
-    {'mode': 'det_giv', 'm': 95, 'p_x': 2.75}
+    {'mode': 'det_giv', 'm': 20, 'p_x': .2},
+    {'mode': 'det_giv', 'm': 40, 'p_x': 1},
+    {'mode': 'det_giv', 'm': 40, 'p_x': .667},
+    {'mode': 'det_giv', 'm': 40, 'p_x': .5},
+    {'mode': 'det_giv', 'm': 40, 'p_x': .4},
+    {'mode': 'det_giv', 'm': 60, 'p_x': 1.5},
+    {'mode': 'det_giv', 'm': 60, 'p_x': 1},
+    {'mode': 'det_giv', 'm': 60, 'p_x': .75},
+    {'mode': 'det_giv', 'm': 60, 'p_x': .6},
+    {'mode': 'det_giv', 'm': 80, 'p_x': 2},
+    {'mode': 'det_giv', 'm': 80, 'p_x': 1.333},
+    {'mode': 'det_giv', 'm': 80, 'p_x': 1},
+    {'mode': 'det_giv', 'm': 100, 'p_x': 5},
+    {'mode': 'det_giv', 'm': 100, 'p_x': 2.5},
+    {'mode': 'det_giv', 'm': 100, 'p_x': 1.25}
     ],
     [
-    {'mode': 'sec_1bl_1ch'   , 'm': 50, 'p_x': 0.60},
-    {'mode': 'sec_1bl_1ch'   , 'm': 68, 'p_x': 2.40}
+    {'mode': 'sec_1bl_1ch', 'm': 20, 'p_x': .5},
+    {'mode': 'sec_1bl_1ch', 'm': 20, 'p_x': .333},
+    {'mode': 'sec_1bl_1ch', 'm': 20, 'p_x': .25},
+    {'mode': 'sec_1bl_1ch', 'm': 20, 'p_x': .2},
+    {'mode': 'sec_1bl_1ch', 'm': 40, 'p_x': 1},
+    {'mode': 'sec_1bl_1ch', 'm': 40, 'p_x': .667},
+    {'mode': 'sec_1bl_1ch', 'm': 40, 'p_x': .5},
+    {'mode': 'sec_1bl_1ch', 'm': 40, 'p_x': .4},
+    {'mode': 'sec_1bl_1ch', 'm': 60, 'p_x': 1.5},
+    {'mode': 'sec_1bl_1ch', 'm': 60, 'p_x': 1},
+    {'mode': 'sec_1bl_1ch', 'm': 60, 'p_x': .75},
+    {'mode': 'sec_1bl_1ch', 'm': 60, 'p_x': .6},
     ],
     [
-    {'mode': 'sec_2bl_1ch'   , 'm': 50, 'p_x': 0.60},
-    {'mode': 'sec_2bl_1ch'   , 'm': 68, 'p_x': 2.40}
+    {'mode': 'sec_2bl_1ch'   , 'm': 20, 'p_x': 0.5},
+    {'mode': 'sec_2bl_1ch'   , 'm': 20, 'p_x': .333},
+    {'mode': 'sec_2bl_1ch'   , 'm': 20, 'p_x': 0.25},
+    {'mode': 'sec_2bl_1ch'   , 'm': 20, 'p_x': 0.2},
+    {'mode': 'sec_2bl_1ch'   , 'm': 40, 'p_x': 1},
+    {'mode': 'sec_2bl_1ch'   , 'm': 40, 'p_x': .667},
+    {'mode': 'sec_2bl_1ch'   , 'm': 40, 'p_x': 0.5},
+    {'mode': 'sec_2bl_1ch'   , 'm': 40, 'p_x': 0.4},
+    {'mode': 'sec_2bl_1ch'   , 'm': 60, 'p_x': 1.5},
+    {'mode': 'sec_2bl_1ch'   , 'm': 60, 'p_x': 1},
+    {'mode': 'sec_2bl_1ch'   , 'm': 60, 'p_x': .75},
+    {'mode': 'sec_2bl_1ch'   , 'm': 60, 'p_x': 0.6},
     ],
     [
-    {'mode': 'sec_ownrisk'   , 'm': 50, 'p_x': 0.60},
-    {'mode': 'sec_ownrisk'   , 'm': 68, 'p_x': 2.40}
+    {'mode': 'sec_ownrisk'   , 'm': 20, 'p_x': 0.5},
+    {'mode': 'sec_ownrisk'   , 'm': 20, 'p_x': .333},
+    {'mode': 'sec_ownrisk'   , 'm': 20, 'p_x': 0.25},
+    {'mode': 'sec_ownrisk'   , 'm': 20, 'p_x': 0.2},
+    {'mode': 'sec_ownrisk'   , 'm': 40, 'p_x': 1},
+    {'mode': 'sec_ownrisk'   , 'm': 40, 'p_x': .667},
+    {'mode': 'sec_ownrisk'   , 'm': 40, 'p_x': 0.5},
+    {'mode': 'sec_ownrisk'   , 'm': 40, 'p_x': 0.4},
+    {'mode': 'sec_ownrisk'   , 'm': 60, 'p_x': 1.5},
+    {'mode': 'sec_ownrisk'   , 'm': 60, 'p_x': 1},
+    {'mode': 'sec_ownrisk'   , 'm': 60, 'p_x': .75},
+    {'mode': 'sec_ownrisk'   , 'm': 60, 'p_x': 0.6},
     ],
     [
-    {'mode': 'sec_ownrisk_fixedother', 'm': 100, 'p_x': 2, 'a': 20, 'b': 30},
-    {'mode': 'sec_ownrisk_fixedother', 'm': 100, 'p_x': 2, 'a': 30, 'b': 20},
+    {'mode': 'sec_ownrisk_fixedother', 'm': 40, 'p_x': 1,       'a': 5, 'b': 5},
+    {'mode': 'sec_ownrisk_fixedother', 'm': 40, 'p_x': .667,    'a': 5, 'b': 5},
+    {'mode': 'sec_ownrisk_fixedother', 'm': 40, 'p_x': .5,      'a': 5, 'b': 5},
+    {'mode': 'sec_ownrisk_fixedother', 'm': 40, 'p_x': .4,      'a': 5, 'b': 5},
+    {'mode': 'sec_ownrisk_fixedother', 'm': 40, 'p_x': 1,       'a': 23, 'b': 23},
+    {'mode': 'sec_ownrisk_fixedother', 'm': 40, 'p_x': .667,    'a': 23, 'b': 23},
+    {'mode': 'sec_ownrisk_fixedother', 'm': 40, 'p_x': .5,      'a': 23, 'b': 23},
+    {'mode': 'sec_ownrisk_fixedother', 'm': 40, 'p_x': .4,      'a': 23, 'b': 23},
+    {'mode': 'sec_ownrisk_fixedother', 'm': 40, 'p_x': 1,       'a': 60, 'b': 60},
+    {'mode': 'sec_ownrisk_fixedother', 'm': 40, 'p_x': .667,    'a': 60, 'b': 60},
+    {'mode': 'sec_ownrisk_fixedother', 'm': 40, 'p_x': .5,      'a': 60, 'b': 60},
+    {'mode': 'sec_ownrisk_fixedother', 'm': 40, 'p_x': .4,      'a': 60, 'b': 60},
     ],
     [
-    {'mode': 'probability', 'a_x': 70, 'a_y': 10, 'b_x': 10, 'b_y': 80}
+    {'mode': 'probability', 'a_x': 90, 'a_y': 10, 'b_x': 10, 'b_y': 90},
+    {'mode': 'probability', 'a_x': 90, 'a_y': 10, 'b_x': 10, 'b_y': 45},
+    {'mode': 'probability', 'a_x': 45, 'a_y': 10, 'b_x': 10, 'b_y': 90},
+    {'mode': 'probability', 'a_x': 70, 'a_y': 10, 'b_x': 40, 'b_y': 40},
+    {'mode': 'probability', 'a_x': 10, 'a_y': 70, 'b_x': 40, 'b_y': 40},
     ]
 ]
 
@@ -71,21 +128,30 @@ def fill_defaults(data):
     newdata = copy.deepcopy(data)
     for block in newdata:
         for dic in block:
-            if dic['mode'] in ['det_giv', 'sec_1bl_1ch', 'sec_2bl_1ch', 'sec_1bl_2ch', 'sec_ownrisk']:
+            if dic['mode'] in ['sec_1bl_1ch', 'sec_2bl_1ch', 'sec_1bl_2ch', 'sec_ownrisk']:
                 if 'p_y' not in dic:
                     dic['p_y'] = 1
                 if 'prob_a' not in dic:
                     dic['prob_a'] = 50
                 if 'label' not in dic:
-                    dic['label'] = {'x': 'Your Tokens', 'y': 'Partner\'s Tokens'}
+                    dic['label'] = {'x': 'State A (50%)', 'y': 'State B (50%)'}
             elif dic['mode'] in ['sec_ownrisk_fixedother', 'sec_otherrisk_ownfixed']:
                 if 'p_y' not in dic:
                     dic['p_y'] = 1
                 if 'prob_a' not in dic:
                     dic['prob_a'] = 50
                 if 'fixed' not in dic and 'a' in dic and 'b' in dic: #check if this is what he wants here
-                    dic['fixed'] = {'m': dic['a'] + dic['b'], 'p_x': 1, 'p_y': 2, 'a': 10}
+                    dic['fixed'] = {'m': dic['a'] + dic['b'], 'p_x': 1, 'p_y': 1, 'a': dic['a']}
+                if 'label' not in dic:
+                    dic['label'] = {'x': 'State A (50%)', 'y': 'State B (50%)'}
             elif dic['mode'] == 'probability':
+                if 'label' not in dic:
+                    dic['label'] = {'x': 'Your Tokens', 'y': 'Partner\'s Tokens'}
+            elif dic['mode'] in ['det_giv']:
+                if 'p_y' not in dic:
+                    dic['p_y'] = 1
+                if 'prob_a' not in dic:
+                    dic['prob_a'] = 50
                 if 'label' not in dic:
                     dic['label'] = {'x': 'Your Tokens', 'y': 'Partner\'s Tokens'}
     return newdata

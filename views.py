@@ -151,6 +151,8 @@ class Results(Page):
                 dec_b = round(nondecider.in_round(pr2).me_b, 1)
 
         outcome = self.player.in_round(self.player.participant.vars['dynamic_values'].index(self.group.get_player_by_id(1).participant.vars['pr_dict']) + 1).outcome
+        #payoff = self.player.in_round(Constants.num_rounds).payoff
+
         payoff = self.player.in_round(self.player.participant.vars['dynamic_values'].index(self.group.get_player_by_id(1).participant.vars['pr_dict']) + 1).payoff
         
         role = self.player.role()
