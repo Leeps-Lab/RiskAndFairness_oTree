@@ -3,21 +3,21 @@
 
 {% block title %}
     {% if mode == 'probability' %}
-        <h1 style="color:#BFBFBF">PR - Decision {{ counter }}</h1>
+        <h1 style="color:#BFBFBF">Task 1 - Decision {{ counter }}</h1>
     {% elif mode == 'sec_1bl_1ch' %}
-        <h1 style="color:#BFBFBF">S-1B-1C - Decision {{ counter }}</h1>
+        <h1 style="color:#BFBFBF">Task 2 - Decision {{ counter }}</h1>
     {% elif mode == 'sec_2bl_1ch' %}
-        <h1 style="color:#BFBFBF">S-2B-1C - Decision {{ counter }}</h1>
+        <h1 style="color:#BFBFBF">Task 3 - Decision {{ counter }}</h1>
     {% elif mode == 'sec_1bl_2ch' %}
-        <h1 style="color:#BFBFBF">S-1B-2C - Decision {{ counter }}</h1>
+        <h1 style="color:#BFBFBF">Task 4 - Decision {{ counter }}</h1>
     {% elif mode == 'sec_ownrisk' %}
-        <h1 style="color:#BFBFBF">S-OwnRisk - Decision {{ counter }}</h1>
+        <h1 style="color:#BFBFBF">Task 5 - Decision {{ counter }}</h1>
     {% elif mode == 'sec_ownrisk_fixedother' %}
-        <h1 style="color:#BFBFBF">S-OwnRisk-FixedOther - Decision {{ counter }}
+        <h1 style="color:#BFBFBF">Task 6 - Decision {{ counter }}
     {% elif mode == 'sec_otherrisk_ownfixed' %}
-        <h1 style="color:#BFBFBF">S-OtherRisk-OwnFixed - Decision {{ counter }}
+        <h1 style="color:#BFBFBF">Task 7 - Decision {{ counter }}
     {% elif mode == 'det_giv' %}
-         <h1 style="color:#BFBFBF">DG - Decision {{ counter }}
+         <h1 style="color:#BFBFBF">Task 8 - Decision {{ counter }}
     {% endif %}
 {% endblock %}
 
@@ -182,16 +182,34 @@
 
     var appSpecific = getGraphData()
 
+    window.onload = function ()
+      {
+        var roundData = dynamicValues[currentRound - 1]
+        var mode = {{ mode | json}}
+        document.getElementById("arrive_time").value = (new Date()).toISOString();
+        if (mode === 'probability')
+        {
+            document.getElementById("ax").value = roundData.a_x
+            document.getElementById("ay").value = roundData.a_y
+            document.getElementById("bx").value = roundData.b_x
+            document.getElementById("by").value = roundData.b_y
+        }
+        else
+        { 
+            if (mode === 'sec_ownrisk_fixedother' || mode === 'sec_otherrisk_ownfixed')
+            {
+                document.getElementById("a").value = roundData.a
+                document.getElementById("b").value = roundData.b
+            }
+            document.getElementById("m").value = roundData.m
+            document.getElementById("px").value = roundData.p_x
+            document.getElementById("py").value = roundData.p_y
+        }
+      }
+
     </script>
 
     <script src="{% static "js/graph.js" %}"></script>
-
-    <script type="text/javascript">
-      window.onload = function ()
-      {
-        document.getElementById("arrive_time").value = (new Date()).toISOString();
-      }
-    </script>
 
 {% endblock %}
 
@@ -200,6 +218,23 @@
 {% block content %}
 
     {% formfield player.time_Graph with label=None %}
+    
+    {% if mode == 'probability' %}
+        {% formfield player.ax with label=None %}
+        {% formfield player.ay with label=None %}
+        {% formfield player.bx with label=None %}
+        {% formfield player.by with label=None %}
+    {% else %}
+        {% formfield player.m with label=None %}
+        {% formfield player.px with label=None %}
+        {% formfield player.py with label=None %}
+
+        {% if mode == 'sec_ownrisk_fixedother' or mode == 'sec_otherrisk_ownfixed' %}
+            {% formfield player.a with label=None %}
+            {% formfield player.b with label=None %}
+        {% endif %}
+    {% endif %}
+
     <div id="app">
         <div class="container">
             <div class="row">

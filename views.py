@@ -54,13 +54,15 @@ class Graph(Page):
         round_data = dynamic_values[self.round_number - 1]
         if round_data is not None and round_data['mode'] is not None:
             if round_data['mode'] == 'det_giv':
-                return ['mode', 'me_a', 'me_b', 'time_Graph']
+                return ['mode', 'me_a', 'me_b', 'time_Graph', 'm', 'px', 'py']
             elif round_data['mode'] == 'probability':
-                return ['mode', 'prob_a', 'prob_b', 'time_Graph']
+                return ['mode', 'prob_a', 'prob_b', 'time_Graph', 'ax', 'ay', 'bx', 'by']
             elif round_data['mode'] == 'sec_ownrisk':
-                return ['mode', 'me_a', 'me_b', 'prob_a', 'prob_b', 'time_Graph']
+                return ['mode', 'me_a', 'me_b', 'prob_a', 'prob_b', 'time_Graph', 'm', 'px', 'py']
+            elif round_data['mode'] == 'sec_ownrisk_fixedother' or round_data['mode'] == 'sec_otherrisk_ownfixed':
+                return ['mode', 'partner_a', 'partner_b', 'me_a', 'me_b', 'prob_a', 'prob_b', 'time_Graph', 'm', 'px', 'py', 'a', 'b']
             else:
-                return ['mode', 'partner_a', 'partner_b', 'me_a', 'me_b', 'prob_a', 'prob_b', 'time_Graph']
+                return ['mode', 'partner_a', 'partner_b', 'me_a', 'me_b', 'prob_a', 'prob_b', 'time_Graph', 'm', 'px', 'py']
         else:
             return ['mode', 'partner_a', 'partner_b', 'me_a', 'me_b', 'prob_a', 'prob_b', 'time_Graph']
 
@@ -119,6 +121,16 @@ class Results(Page):
         'sec_ownrisk_fixedother': 'S-OwnRisk-FixedOther',
         'sec_otherrisk_ownfixed': 'S-OtherRisk-OwnFixed'}
 
+        modeNum = {
+        'probability': '1',
+        'sec_1bl_1ch': '2',
+        'sec_1bl_2ch': '4',
+        'sec_2bl_1ch': '3',
+        'sec_ownrisk': '5',
+        'det_giv': '8',
+        'sec_ownrisk_fixedother': '6',
+        'sec_otherrisk_ownfixed': '7'}
+
         # variables:
         mode = self.group.get_player_by_id(1).participant.vars['pr_dict']['mode']
 
@@ -154,7 +166,11 @@ class Results(Page):
         #payoff = self.player.in_round(Constants.num_rounds).payoff
 
         payoff = self.player.in_round(self.player.participant.vars['dynamic_values'].index(self.group.get_player_by_id(1).participant.vars['pr_dict']) + 1).payoff
-        
+        if self.player.id_in_group == 1:
+            partner_payoff = self.group.get_player_by_id(2).in_round(self.group.get_player_by_id(2).participant.vars['dynamic_values'].index(self.group.get_player_by_id(1).participant.vars['pr_dict']) + 1).payoff
+        else:
+            partner_payoff = self.group.get_player_by_id(1).in_round(self.group.get_player_by_id(1).participant.vars['dynamic_values'].index(self.group.get_player_by_id(1).participant.vars['pr_dict']) + 1).payoff
+
         role = self.player.role()
 
         if self.player.participant.vars['dynamic_values'].index(self.group.get_player_by_id(1).participant.vars['pr_dict']) > 0:
@@ -167,7 +183,8 @@ class Results(Page):
                 prevmode = self.player.participant.vars['dynamic_values'][self.player.participant.vars['dynamic_values'].index(self.group.get_player_by_id(1).participant.vars['pr_dict']) - counter]['mode']
         else:
             counter = 1
-        return {'mode': modeMap[mode], 'dec_a': dec_a, 'dec_b': dec_b, 'role': role, 'counter': counter, 'outcome': outcome, 'payoff': payoff}
+        
+        return {'mode': modeMap[mode], 'mode_num': modeNum[mode], 'dec_a': dec_a, 'dec_b': dec_b, 'role': role, 'counter': counter, 'outcome': outcome, 'payoff': payoff, 'partner_payoff': partner_payoff}
 
 
 page_sequence = [

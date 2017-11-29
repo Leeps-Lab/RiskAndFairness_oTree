@@ -94,6 +94,16 @@ class Player(BasePlayer):
     time_Graph =  models.TextField(widget=widgets.HiddenInput(attrs={'id': 'arrive_time'}))
     time_Results =  models.TextField(widget=widgets.HiddenInput(attrs={'id': 'arrive_time'}))
 
+    m = models.FloatField(widget=widgets.HiddenInput(attrs={'id': 'm'}))
+    px = models.FloatField(widget=widgets.HiddenInput(attrs={'id': 'px'}))
+    py = models.FloatField(widget=widgets.HiddenInput(attrs={'id': 'py'}))
+    a = models.FloatField(widget=widgets.HiddenInput(attrs={'id': 'a'}))
+    b = models.FloatField(widget=widgets.HiddenInput(attrs={'id': 'b'}))
+    ax = models.FloatField(widget=widgets.HiddenInput(attrs={'id': 'ax'}))
+    ay = models.FloatField(widget=widgets.HiddenInput(attrs={'id': 'ay'}))
+    bx = models.FloatField(widget=widgets.HiddenInput(attrs={'id': 'bx'}))
+    by = models.FloatField(widget=widgets.HiddenInput(attrs={'id': 'by'}))
+
 
     def role(self):
         if self.id_in_group == 1:
@@ -139,7 +149,6 @@ class Group(BaseGroup):
         'det_giv': 'single_given'}
         
         # generate pseudo_random number to compare to probabilities  0 <= rnd <= 1
-        # !!!!  this is now run every round so rnd cant be here. !!!!
         rnd = random.random()
         print('random rnd', rnd)
 

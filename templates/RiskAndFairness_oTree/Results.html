@@ -17,7 +17,7 @@
 {% block content %}
 {% formfield player.time_Results with label=None %}
     <h5>Your role for the experiment was {{ role | json }}.</h5>
-    <h5>The paying round was {{ mode | json }} - Decision {{ counter | json }}.
+    <h5>The paying round was Task {{ mode_num }} - Decision {{ counter }}.
     <hr>
     {% if mode == 'PR' %}
 	<table style="width:60%">
@@ -37,6 +37,10 @@
 			<th>Your earnings</th>
 			<td>{{ payoff | json }} </td>
 		</tr>
+        <tr>
+            <th>Partner's earnings</th>
+            <td>{{ partner_payoff | json }}
+        </tr>
     </table>
     
     {% elif mode == 'DG' %}
@@ -52,6 +56,10 @@
         <tr>
             <th>Your earnings</th>
             <td>{{ payoff | json }} </td>
+        </tr>
+        <tr>
+            <th>Partner's earnings</th>
+            <td>{{ partner_payoff | json }}
         </tr>
     </table>
     
@@ -72,6 +80,10 @@
         <tr>
             <th>Your earnings</th>
             <td>{{ payoff | json }} </td>
+        </tr>
+        <tr>
+            <th>Partner's earnings</th>
+            <td>{{ partner_payoff | json }}
         </tr>
     </table>
     {% endif %}

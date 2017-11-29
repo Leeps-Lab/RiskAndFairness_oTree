@@ -12,91 +12,97 @@ Please use lowercase for dictionary keys in the future // Rachel
 
 import random
 import copy
+import pandas as pd
+
+shuffle = True
 
 data = [
     [
     {'mode': 'det_giv', 'm': 20, 'p_x': .2},
-    {'mode': 'det_giv', 'm': 40, 'p_x': 1},
-    {'mode': 'det_giv', 'm': 40, 'p_x': .667},
-    {'mode': 'det_giv', 'm': 40, 'p_x': .5},
-    {'mode': 'det_giv', 'm': 40, 'p_x': .4},
-    {'mode': 'det_giv', 'm': 60, 'p_x': 1.5},
-    {'mode': 'det_giv', 'm': 60, 'p_x': 1},
-    {'mode': 'det_giv', 'm': 60, 'p_x': .75},
-    {'mode': 'det_giv', 'm': 60, 'p_x': .6},
-    {'mode': 'det_giv', 'm': 80, 'p_x': 2},
-    {'mode': 'det_giv', 'm': 80, 'p_x': 1.333},
-    {'mode': 'det_giv', 'm': 80, 'p_x': 1},
-    {'mode': 'det_giv', 'm': 100, 'p_x': 5},
-    {'mode': 'det_giv', 'm': 100, 'p_x': 2.5},
-    {'mode': 'det_giv', 'm': 100, 'p_x': 1.25}
+    # {'mode': 'det_giv', 'm': 40, 'p_x': 1},
+    # {'mode': 'det_giv', 'm': 40, 'p_x': .667},
+    # {'mode': 'det_giv', 'm': 40, 'p_x': .5},
+    # {'mode': 'det_giv', 'm': 40, 'p_x': .4},
+    # {'mode': 'det_giv', 'm': 60, 'p_x': 1.5},
+    # {'mode': 'det_giv', 'm': 60, 'p_x': 1},
+    # {'mode': 'det_giv', 'm': 60, 'p_x': .75},
+    # {'mode': 'det_giv', 'm': 60, 'p_x': .6},
+    # {'mode': 'det_giv', 'm': 80, 'p_x': 2},
+    # {'mode': 'det_giv', 'm': 80, 'p_x': 1.333},
+    # {'mode': 'det_giv', 'm': 80, 'p_x': 1},
+    # {'mode': 'det_giv', 'm': 100, 'p_x': 5},
+    # {'mode': 'det_giv', 'm': 100, 'p_x': 2.5},
+    # {'mode': 'det_giv', 'm': 100, 'p_x': 1.25}
     ],
     [
     {'mode': 'sec_1bl_1ch', 'm': 20, 'p_x': .5},
-    {'mode': 'sec_1bl_1ch', 'm': 20, 'p_x': .333},
-    {'mode': 'sec_1bl_1ch', 'm': 20, 'p_x': .25},
-    {'mode': 'sec_1bl_1ch', 'm': 20, 'p_x': .2},
-    {'mode': 'sec_1bl_1ch', 'm': 40, 'p_x': 1},
-    {'mode': 'sec_1bl_1ch', 'm': 40, 'p_x': .667},
-    {'mode': 'sec_1bl_1ch', 'm': 40, 'p_x': .5},
-    {'mode': 'sec_1bl_1ch', 'm': 40, 'p_x': .4},
-    {'mode': 'sec_1bl_1ch', 'm': 60, 'p_x': 1.5},
-    {'mode': 'sec_1bl_1ch', 'm': 60, 'p_x': 1},
-    {'mode': 'sec_1bl_1ch', 'm': 60, 'p_x': .75},
-    {'mode': 'sec_1bl_1ch', 'm': 60, 'p_x': .6},
+    # {'mode': 'sec_1bl_1ch', 'm': 20, 'p_x': .333},
+    # {'mode': 'sec_1bl_1ch', 'm': 20, 'p_x': .25},
+    # {'mode': 'sec_1bl_1ch', 'm': 20, 'p_x': .2},
+    # {'mode': 'sec_1bl_1ch', 'm': 40, 'p_x': 1},
+    # {'mode': 'sec_1bl_1ch', 'm': 40, 'p_x': .667},
+    # {'mode': 'sec_1bl_1ch', 'm': 40, 'p_x': .5},
+    # {'mode': 'sec_1bl_1ch', 'm': 40, 'p_x': .4},
+    # {'mode': 'sec_1bl_1ch', 'm': 60, 'p_x': 1.5},
+    # {'mode': 'sec_1bl_1ch', 'm': 60, 'p_x': 1},
+    # {'mode': 'sec_1bl_1ch', 'm': 60, 'p_x': .75},
+    # {'mode': 'sec_1bl_1ch', 'm': 60, 'p_x': .6},
     ],
     [
     {'mode': 'sec_2bl_1ch'   , 'm': 20, 'p_x': 0.5},
-    {'mode': 'sec_2bl_1ch'   , 'm': 20, 'p_x': .333},
-    {'mode': 'sec_2bl_1ch'   , 'm': 20, 'p_x': 0.25},
-    {'mode': 'sec_2bl_1ch'   , 'm': 20, 'p_x': 0.2},
-    {'mode': 'sec_2bl_1ch'   , 'm': 40, 'p_x': 1},
-    {'mode': 'sec_2bl_1ch'   , 'm': 40, 'p_x': .667},
-    {'mode': 'sec_2bl_1ch'   , 'm': 40, 'p_x': 0.5},
-    {'mode': 'sec_2bl_1ch'   , 'm': 40, 'p_x': 0.4},
-    {'mode': 'sec_2bl_1ch'   , 'm': 60, 'p_x': 1.5},
-    {'mode': 'sec_2bl_1ch'   , 'm': 60, 'p_x': 1},
-    {'mode': 'sec_2bl_1ch'   , 'm': 60, 'p_x': .75},
-    {'mode': 'sec_2bl_1ch'   , 'm': 60, 'p_x': 0.6},
+    # {'mode': 'sec_2bl_1ch'   , 'm': 20, 'p_x': .333},
+    # {'mode': 'sec_2bl_1ch'   , 'm': 20, 'p_x': 0.25},
+    # {'mode': 'sec_2bl_1ch'   , 'm': 20, 'p_x': 0.2},
+    # {'mode': 'sec_2bl_1ch'   , 'm': 40, 'p_x': 1},
+    # {'mode': 'sec_2bl_1ch'   , 'm': 40, 'p_x': .667},
+    # {'mode': 'sec_2bl_1ch'   , 'm': 40, 'p_x': 0.5},
+    # {'mode': 'sec_2bl_1ch'   , 'm': 40, 'p_x': 0.4},
+    # {'mode': 'sec_2bl_1ch'   , 'm': 60, 'p_x': 1.5},
+    # {'mode': 'sec_2bl_1ch'   , 'm': 60, 'p_x': 1},
+    # {'mode': 'sec_2bl_1ch'   , 'm': 60, 'p_x': .75},
+    # {'mode': 'sec_2bl_1ch'   , 'm': 60, 'p_x': 0.6},
     ],
     [
     {'mode': 'sec_ownrisk'   , 'm': 20, 'p_x': 0.5},
-    {'mode': 'sec_ownrisk'   , 'm': 20, 'p_x': .333},
-    {'mode': 'sec_ownrisk'   , 'm': 20, 'p_x': 0.25},
-    {'mode': 'sec_ownrisk'   , 'm': 20, 'p_x': 0.2},
-    {'mode': 'sec_ownrisk'   , 'm': 40, 'p_x': 1},
-    {'mode': 'sec_ownrisk'   , 'm': 40, 'p_x': .667},
-    {'mode': 'sec_ownrisk'   , 'm': 40, 'p_x': 0.5},
-    {'mode': 'sec_ownrisk'   , 'm': 40, 'p_x': 0.4},
-    {'mode': 'sec_ownrisk'   , 'm': 60, 'p_x': 1.5},
-    {'mode': 'sec_ownrisk'   , 'm': 60, 'p_x': 1},
-    {'mode': 'sec_ownrisk'   , 'm': 60, 'p_x': .75},
-    {'mode': 'sec_ownrisk'   , 'm': 60, 'p_x': 0.6},
+    # {'mode': 'sec_ownrisk'   , 'm': 20, 'p_x': .333},
+    # {'mode': 'sec_ownrisk'   , 'm': 20, 'p_x': 0.25},
+    # {'mode': 'sec_ownrisk'   , 'm': 20, 'p_x': 0.2},
+    # {'mode': 'sec_ownrisk'   , 'm': 40, 'p_x': 1},
+    # {'mode': 'sec_ownrisk'   , 'm': 40, 'p_x': .667},
+    # {'mode': 'sec_ownrisk'   , 'm': 40, 'p_x': 0.5},
+    # {'mode': 'sec_ownrisk'   , 'm': 40, 'p_x': 0.4},
+    # {'mode': 'sec_ownrisk'   , 'm': 60, 'p_x': 1.5},
+    # {'mode': 'sec_ownrisk'   , 'm': 60, 'p_x': 1},
+    # {'mode': 'sec_ownrisk'   , 'm': 60, 'p_x': .75},
+    # {'mode': 'sec_ownrisk'   , 'm': 60, 'p_x': 0.6},
     ],
     [
     {'mode': 'sec_ownrisk_fixedother', 'm': 40, 'p_x': 1,       'a': 5, 'b': 5},
-    {'mode': 'sec_ownrisk_fixedother', 'm': 40, 'p_x': .667,    'a': 5, 'b': 5},
-    {'mode': 'sec_ownrisk_fixedother', 'm': 40, 'p_x': .5,      'a': 5, 'b': 5},
-    {'mode': 'sec_ownrisk_fixedother', 'm': 40, 'p_x': .4,      'a': 5, 'b': 5},
-    {'mode': 'sec_ownrisk_fixedother', 'm': 40, 'p_x': 1,       'a': 23, 'b': 23},
-    {'mode': 'sec_ownrisk_fixedother', 'm': 40, 'p_x': .667,    'a': 23, 'b': 23},
-    {'mode': 'sec_ownrisk_fixedother', 'm': 40, 'p_x': .5,      'a': 23, 'b': 23},
-    {'mode': 'sec_ownrisk_fixedother', 'm': 40, 'p_x': .4,      'a': 23, 'b': 23},
-    {'mode': 'sec_ownrisk_fixedother', 'm': 40, 'p_x': 1,       'a': 60, 'b': 60},
-    {'mode': 'sec_ownrisk_fixedother', 'm': 40, 'p_x': .667,    'a': 60, 'b': 60},
-    {'mode': 'sec_ownrisk_fixedother', 'm': 40, 'p_x': .5,      'a': 60, 'b': 60},
-    {'mode': 'sec_ownrisk_fixedother', 'm': 40, 'p_x': .4,      'a': 60, 'b': 60},
+    # {'mode': 'sec_ownrisk_fixedother', 'm': 40, 'p_x': .667,    'a': 5, 'b': 5},
+    # {'mode': 'sec_ownrisk_fixedother', 'm': 40, 'p_x': .5,      'a': 5, 'b': 5},
+    # {'mode': 'sec_ownrisk_fixedother', 'm': 40, 'p_x': .4,      'a': 5, 'b': 5},
+    # {'mode': 'sec_ownrisk_fixedother', 'm': 40, 'p_x': 1,       'a': 23, 'b': 23},
+    # {'mode': 'sec_ownrisk_fixedother', 'm': 40, 'p_x': .667,    'a': 23, 'b': 23},
+    # {'mode': 'sec_ownrisk_fixedother', 'm': 40, 'p_x': .5,      'a': 23, 'b': 23},
+    # {'mode': 'sec_ownrisk_fixedother', 'm': 40, 'p_x': .4,      'a': 23, 'b': 23},
+    # {'mode': 'sec_ownrisk_fixedother', 'm': 40, 'p_x': 1,       'a': 60, 'b': 60},
+    # {'mode': 'sec_ownrisk_fixedother', 'm': 40, 'p_x': .667,    'a': 60, 'b': 60},
+    # {'mode': 'sec_ownrisk_fixedother', 'm': 40, 'p_x': .5,      'a': 60, 'b': 60},
+    # {'mode': 'sec_ownrisk_fixedother', 'm': 40, 'p_x': .4,      'a': 60, 'b': 60},
     ],
     [
     {'mode': 'probability', 'a_x': 90, 'a_y': 10, 'b_x': 10, 'b_y': 90},
-    {'mode': 'probability', 'a_x': 90, 'a_y': 10, 'b_x': 10, 'b_y': 45},
-    {'mode': 'probability', 'a_x': 45, 'a_y': 10, 'b_x': 10, 'b_y': 90},
-    {'mode': 'probability', 'a_x': 70, 'a_y': 10, 'b_x': 40, 'b_y': 40},
-    {'mode': 'probability', 'a_x': 10, 'a_y': 70, 'b_x': 40, 'b_y': 40},
+    # {'mode': 'probability', 'a_x': 90, 'a_y': 10, 'b_x': 10, 'b_y': 45},
+    # {'mode': 'probability', 'a_x': 45, 'a_y': 10, 'b_x': 10, 'b_y': 90},
+    # {'mode': 'probability', 'a_x': 70, 'a_y': 10, 'b_x': 40, 'b_y': 40},
+    # {'mode': 'probability', 'a_x': 10, 'a_y': 70, 'b_x': 40, 'b_y': 40},
     ]
 ]
 
 def shuffle(data):
+    if shuffle == False:
+        return data
+
     shuffled_data = []
     # shuffle each dict within each block
     for block in data:
@@ -109,6 +115,21 @@ def shuffle(data):
 
 def flatten(shuffled_data):
     return [period for block in shuffled_data for period in block]
+
+# converts config data into a pandas dataframe, for exporting to the visualization fcn
+def export_data(data, session_name):
+    cols = ['mode', 'm', 'p_x', 'a', 'b', 'a_x', 'a_y', 'b_x', 'b_y']
+    df = pd.DataFrame(columns=cols)
+    for period in flatten(data):
+        for key in period:
+            # convert all dict values to lists to allow creation of dataframe
+            period[key] = [period[key]]
+        df1 = pd.DataFrame(period)
+        df = df.append(df1)
+
+    df.to_csv('visualization/data/config_' + session_name + '.csv')
+
+
 
 def checkValidity(flattened_data):
     for period in flattened_data:
