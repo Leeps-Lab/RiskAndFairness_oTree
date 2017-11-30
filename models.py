@@ -123,18 +123,47 @@ class Player(BasePlayer):
             
 class Group(BaseGroup):
 
+    # sets the shuffled dynamic values for each player and stores them in the participant.vars dictionary,
+    # which every participant has
+    def set_dv(self, chosen_round=None):
+        p1 = self.get_player_by_id(1)
+        p2 = self.get_player_by_id(2)
+        
+        # there is no group.vars dictionary, so we use player 1's participant.vars dict to store group data
 
-    def set_dv(self):
-        self.get_player_by_id(1).participant.vars['paying_round'] = random.randint(1, Constants.num_rounds)
-        print('GROUP PAYING ROUND', self.get_player_by_id(1).participant.vars['paying_round'])
-        self.get_player_by_id(1).participant.vars['pr_dict'] = config.flatten(Constants.dynamic_values)[self.get_player_by_id(1).participant.vars['paying_round'] - 1]
-        print('\nPR DICT', self.get_player_by_id(1).participant.vars['pr_dict'])
-        self.get_player_by_id(1).participant.vars['dynamic_values'] = config.flatten(config.shuffle(Constants.dynamic_values))
-        print('\nPLAYER 1 PAYING ROUND', self.get_player_by_id(1).participant.vars['dynamic_values'].index(self.get_player_by_id(1).participant.vars['pr_dict']) + 1)
-        print('\nPLAYER 1 DV', self.get_player_by_id(1).participant.vars['dynamic_values'])
-        self.get_player_by_id(2).participant.vars['dynamic_values'] = config.flatten(config.shuffle(Constants.dynamic_values))
-        print('\nPLAYER 2 PAYING ROUND', self.get_player_by_id(2).participant.vars['dynamic_values'].index(self.get_player_by_id(1).participant.vars['pr_dict']) + 1)
-        print('\nPLAYER 2 DV', self.get_player_by_id(2).participant.vars['dynamic_values'])
+        # this is the paying round for the group -- a random int between 1 and the number of rounds that 
+        # corresponds to a dictionary in dynamic_values. It is stored in player 1's participant.vars
+        if chosen_round == None:
+            p1.participant.vars['group_pr'] = random.randint(1, Constants.num_rounds)
+        else:
+            p1.participant.vars['group_pr'] = chosen_round
+        
+        # this is the dictionary at that line (the data for the paying round). Stored in player 1's
+        # participant.vars
+        p1.participant.vars['pr_dict'] = config.flatten(Constants.dynamic_values)[p1.participant.vars['group_pr'] - 1]
+        
+        # the shuffled dynamic_values for player 1
+        p1.participant.vars['dynamic_values'] = config.flatten(config.shuffle(Constants.dynamic_values))
+        
+        # player 1's paying round. Retrieved by getting the index of pr_dict in player 1's dynamic values
+        p1.participant.vars['pr'] = p1.participant.vars['dynamic_values'].index(p1.participant.vars['pr_dict']) + 1
+
+        # the shuffled dynamic_values for player 2
+        p2.participant.vars['dynamic_values'] = config.flatten(config.shuffle(Constants.dynamic_values))
+
+        # player 2's paying round. Retrieved by getting the index of pr_dict in player 2's dynamic values
+        p2.participant.vars['pr'] = p2.participant.vars['dynamic_values'].index(p1.participant.vars['pr_dict']) + 1
+        
+        # --------------------------------------------------------------------------------------------------------------
+        # some print statements for checking the group paying round, the round data at that round,
+        # each player's paying round, each player's dynamic values
+        # print('GROUP PAYING ROUND', p1.participant.vars['group_pr'])
+        # print('\nPR DICT', p1.participant.vars['pr_dict'])
+        # print('\nPLAYER 1 PAYING ROUND', p1.participant.vars['pr])
+        # print('\nPLAYER 1 DV', p1.participant.vars['dynamic_values'])
+        # print('\nPLAYER 2 PAYING ROUND', p2.participant.vars['pr])
+        # print('\nPLAYER 2 DV', p2.participant.vars['dynamic_values'])
+        # --------------------------------------------------------------------------------------------------------------
 
     def set_payoffs(self):
 
@@ -152,8 +181,8 @@ class Group(BaseGroup):
         rnd = random.random()
         print('random rnd', rnd)
 
-        pr = self.get_player_by_id(1).participant.vars['dynamic_values'].index(self.get_player_by_id(1).participant.vars['pr_dict']) + 1
-        pr2 = self.get_player_by_id(2).participant.vars['dynamic_values'].index(self.get_player_by_id(1).participant.vars['pr_dict']) + 1
+        pr = self.get_player_by_id(1).participant.vars['pr']
+        pr2 = self.get_player_by_id(2).participant.vars['pr']
 
         decider = self.get_player_by_role('Decider').in_round(pr)
         nondecider = self.get_player_by_role('Non-Decider').in_round(pr2)
@@ -192,15 +221,21 @@ class Group(BaseGroup):
             nondecider.outcome = decider.outcome
         elif modeMap[round_data['mode']] == 'single_given':
             decider.payoff = decider.me_a
-            nondecider.payoff = decider.me_b # this is really partner_a, but the javascript automatically exports this so its a hacky but easy and clean way to do it
+            nondecider.payoff = decider.me_b # this is really partner_a
 
 class Subsession(BaseSubsession):
     def creating_session(self):
         if self.round_number == 1:
             self.group_randomly()
+            chosen_rounds = config.getChosenRounds()
+            i = 0
+            # the number of groups needs to be the same as the number of elements in chosen_rounds
             for group in self.get_groups():
-                group.set_dv()
-
+                if chosen_rounds == None:
+                    group.set_dv()
+                else:
+                    group.set_dv(chosen_rounds[i])
+                    i += 1
         else:
             self.group_like_round(1)
 

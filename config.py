@@ -14,11 +14,19 @@ import random
 import copy
 import pandas as pd
 
+# if you want to turn off shuffling, change this to False
 shuffle = True
+
+# this will be a list, each element of which is the paying round for a group.
+# With the default of 16 participants, there will be 8 groups, so chosen_rounds
+# should never have more than 8 elements.
+# If chosen rounds is empty, models.py will randomly assign the chosen round for each group.
+# indexing starts at 1, not 0
+chosen_rounds = [2]
 
 data = [
     [
-    {'mode': 'det_giv', 'm': 20, 'p_x': .2},
+    #{'mode': 'det_giv', 'm': 20, 'p_x': .2},
     # {'mode': 'det_giv', 'm': 40, 'p_x': 1},
     # {'mode': 'det_giv', 'm': 40, 'p_x': .667},
     # {'mode': 'det_giv', 'm': 40, 'p_x': .5},
@@ -35,7 +43,7 @@ data = [
     # {'mode': 'det_giv', 'm': 100, 'p_x': 1.25}
     ],
     [
-    {'mode': 'sec_1bl_1ch', 'm': 20, 'p_x': .5},
+    #{'mode': 'sec_1bl_1ch', 'm': 20, 'p_x': .5},
     # {'mode': 'sec_1bl_1ch', 'm': 20, 'p_x': .333},
     # {'mode': 'sec_1bl_1ch', 'm': 20, 'p_x': .25},
     # {'mode': 'sec_1bl_1ch', 'm': 20, 'p_x': .2},
@@ -49,7 +57,7 @@ data = [
     # {'mode': 'sec_1bl_1ch', 'm': 60, 'p_x': .6},
     ],
     [
-    {'mode': 'sec_2bl_1ch'   , 'm': 20, 'p_x': 0.5},
+    #{'mode': 'sec_2bl_1ch'   , 'm': 20, 'p_x': 0.5},
     # {'mode': 'sec_2bl_1ch'   , 'm': 20, 'p_x': .333},
     # {'mode': 'sec_2bl_1ch'   , 'm': 20, 'p_x': 0.25},
     # {'mode': 'sec_2bl_1ch'   , 'm': 20, 'p_x': 0.2},
@@ -182,6 +190,12 @@ def getDynamicValues():
     if checkValidity(flatten(dynamic_values)) == 0:
         return 0
     return dynamic_values
+
+def getChosenRounds():
+    if len(chosen_rounds) == 0:
+        return None
+    else:
+        return chosen_rounds
 
 
 # Syntax for data dictionaries
