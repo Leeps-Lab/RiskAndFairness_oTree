@@ -1,0 +1,29 @@
+{% extends "global/Base.html" %}
+{% load staticfiles otree %}
+
+{% block scripts %}
+    <script type="text/javascript">
+      window.onload = function () 
+      {
+        document.getElementById("arrive_time").value = (new Date()).toISOString();
+      }
+    </script>
+{% endblock %}
+
+
+{% block content %}
+    {% formfield player.time_TaskInstructions label=None %}
+
+    {% if mode == 'probability' %}
+        {% include Constants.instructions_probability %}
+    {% elif sec0 == 'sec' %}
+        {% include Constants.instructions_sec %}
+    {% elif mode == 'det_giv' %}
+        {% include Constants.instructions_det_giv %}
+    {% endif %}
+
+    {% include Constants.trial_period %}
+
+    {% next_button %}
+
+{% endblock %}
