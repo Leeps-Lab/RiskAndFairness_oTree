@@ -152,7 +152,7 @@ def numberOfPeriod():
     return len(flatten(data))
 
 
-# CHECK WHAT HE WANTS FOR PROBABILITY AND FIXED FOR ALT OWNRISKS
+# CHECK WHAT HE WANTS FOR PROBABILITY AND FIXED FOR ALT OWNRISKSa
 def fill_defaults(data):
     newdata = copy.deepcopy(data)
     for block in newdata:
