@@ -7,6 +7,7 @@ Contributors:
 */
 
 // creates a new Vue app, that holds all information related to the graph
+
 var vm = new Vue({
     components: {
         rangeSlider: RangeSlider
@@ -16,6 +17,7 @@ var vm = new Vue({
     data: function() {
         // returns an object containing all initial values for the graph's data
         // all properties in data are globally available to the html document
+
         return Object.assign({
             // DO NOT CHANGE THE FOLLOWING
             circleRadius: 8,
@@ -304,6 +306,7 @@ var vm = new Vue({
 
             this.graph.svg.append('g')
             .attr('class', 'lightgray')
+
             .attr('transform', 'translate(0, ' + this.dimension.height + ')')
             .call(this.graph.xAxis)
 
@@ -314,6 +317,7 @@ var vm = new Vue({
 
             this.graph.svg.append('g')
             .attr('class', 'lightgray')
+
             .call(this.graph.yAxis)
 
             this.graph.svg.append('text')
