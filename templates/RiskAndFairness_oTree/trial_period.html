@@ -3,21 +3,21 @@
 
 {% block title %}
     {% if mode == 'probability' %}
-        <h1 style="color:#BFBFBF">Task 1 - Trial</h1>
+        <h1 style="color:#BFBFBF">Task 1 - Decision {{ counter }}</h1>
     {% elif mode == 'sec_1bl_1ch' %}
-        <h1 style="color:#BFBFBF">Task 2 - Trial</h1>
+        <h1 style="color:#BFBFBF">Task 2 - Decision {{ counter }}</h1>
     {% elif mode == 'sec_2bl_1ch' %}
-        <h1 style="color:#BFBFBF">Task 3 - Trial</h1>
+        <h1 style="color:#BFBFBF">Task 3 - Decision {{ counter }}</h1>
     {% elif mode == 'sec_1bl_2ch' %}
-        <h1 style="color:#BFBFBF">Task 4 - Trial</h1>
+        <h1 style="color:#BFBFBF">Task 4 - Decision {{ counter }}</h1>
     {% elif mode == 'sec_ownrisk' %}
-        <h1 style="color:#BFBFBF">Task 5 - Trial</h1>
+        <h1 style="color:#BFBFBF">Task 5 - Decision {{ counter }}</h1>
     {% elif mode == 'sec_ownrisk_fixedother' %}
-        <h1 style="color:#BFBFBF">Task 6 - Trial</h1>
+        <h1 style="color:#BFBFBF">Task 6 - Decision {{ counter }}</h1>
     {% elif mode == 'sec_otherrisk_ownfixed' %}
-        <h1 style="color:#BFBFBF">Task 7 - Trial</h1>
+        <h1 style="color:#BFBFBF">Task 7 - Decision {{ counter }}</h1>
     {% elif mode == 'det_giv' %}
-         <h1 style="color:#BFBFBF">Task 8 - Trial</h1>
+         <h1 style="color:#BFBFBF">Task 8 - Decision {{ counter }}</h1>
     {% endif %}
 {% endblock %}
 
@@ -190,10 +190,9 @@
 
     window.onload = function ()
       {
-        console.log("WINDOW LOADED")
         var roundData = dynamicValues[currentRound - 1]
         var mode = {{ mode | json}}
-        //document.getElementById("arrive_time").value = (new Date()).toISOString();
+        document.getElementById("arrive_time").value = (new Date()).toISOString();
         if (mode === 'probability')
         {
             document.getElementById("ax").value = roundData.a_x
@@ -223,6 +222,36 @@
 
 
 {% block content %}
+
+    {% comment %}
+
+    {% formfield player.time_TaskInstructions label=None %}
+
+    {% if mode == 'probability' %}
+        {% include Constants.instructions_probability %}
+    {% elif sec0 == 'sec' %}
+        {% include Constants.instructions_sec %}
+    {% elif mode == 'det_giv' %}
+        {% include Constants.instructions_det_giv %}
+    {% endif %}
+
+   
+    {% if mode == 'probability' %}
+        {% formfield player.ax label=None %}
+        {% formfield player.ay label=None %}
+        {% formfield player.bx label=None %}
+        {% formfield player.by label=None %}
+    {% else %}
+        {% formfield player.m label=None %}
+        {% formfield player.px label=None %}
+        {% formfield player.py label=None %}
+
+        {% if mode == 'sec_ownrisk_fixedother' or mode == 'sec_otherrisk_ownfixed' %}
+            {% formfield player.a label=None %}
+            {% formfield player.b label=None %}
+        {% endif %}
+    {% endif %}
+    {% endcomment %}
 
     <div id="app">
         <div class="container">
@@ -342,18 +371,22 @@
 
 
     <div>
-        <button id="realize" type="button">Realize Outcome</button>
+        <button id="go" type="button" style="float: right;">Go</button>
     </div>
 
 
     <script type="text/javascript">
     $(document).ready(function() {
-        $('realize').click(function() {
-            console.log("BUTTON CLICKED")
+        $('go').click(function() {
+            
             }
         })
     })
     </script>
+
+    {% comment %}
+    {% next_button %}
+    {% endcomment %}
 
 {% endblock %}
 
