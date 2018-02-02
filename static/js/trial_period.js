@@ -1,7 +1,7 @@
 /*
 Principal maintainer: Rachel Chen <me@rachelchen.me>
 Contributors:
-    Eli Pandolfo, epandolf@ucsc.edu\
+    Eli Pandolfo, epandolf@ucsc.edu
 
 * 1-15-18, Eli Pandolfo: add comments to code. My understanding is limited so they might not all be accurate.
 */
@@ -61,7 +61,7 @@ var vm = new Vue({
             }
         }
     },
-    // object that watches for changes and then changes properties accordingly?
+    // object that watches for changes and then changes properties accordingly
     watch: {
         'prob.a': function(val, old) {
 

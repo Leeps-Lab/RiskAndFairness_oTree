@@ -214,21 +214,54 @@
         }
       }
 
+    function test_outcome()
+    {
+        //make it pick a random value, assign payoffs, then set the inner html of 
+        // outcome, you_payoff, partner_payoff
+
+        var roundData = dynamicValues[currentRound - 1]
+        var mode = {{ mode | json }}
+        var rand = Math.random()
+
+        if (mode === 'probability')
+        {
+            if (rand * 100 < vm.prob.a)
+            {
+                document.getElementById('outcome').innerHTML='A'
+                document.getElementById('you_payoff').innerHTML=roundData['a_x']
+                document.getElementById('partner_payoff').innerHTML=roundData['a_y']
+            }
+            else
+            {
+                document.getElementById('outcome').innerHTML='B'
+                document.getElementById('you_payoff').innerHTML=roundData['b_x']
+                document.getElementById('partner_payoff').innerHTML=roundData['b_y']
+            }
+        }
+        else
+        {
+            if (rand * 100 < roundData['prob_a'])
+            {
+                document.getElementById('outcome').innerHTML='A'
+                document.getElementById('you_payoff').innerHTML=vm.selected[0].x
+                if (mode !== 'single')
+                    document.getElementById('partner_payoff').innerHTML=vm.selected[1].x
+            }
+            else
+            {
+                document.getElementById('outcome').innerHTML='B'
+                document.getElementById('you_payoff').innerHTML=vm.selected[0].y
+                if (mode !== 'single')
+                    document.getElementById('partner_payoff').innerHTML=vm.selected[1].y
+            }
+        }
+        document.getElementById('results').style.display='block'
+        return false
+    }
+
     </script>
 
     <script src="{% static "js/trial_period.js" %}"></script>
-
-    <script>
-
-        function test_outcome()
-        {
-            //make it pick a random value, assign payoffs, then set the inner html of 
-            // outcome, you_payoff, partner_payoff
-
-            document.getElementById('results').style.display='block'
-            return false
-        }
-    </script>
 
 {% endblock %}
 
@@ -322,7 +355,7 @@
                         </table>
                     </div>
                 </div>
-                <div class="col-md-6" v-if="mode === 'single_given'">
+                <div class="col-md-5" v-if="mode === 'single_given'">
                     <h5>This is your choice:</h5>
                     <div class="row col-md-6" style="margin-top: 50px">
                         <table class="table table-bordered table-condensed small">
@@ -341,7 +374,7 @@
                         </table>
                     </div>
                 </div>
-                <div class="col-md-6" v-if="mode !== 'probability' && mode !== 'single_given'">
+                <div class="col-md-5" v-if="mode !== 'probability' && mode !== 'single_given'">
                     <h5>This is your choice:</h5>
                     <div class="row col-md-6" style="margin-top: 50px">
                         <table class="table table-bordered table-condensed small">
@@ -394,7 +427,7 @@
 
 
     <div>
-        <button id="go" type="button" onclick="test_outcome()">Test Outcome</button>
+        <button id="go" type="button" class="btn-large" onclick="test_outcome()">Test Outcome</button>
     </div>
 
 

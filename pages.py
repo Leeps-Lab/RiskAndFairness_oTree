@@ -35,7 +35,8 @@ class TaskInstructions(Page):
 
     def vars_for_template(self):
         dynamic_values = self.player.participant.vars['dynamic_values']
-        mode = self.player.participant.vars['dynamic_values'][self.round_number - 1]['mode']
+        round_data = dynamic_values[self.round_number - 1]
+        mode = round_data['mode']
         # this will be used in the conditional display of instructions
         return {'dynamic_values': dynamic_values,
                 'mode': mode,
