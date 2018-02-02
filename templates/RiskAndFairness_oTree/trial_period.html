@@ -220,7 +220,7 @@
         // outcome, you_payoff, partner_payoff
 
         var roundData = dynamicValues[currentRound - 1]
-        var mode = {{ mode | json }}
+        var mode = getMode()
         var rand = Math.random()
 
         if (mode === 'probability')
