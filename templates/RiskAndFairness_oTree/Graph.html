@@ -244,8 +244,8 @@
     <div id="app">
         <div class="container">
             <div class="row">
-                <div class="graph col-md-6"></div>
-                <div class="col-md-6" v-if="mode === 'probability'">
+                <div class="graph col-md-7"></div>
+                <div class="col-md-5" v-if="mode === 'probability'">
                     <h5>This is your choice:</h5>
                     <div class="row" style="margin-top: 50px">
                         <range-slider
@@ -256,20 +256,23 @@
                         v-model="prob.a">
                         </range-slider>
                     </div>
+
                     <div class="row">
-                        <div class="col-md-3" v-html="prob.a.toFixed(0) + '%'">
-                        </div>
-                        <div class="col-md-3" style="text-align: right;" v-html="prob.b.toFixed(0) + '%'">
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-3">
+                        <div class="col-md-4">
                             Probability of A:
                         </div>
-                        <div class="col-md-3" style="text-align: right;">
+                        <div class="col-md-4">
                             Probability of B:
                         </div>
                     </div>
+
+                    <div class="row">
+                        <div class="col-md-4" v-html="prob.a.toFixed(0) + '%'">
+                        </div>
+                        <div class="col-md-4" v-html="prob.b.toFixed(0) + '%'">
+                        </div>
+                    </div>
+                    
                     <div class="row col-md-6" style="margin-top: 50px">
                         <table class="table table-bordered table-condensed small">
                             <thead>
@@ -294,7 +297,7 @@
                         </table>
                     </div>
                 </div>
-                <div class="col-md-6" v-if="mode === 'single_given'">
+                <div class="col-md-5" v-if="mode === 'single_given'">
                     <h5>This is your choice:</h5>
                     <div class="row col-md-6" style="margin-top: 50px">
                         <table class="table table-bordered table-condensed small">
@@ -313,7 +316,7 @@
                         </table>
                     </div>
                 </div>
-                <div class="col-md-6" v-if="mode !== 'probability' && mode !== 'single_given'">
+                <div class="col-md-5" v-if="mode !== 'probability' && mode !== 'single_given'">
                     <h5>This is your choice:</h5>
                     <div class="row col-md-6" style="margin-top: 50px">
                         <table class="table table-bordered table-condensed small">
