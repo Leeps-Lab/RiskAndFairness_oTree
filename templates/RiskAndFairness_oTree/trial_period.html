@@ -38,10 +38,10 @@
         width: 290px !important;
     }
     .lightgray line {
-        stroke: LightGray;
+        stroke: #f2f2f2;
     }
     .lightgray path {
-        stroke: LightGray;
+        stroke: #f2f2f2;
     }
     </style>
 {% endblock %}
@@ -335,9 +335,9 @@
                         <table class="table table-bordered table-condensed small">
                             <thead>
                                 <tr>
-                                    <td style = "text-align: left;">Outcome Probability (%)</td>
-                                    <td style = "text-align: center;" ><b style="color: blue">Your Tokens<b></td>
-                                    <td style = "text-align: center;" ><b style="color: orange">Partner's Tokens<b></td>
+                                    <td width="34%" sstyle = "text-align: left;">Outcome Probability (%)</td>
+                                    <td width="33%" sstyle = "text-align: center;" ><b style="color: blue">Your Tokens<b></td>
+                                    <td width="33%" sstyle = "text-align: center;" ><b style="color: orange">Partner's Tokens<b></td>
                                 </tr>
                             </thead>
                             <tbody>
@@ -380,16 +380,16 @@
                         <table class="table table-bordered table-condensed small">
                             <thead>
                                 <tr>
-                                    <td style = "text-align: left;">State: Probability (%)</td>
-                                    <td style = "text-align: center; color: blue">Your Tokens</td>
-                                    <td style = "text-align: center; color: orange" v-if="mode !== 'single'">Partner's Tokens</td>
+                                    <td width="34%" style = "text-align: left;">State: Probability (%)</td>
+                                    <td width="33%" style = "text-align: center; color: blue">Your Tokens</td>
+                                    <td width="33%" style = "text-align: center; color: orange" v-if="mode !== 'single'">Partner's Tokens</td>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td style = "text-align: center;" v-html="'State A: ' + prob.a.toFixed(0) + '%'"></td>
-                                    <td style = "text-align: center; color: blue" v-html="selected[0].x"></td>
-                                    <td style = "text-align: center; color: orange" v-html="selected[1].x" v-if="mode !== 'single'"></td>
+                                    <td  style = "text-align: center;" v-html="'State A: ' + prob.a.toFixed(0) + '%'"></td>
+                                    <td  style = "text-align: center; color: blue" v-html="selected[0].x"></td>
+                                    <td  style = "text-align: center; color: orange" v-html="selected[1].x" v-if="mode !== 'single'"></td>
                                 </tr>
                                 <tr>
                                     <td style = "text-align: center;" v-html="'State B: ' + prob.b.toFixed(0) + '%'"></td>
@@ -406,9 +406,9 @@
                         <table class="table table-bordered table-condensed small">
                             <thead>
                                 <tr>
-                                    <td style = "text-align: left;">Realized Outcome</td>
-                                    <td style = "text-align: center; color: blue">Your Payoff</td>
-                                    <td style = "text-align: center; color: orange" v-if="mode !== 'single'">Partner's Payoff</td>
+                                    <td width="34%" style = "text-align: left;">Realized Outcome</td>
+                                    <td width="33%" style = "text-align: center; color: blue">Your Payoff</td>
+                                    <td width="33%" style = "text-align: center; color: orange" v-if="mode !== 'single'">Partner's Payoff</td>
                                 </tr>
                             </thead>
                             <tbody>

@@ -300,7 +300,12 @@ var vm = new Vue({
             this.graph.xAxis = d3.axisBottom(this.graph.x).tickValues(xTicks).tickSize([-this.dimension.height]);
             this.graph.yAxis = d3.axisLeft(this.graph.y).tickValues(yTicks).tickSize([-this.dimension.width]);
 
-            this.graph.x
+            // for(var index = 0; index < this.equations.length; index++)
+            // {
+            //     this.graph.svg.append('path')
+            //     .style('stroke', 'Teal')
+            //     .attr('d', this.graph.line(this.graphData[index]))       
+            // }
 
             this.graph.svg.append('g')
             .attr('class', 'lightgray')

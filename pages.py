@@ -45,7 +45,7 @@ class TaskInstructions(Page):
                 'sec2': '' if mode in ['probability', 'det_giv', 'sec_ownrisk'] else mode.split('_')[2]
                 }
 
-class Graph(Page):
+class Task(Page):
     form_model = 'player'
 
     def get_form_fields(self):
@@ -193,7 +193,7 @@ class Results(Page):
 page_sequence = [
     InitialInstructions,
     TaskInstructions,
-    Graph,
+    Task,
     ResultsWaitPage,
     Results
 ]
