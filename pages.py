@@ -34,15 +34,18 @@ class TaskInstructions(Page):
         return self.round_number == 1 or mode != prevmode
 
     def vars_for_template(self):
-        mode = self.player.participant.vars['dynamic_values'][self.round_number - 1]['mode']
+        dynamic_values = self.player.participant.vars['dynamic_values']
+        round_data = dynamic_values[self.round_number - 1]
+        mode = round_data['mode']
         # this will be used in the conditional display of instructions
-        return {'mode': mode,
+        return {'dynamic_values': dynamic_values,
+                'mode': mode,
                 'sec0': '' if mode in ['probability', 'det_giv'] else mode.split('_')[0],
                 'sec1': '' if mode in ['probability', 'det_giv'] else mode.split('_')[1],
                 'sec2': '' if mode in ['probability', 'det_giv', 'sec_ownrisk'] else mode.split('_')[2]
                 }
 
-class Graph(Page):
+class Task(Page):
     form_model = 'player'
 
     def get_form_fields(self):
@@ -190,7 +193,7 @@ class Results(Page):
 page_sequence = [
     InitialInstructions,
     TaskInstructions,
-    Graph,
+    Task,
     ResultsWaitPage,
     Results
 ]

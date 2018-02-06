@@ -1,7 +1,7 @@
 /*
 Principal maintainer: Rachel Chen <me@rachelchen.me>
 Contributors:
-    Eli Pandolfo, epandolf@ucsc.edu\
+    Eli Pandolfo, epandolf@ucsc.edu
 
 * 1-15-18, Eli Pandolfo: add comments to code. My understanding is limited so they might not all be accurate.
 */
@@ -61,7 +61,7 @@ var vm = new Vue({
             }
         }
     },
-    // object that watches for changes and then changes properties accordingly?
+    // object that watches for changes and then changes properties accordingly
     watch: {
         'prob.a': function(val, old) {
 
@@ -300,12 +300,11 @@ var vm = new Vue({
             this.graph.xAxis = d3.axisBottom(this.graph.x).tickValues(xTicks).tickSize([-this.dimension.height]);
             this.graph.yAxis = d3.axisLeft(this.graph.y).tickValues(yTicks).tickSize([-this.dimension.width]);
 
-            this.graph.x
-
             this.graph.svg.append('g')
             .attr('class', 'lightgray')
             .attr('transform', 'translate(0, ' + this.dimension.height + ')')
             .call(this.graph.xAxis)
+            //add lines figure out how from next fcn
 
             this.graph.svg.append('text')
             .attr('transform', 'translate(' + (this.dimension.width / 2) + ', ' + (this.dimension.height + this.margin.top + 15) + ')')

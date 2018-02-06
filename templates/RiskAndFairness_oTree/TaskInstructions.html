@@ -13,7 +13,7 @@
 
 {% block content %}
     {% formfield player.time_TaskInstructions label=None %}
-
+    
     {% if mode == 'probability' %}
         {% include Constants.instructions_probability %}
     {% elif sec0 == 'sec' %}
@@ -21,6 +21,8 @@
     {% elif mode == 'det_giv' %}
         {% include Constants.instructions_det_giv %}
     {% endif %}
+   
+    {% include Constants.trial_period %}
 
     {% next_button %}
 

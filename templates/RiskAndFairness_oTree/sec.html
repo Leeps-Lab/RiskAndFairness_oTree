@@ -17,7 +17,7 @@
             {% elif mode == 'sec_ownrisk' %}
                 Instructions - Task 5
             {% elif mode == 'sec_ownrisk_fixedother' %}
-                Instrucitons - Task 6
+                Instructions - Task 6
             {% elif mode == 'sec_otherrisk_ownfixed' %}
                 Instructions - Task 7
             {% endif %}
@@ -99,7 +99,7 @@
         
     {% endif %}
 
-
+{% comment %}
 {# IMAGES #}
             {% if mode == 'sec_1bl_1ch' %}
                 <img src="{% static "sec_1bl_1ch_1.png" %}" width="500" align="center"/>
@@ -114,4 +114,6 @@
             {% elif mode == 'sec_otherrisk_ownfixed' %}
                 <img src="{% static "sec_otherrisk_ownfixed.png" %}" width="500" align="center"/>
             {% endif %}
+{% endcomment %}
 
+</div>
