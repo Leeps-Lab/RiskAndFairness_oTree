@@ -1,13 +1,12 @@
 /*
 Principal maintainer: Rachel Chen <me@rachelchen.me>
 Contributors:
-    Eli Pandolfo, epandolf@ucsc.edu\
+    Eli Pandolfo, epandolf@ucsc.edu
 
 * 1-15-18, Eli Pandolfo: add comments to code. My understanding is limited so they might not all be accurate.
 */
 
 // creates a new Vue app, that holds all information related to the graph
-
 var vm = new Vue({
     components: {
         rangeSlider: RangeSlider
@@ -17,7 +16,6 @@ var vm = new Vue({
     data: function() {
         // returns an object containing all initial values for the graph's data
         // all properties in data are globally available to the html document
-
         return Object.assign({
             // DO NOT CHANGE THE FOLLOWING
             circleRadius: 8,
@@ -63,7 +61,7 @@ var vm = new Vue({
             }
         }
     },
-    // object that watches for changes and then changes properties accordingly?
+    // object that watches for changes and then changes properties accordingly
     watch: {
         'prob.a': function(val, old) {
 
@@ -287,6 +285,16 @@ var vm = new Vue({
 
         },
         drawAxis: function() {
+
+            if (this.scale.type === 'dynamic') {
+                this.graph.x.domain([0, this.graph.maxX])
+                this.graph.y.domain([0, this.graph.maxY])
+            }else{
+                this.graph.x.domain([0, this.scale.max])
+                this.graph.y.domain([0, this.scale.max])
+            }
+
+
             var tickStep = 10;
             var xTicks = [], x = 0, yTicks = [], y = 0;
             do {
@@ -299,21 +307,25 @@ var vm = new Vue({
                 y += tickStep;
             } while(y <= (this.scale.type === 'fixed' ? this.scale.max : this.graph.maxY))
 
-            this.graph.xAxis = d3.axisBottom(this.graph.x).tickValues(xTicks).tickSize([-this.dimension.height]);
-            this.graph.yAxis = d3.axisLeft(this.graph.y).tickValues(yTicks).tickSize([-this.dimension.width]);
+            for (var i = 0; i < xTicks.length; i++) 
+            {
+                this.graph.svg.append('path')
+                .style('stroke', '#f2f2f2')
+                .attr('d', this.graph.line([{x: xTicks[i], y: 0}, {x: xTicks[i], y: (this.scale.type === 'fixed' ? this.scale.max : this.graph.maxY)}]))
 
-            // for(var index = 0; index < this.equations.length; index++)
-            // {
-            //     this.graph.svg.append('path')
-            //     .style('stroke', 'Teal')
-            //     .attr('d', this.graph.line(this.graphData[index]))       
-            // }
+                this.graph.svg.append('path')
+                .style('stroke', '#f2f2f2')
+                .attr('d', this.graph.line([{x: 0, y: yTicks[i]}, {x: (this.scale.type === 'fixed' ? this.scale.max : this.graph.maxX), y: yTicks[i]}]))
+            }
+
+            this.graph.xAxis = d3.axisBottom(this.graph.x).tickValues(xTicks).tickSize(6);
+            this.graph.yAxis = d3.axisLeft(this.graph.y).tickValues(yTicks).tickSize(6);
 
             this.graph.svg.append('g')
-            .attr('class', 'lightgray')
-
+            .attr('class', 'gray')
             .attr('transform', 'translate(0, ' + this.dimension.height + ')')
             .call(this.graph.xAxis)
+            //add lines figure out how from next fcn
 
             this.graph.svg.append('text')
             .attr('transform', 'translate(' + (this.dimension.width / 2) + ', ' + (this.dimension.height + this.margin.top + 15) + ')')
@@ -321,8 +333,7 @@ var vm = new Vue({
             .text(this.label.x)
 
             this.graph.svg.append('g')
-            .attr('class', 'lightgray')
-
+            .attr('class', 'gray')
             .call(this.graph.yAxis)
 
             this.graph.svg.append('text')
@@ -611,8 +622,8 @@ var vm = new Vue({
             this.sanity()
             this.plots()
             this.init()
-            this.draw()
             this.drawAxis()
+            this.draw()
             this.showSelect()
         },
         update: function(newData) {
