@@ -1,0 +1,170 @@
+{% extends "global/Base.html" %}
+{% load staticfiles otree %}
+
+{% block title %}
+    <h1>
+        Control Questions
+    </h1>
+{% endblock %}
+
+{% block styles %}
+    <style>
+        h1
+        {
+            color: #BFBFBF;
+        }
+
+        h4
+        {
+            color: #494949;
+        }
+
+        #incorrect1
+        {
+            color: red;
+        }
+
+        #incorrect2
+        {
+            color: red;
+        }
+    </style>
+{% endblock %}
+
+{% block scripts %}
+    <script type="text/javascript">
+
+        var modemap = {
+            probability: {you_a: 70.0, you_b: 10.0, partner_a: 10.0, partner_b: 80.0},
+            sec_1bl_1ch: {you_a: 50.0, you_b: 16.7, partner_a: 50.0, partner_b: 16.7},
+            sec_1bl_2ch: {you_a: 16.0, you_b: 68.0, partner_a: 43.0, partner_b: 14.0},
+            sec_2bl_1ch: {you_a: 50.0, you_b: 16.7, partner_a: 16.7, partner_b: 50.0},
+            sec_ownrisk: {you_a: 40.0, you_b: 6.7},
+            sec_ownrisk_fixedother: {you_a: 35.9, you_b: 9.4, partner_a: 10.0, partner_b: 20.0},
+            sec_otherrisk_ownfixed: {you_a: 30.0, you_b: 13.3, partner_a: 35.5, partner_b: 7.3},
+            det_giv: {you_a: 3.9, partner_a: 30.8}
+        }
+    
+        assign_questions = function()
+        {
+            var q1 = document.getElementById('q1')
+            var q2 = document.getElementById('q2')
+
+            var mode = {{mode | json}}
+
+            if (mode === 'sec_ownrisk')
+            {
+                q1.innerHTML = "What is your payoff if state A is realized?"
+                q2.innerHTML = "What is your payoff if state B is realized?"
+            }
+            else if (mode === 'det_giv')
+            {
+                q1.innerHTML = "What is your payoff?"
+                q2.innerHTML = "What is your patner's payoff?"       
+            }
+            else
+            {
+                if (Math.random() < 0.5)
+                    q1.innerHTML = "What is your payoff if state A is realized?"
+                else
+                   q1.innerHTML = "What is your partner's payoff if state A is realized?"
+
+                if (Math.random() < 0.5)
+                    q2.innerHTML = "What is your payoff if state B is realized?"
+                else
+                    q2.innerHTML = "What is your partner's payoff if state B is realized?"
+            }
+        }
+
+        check_answers = function()
+        {
+            var mode = {{mode | json}}
+
+            var a1 = document.getElementById('input1').value + 0.0 // or here
+            var a2 = document.getElementById('input2').value + 0.0 // and here
+
+            var toggle = true
+
+            if (mode === 'sec_ownrisk')
+            {
+                if (a1 !== modemap[sec_ownrisk][you_a]) //something fucked up here 
+                {
+                    var i1 = document.getElementById('incorrect1')
+                    i1.innerHTML = "The correct answer is" + modemap[sec_ownrisk][you_a]
+                    toggle = false
+                }
+
+            }
+            // else if (mode === 'det_giv')
+            // {
+                
+            // }
+            // else
+            // {
+                
+            // }
+
+            return toggle            
+        }
+
+        window.onload = function() 
+        {
+            document.getElementById("arrive_time").value = (new Date()).toISOString()
+            assign_questions()
+        }
+    </script>
+{% endblock %}
+
+{% block content %}
+    {% formfield player.time_ControlQuestions label=None %}
+
+    <div>
+        <h4>
+            You must answer correctly before proceeding to the paying task.
+        </h4>
+    </div>
+    <div>
+        {% if mode == 'probability' %}
+            <img src="{% static 'probability.png' %}" width="700">       
+        {% elif mode == 'sec_1bl_1ch' %}
+            <img src="{% static 'sec_1bl_1ch.png' %}" width="700">
+        {% elif mode == 'sec_2bl_1ch' %}
+            <img src="{% static 'sec_2bl_1ch.png' %}" width="700">
+        {% elif mode == 'sec_1bl_2ch' %}
+            <img src="{% static 'sec_1bl_2ch.png' %}" width="700">
+        {% elif mode == 'sec_ownrisk' %}
+            <img src="{% static 'sec_ownrisk.png' %}" width="700">
+        {% elif mode == 'sec_ownrisk_fixedother' %}
+            <img src="{% static 'sec_ownrisk_fixedother.png' %}" width="700">
+        {% elif mode == 'sec_otherrisk_ownfixed' %}
+            <img src="{% static 'sec_otherrisk_ownfixed.png' %}" width="700">
+        {% elif mode == 'det_giv' %}
+            <img src="{% static 'det_giv.png' %}" width="700">
+        {% endif %}
+    </div>
+    <hr>
+    <div>
+        <p id="q1"></p>
+        <p id="incorrect1"></p>
+        <input id="input1">
+        <p id="q2"></p>
+        <p id="incorrect2"></p>
+        <input id="input2">
+    </div>
+    <hr>
+
+    <div>
+        <button id="submit" class="btn btn-primary btn-large next-button" style="float: left;">Submit</button>
+    </div>
+
+
+    <script type="text/javascript">
+    $(document).ready(function() 
+    {
+        $('.next-button').click(function() 
+        {
+            return check_answers()
+        })
+    })
+    </script>
+{% endblock %}

@@ -92,6 +92,7 @@ class Player(BasePlayer):
     outcome = models.StringField()
     time_InitialInstructions = models.LongStringField(widget=widgets.HiddenInput(attrs={'id': 'arrive_time'}))
     time_TaskInstructions =  models.TextField(widget=widgets.HiddenInput(attrs={'id': 'arrive_time'}))
+    time_ControlQuestions = models.TextField(widget=widgets.HiddenInput(attrs={'id': 'arrive_time'}))
     time_Graph =  models.TextField(widget=widgets.HiddenInput(attrs={'id': 'arrive_time'}))
     time_Results =  models.TextField(widget=widgets.HiddenInput(attrs={'id': 'arrive_time'}))
 

@@ -325,7 +325,6 @@ var vm = new Vue({
             .attr('class', 'gray')
             .attr('transform', 'translate(0, ' + this.dimension.height + ')')
             .call(this.graph.xAxis)
-            //add lines figure out how from next fcn
 
             this.graph.svg.append('text')
             .attr('transform', 'translate(' + (this.dimension.width / 2) + ', ' + (this.dimension.height + this.margin.top + 15) + ')')

@@ -45,6 +45,27 @@ class TaskInstructions(Page):
                 'sec2': '' if mode in ['probability', 'det_giv', 'sec_ownrisk'] else mode.split('_')[2]
                 }
 
+        
+class ControlQuestions(Page):
+    form_model = 'player'
+    form_fields = ['time_ControlQuestions']
+
+    def is_displayed(self):
+        mode = self.player.participant.vars['dynamic_values'][self.round_number - 1]['mode']
+        if self.round_number > 1:
+            prevmode = self.player.participant.vars['dynamic_values'][self.round_number - 2]['mode']
+        return self.round_number == 1 or mode != prevmode
+
+    def vars_for_template(self):
+        dynamic_values = self.player.participant.vars['dynamic_values']
+        round_data = dynamic_values[self.round_number - 1]
+        mode = round_data['mode']
+
+        return {'mode': mode}
+
+    #def get_form_fields(self):
+
+
 class Task(Page):
     form_model = 'player'
 
@@ -193,6 +214,7 @@ class Results(Page):
 page_sequence = [
     InitialInstructions,
     TaskInstructions,
+    ControlQuestions,
     Task,
     ResultsWaitPage,
     Results
