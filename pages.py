@@ -25,7 +25,7 @@ class InitialInstructions(Page):
 
 class TaskInstructions(Page):
     form_model = 'player'
-    form_fields = ['time_TaskInstructions']
+    form_fields = ['time_TaskInstructions', 'cq_attempts', 'cq_a1', 'cq_a2']
 
     def is_displayed(self):
         mode = self.player.participant.vars['dynamic_values'][self.round_number - 1]['mode']
