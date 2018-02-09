@@ -26,7 +26,7 @@ chosen_rounds = [2]
 
 data = [
     [
-    #{'mode': 'det_giv', 'm': 20, 'p_x': .2},
+    # {'mode': 'det_giv', 'm': 20, 'p_x': .2},
     # {'mode': 'det_giv', 'm': 40, 'p_x': 1},
     # {'mode': 'det_giv', 'm': 40, 'p_x': .667},
     # {'mode': 'det_giv', 'm': 40, 'p_x': .5},
@@ -43,7 +43,7 @@ data = [
     # {'mode': 'det_giv', 'm': 100, 'p_x': 1.25}
     ],
     [
-    #{'mode': 'sec_1bl_1ch', 'm': 20, 'p_x': .5},
+    {'mode': 'sec_1bl_1ch', 'm': 20, 'p_x': .5},
     # {'mode': 'sec_1bl_1ch', 'm': 20, 'p_x': .333},
     # {'mode': 'sec_1bl_1ch', 'm': 20, 'p_x': .25},
     # {'mode': 'sec_1bl_1ch', 'm': 20, 'p_x': .2},
@@ -57,7 +57,7 @@ data = [
     # {'mode': 'sec_1bl_1ch', 'm': 60, 'p_x': .6},
     ],
     [
-    #{'mode': 'sec_2bl_1ch'   , 'm': 20, 'p_x': 0.5},
+    {'mode': 'sec_2bl_1ch'   , 'm': 20, 'p_x': 0.5},
     # {'mode': 'sec_2bl_1ch'   , 'm': 20, 'p_x': .333},
     # {'mode': 'sec_2bl_1ch'   , 'm': 20, 'p_x': 0.25},
     # {'mode': 'sec_2bl_1ch'   , 'm': 20, 'p_x': 0.2},
@@ -71,7 +71,7 @@ data = [
     # {'mode': 'sec_2bl_1ch'   , 'm': 60, 'p_x': 0.6},
     ],
     [
-    {'mode': 'sec_ownrisk'   , 'm': 20, 'p_x': 0.5},
+    # {'mode': 'sec_ownrisk'   , 'm': 20, 'p_x': 0.5},
     # {'mode': 'sec_ownrisk'   , 'm': 20, 'p_x': .333},
     # {'mode': 'sec_ownrisk'   , 'm': 20, 'p_x': 0.25},
     # {'mode': 'sec_ownrisk'   , 'm': 20, 'p_x': 0.2},
@@ -85,7 +85,7 @@ data = [
     # {'mode': 'sec_ownrisk'   , 'm': 60, 'p_x': 0.6},
     ],
     [
-    {'mode': 'sec_ownrisk_fixedother', 'm': 40, 'p_x': 1,       'a': 5, 'b': 5},
+    #{'mode': 'sec_ownrisk_fixedother', 'm': 40, 'p_x': 1,       'a': 5, 'b': 5},
     # {'mode': 'sec_ownrisk_fixedother', 'm': 40, 'p_x': .667,    'a': 5, 'b': 5},
     # {'mode': 'sec_ownrisk_fixedother', 'm': 40, 'p_x': .5,      'a': 5, 'b': 5},
     # {'mode': 'sec_ownrisk_fixedother', 'm': 40, 'p_x': .4,      'a': 5, 'b': 5},
@@ -99,7 +99,7 @@ data = [
     # {'mode': 'sec_ownrisk_fixedother', 'm': 40, 'p_x': .4,      'a': 60, 'b': 60},
     ],
     [
-    {'mode': 'probability', 'a_x': 90, 'a_y': 10, 'b_x': 10, 'b_y': 90},
+    #{'mode': 'probability', 'a_x': 90, 'a_y': 10, 'b_x': 10, 'b_y': 90},
     # {'mode': 'probability', 'a_x': 90, 'a_y': 10, 'b_x': 10, 'b_y': 45},
     # {'mode': 'probability', 'a_x': 45, 'a_y': 10, 'b_x': 10, 'b_y': 90},
     # {'mode': 'probability', 'a_x': 70, 'a_y': 10, 'b_x': 40, 'b_y': 40},

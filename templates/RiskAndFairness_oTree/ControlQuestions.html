@@ -35,14 +35,14 @@
     <script type="text/javascript">
 
         var modemap = {
-            probability: {you_a: 70.0, you_b: 10.0, partner_a: 10.0, partner_b: 80.0},
-            sec_1bl_1ch: {you_a: 50.0, you_b: 16.7, partner_a: 50.0, partner_b: 16.7},
-            sec_1bl_2ch: {you_a: 16.0, you_b: 68.0, partner_a: 43.0, partner_b: 14.0},
-            sec_2bl_1ch: {you_a: 50.0, you_b: 16.7, partner_a: 16.7, partner_b: 50.0},
-            sec_ownrisk: {you_a: 40.0, you_b: 6.7},
-            sec_ownrisk_fixedother: {you_a: 35.9, you_b: 9.4, partner_a: 10.0, partner_b: 20.0},
-            sec_otherrisk_ownfixed: {you_a: 30.0, you_b: 13.3, partner_a: 35.5, partner_b: 7.3},
-            det_giv: {you_a: 3.9, partner_a: 30.8}
+            'probability': {you_a: 70.0, you_b: 10.0, partner_a: 10.0, partner_b: 80.0},
+            'sec_1bl_1ch': {you_a: 50.0, you_b: 16.7, partner_a: 50.0, partner_b: 16.7},
+            'sec_1bl_2ch': {you_a: 16.0, you_b: 68.0, partner_a: 43.0, partner_b: 14.0},
+            'sec_2bl_1ch': {you_a: 50.0, you_b: 16.7, partner_a: 16.7, partner_b: 50.0},
+            'sec_ownrisk': {you_a: 40.0, you_b: 6.7},
+            'sec_ownrisk_fixedother': {you_a: 35.9, you_b: 9.4, partner_a: 10.0, partner_b: 20.0},
+            'sec_otherrisk_ownfixed': {you_a: 30.0, you_b: 13.3, partner_a: 35.5, partner_b: 7.3},
+            'det_giv': {you: 3.9, partner: 30.8}
         }
     
         assign_questions = function()
@@ -80,31 +80,87 @@
         {
             var mode = {{mode | json}}
 
-            var a1 = document.getElementById('input1').value + 0.0 // or here
-            var a2 = document.getElementById('input2').value + 0.0 // and here
+            var a1 = parseFloat(document.getElementById('input1').value)
+            var a2 = parseFloat(document.getElementById('input2').value)
 
             var toggle = true
 
             if (mode === 'sec_ownrisk')
             {
-                if (a1 !== modemap[sec_ownrisk][you_a]) //something fucked up here 
+                if (a1 !== modemap.sec_ownrisk.you_a) 
                 {
                     var i1 = document.getElementById('incorrect1')
-                    i1.innerHTML = "The correct answer is" + modemap[sec_ownrisk][you_a]
+                    i1.innerHTML = "The correct answer is " + modemap.sec_ownrisk.you_a
                     toggle = false
                 }
-
+                if (a2 !== modemap.sec_ownrisk.you_b)
+                {
+                    var i2 = document.getElementById('incorrect2')
+                    i2.innerHTML = "The correct answer is " + modemap.sec_ownrisk.you_b
+                    toggle = false
+                }
             }
-            // else if (mode === 'det_giv')
-            // {
-                
-            // }
-            // else
-            // {
-                
-            // }
+            else if (mode === 'det_giv')
+            {
+                if (a1 !== modemap.det_giv.you)
+                {
+                    var i1 = document.getElementById('incorrect1')
+                    i1.innerHTML = "The correct answer is " + modemap.det_giv.you
+                    toggle = false
+                }
+                if (a2 !== modemap.det_giv.partner)
+                {
+                    var i1 = document.getElementById('incorrect2')
+                    i1.innerHTML = "The correct answer is " + modemap.det_giv.partner
+                    toggle = false
+                }
+            }
+            else
+            {
+                var q1 = document.getElementById('q1').innerHTML
+                var q2 = document.getElementById('q2').innerHTML
 
-            return toggle            
+                if (q1 === 'What is your payoff if state A is realized?')
+                {
+                    if (a1 !== modemap[mode].you_a)
+                    {
+                        var i1 = document.getElementById('incorrect1')
+                        i1.innerHTML = "The correct answer is " + modemap[mode].you_a
+                        toggle = false
+                    }
+                }
+                else // "What is your partner's payoff if state A is realized?"
+                {
+                    if (a1 !== modemap[mode].partner_a)
+                    {
+                        var i1 = document.getElementById('incorrect1')
+                        i1.innerHTML = "The correct answer is " + modemap[mode].partner_a
+                        toggle = false
+                    }
+                }
+
+                if (q2 === 'What is your payoff if state B is realized?')
+                {
+                    if (a2 !== modemap[mode].you_b)
+                    {
+                        var i2 = document.getElementById('incorrect2')
+                        i2.innerHTML = "The correct answer is " + modemap[mode].you_b
+                        toggle = false
+                    }
+                }
+                else // "What is your partner's payoff if state B is realized?"
+                {
+                    if (a2 !== modemap[mode].partner_b)
+                    {
+                        var i2 = document.getElementById('incorrect2')
+                        i2.innerHTML = "The correct answer is " + modemap[mode].partner_b
+                        toggle = false
+                    }
+                }
+            }
+            return toggle
+
+            //add the next button, add the thing with returning the form 
         }
 
         window.onload = function() 
@@ -127,7 +183,7 @@
         {% if mode == 'probability' %}
             <img src="{% static 'probability.png' %}" width="700">       
         {% elif mode == 'sec_1bl_1ch' %}
-            <img src="{% static 'sec_1bl_1ch.png' %}" width="700">
+            <img src="{% static 'sec_1bl_1ch_1.png' %}" width="700">
         {% elif mode == 'sec_2bl_1ch' %}
             <img src="{% static 'sec_2bl_1ch.png' %}" width="700">
         {% elif mode == 'sec_1bl_2ch' %}
@@ -153,8 +209,12 @@
     </div>
     <hr>
 
-    <div>
+    <!--div>
         <button id="submit" class="btn btn-primary btn-large next-button" style="float: left;">Submit</button>
+    </div-->
+
+    <div>
+        <button id="submit" class="btn btn-primary btn-large" onclick="check_answers()" type="button" style="float: left;">Submit</button>
     </div>
 
 
@@ -163,7 +223,7 @@
     {
         $('.next-button').click(function() 
         {
-            return check_answers()
+           return false
         })
     })
     </script>
