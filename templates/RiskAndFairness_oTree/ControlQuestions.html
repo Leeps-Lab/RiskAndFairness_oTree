@@ -42,13 +42,13 @@
 
         var modemap = {
             'probability': {you: 70.0, partner: 10.0},
-            'sec_1bl_1ch': {you: 50.0, partner: 50.0},
-            'sec_1bl_2ch': {you: 16.0, partner: 43.0},
-            'sec_2bl_1ch': {you: 50.0, partner: 16.7},
-            'sec_ownrisk': {you_a: 40.0, you_b: 6.7},
-            'sec_ownrisk_fixedother': {you_a: 35.9, partner: 10.0},
-            'sec_otherrisk_ownfixed': {you_a: 30.0, partner: 35.5},
-            'det_giv': {you: 3.9, partner: 30.8}
+            'sec_1bl_1ch': {you: 20.0, partner: 20.0},
+            'sec_1bl_2ch': {you: 20.0, partner: 10.0},
+            'sec_2bl_1ch': {you: 10.0, partner: 44.0},
+            'sec_ownrisk': {you_a: 30.0, you_b: 32.0},
+            'sec_ownrisk_fixedother': {you: 20.0, partner: 30.0},
+            'sec_otherrisk_ownfixed': {you: 30.0, partner: 26.0},
+            'det_giv': {you: 50.0, partner: 25.0}
         }
     
         assign_questions = function()
@@ -191,7 +191,7 @@
         {% if mode == 'probability' %}
             <img src="{% static 'probability.png' %}" width="700">   
         {% elif mode == 'sec_1bl_1ch' %}
-            <img src="{% static 'sec_1bl_1ch_1.png' %}" width="700">
+            <img src="{% static 'sec_1bl_1ch.png' %}" width="700">
         {% elif mode == 'sec_2bl_1ch' %}
             <img src="{% static 'sec_2bl_1ch.png' %}" width="700">
         {% elif mode == 'sec_1bl_2ch' %}

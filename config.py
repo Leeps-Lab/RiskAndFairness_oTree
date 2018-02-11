@@ -22,88 +22,115 @@ shuffle = True
 # should never have more than 8 elements.
 # If chosen rounds is empty, models.py will randomly assign the chosen round for each group.
 # indexing starts at 1, not 0
-chosen_rounds = [2]
+chosen_rounds = []
+
+# data = [
+#     [
+#         {'mode': 'det_giv', 'm': 20, 'p_x': .2},
+#         {'mode': 'det_giv', 'm': 40, 'p_x': 1},
+#         {'mode': 'det_giv', 'm': 40, 'p_x': .667},
+#         {'mode': 'det_giv', 'm': 40, 'p_x': .5},
+#         {'mode': 'det_giv', 'm': 40, 'p_x': .4},
+#         {'mode': 'det_giv', 'm': 60, 'p_x': 1.5},
+#         {'mode': 'det_giv', 'm': 60, 'p_x': 1},
+#         {'mode': 'det_giv', 'm': 60, 'p_x': .75},
+#         {'mode': 'det_giv', 'm': 60, 'p_x': .6},
+#         {'mode': 'det_giv', 'm': 80, 'p_x': 2},
+#         {'mode': 'det_giv', 'm': 80, 'p_x': 1.333},
+#         {'mode': 'det_giv', 'm': 80, 'p_x': 1},
+#         {'mode': 'det_giv', 'm': 100, 'p_x': 5},
+#         {'mode': 'det_giv', 'm': 100, 'p_x': 2.5},
+#         {'mode': 'det_giv', 'm': 100, 'p_x': 1.25}
+#     ],
+#     [
+#         {'mode': 'sec_1bl_1ch', 'm': 20, 'p_x': .5},
+#         {'mode': 'sec_1bl_1ch', 'm': 20, 'p_x': .333},
+#         {'mode': 'sec_1bl_1ch', 'm': 20, 'p_x': .25},
+#         {'mode': 'sec_1bl_1ch', 'm': 20, 'p_x': .2},
+#         {'mode': 'sec_1bl_1ch', 'm': 40, 'p_x': 1},
+#         {'mode': 'sec_1bl_1ch', 'm': 40, 'p_x': .667},
+#         {'mode': 'sec_1bl_1ch', 'm': 40, 'p_x': .5},
+#         {'mode': 'sec_1bl_1ch', 'm': 40, 'p_x': .4},
+#         {'mode': 'sec_1bl_1ch', 'm': 60, 'p_x': 1.5},
+#         {'mode': 'sec_1bl_1ch', 'm': 60, 'p_x': 1},
+#         {'mode': 'sec_1bl_1ch', 'm': 60, 'p_x': .75},
+#         {'mode': 'sec_1bl_1ch', 'm': 60, 'p_x': .6},
+#     ],
+#     [
+#         {'mode': 'sec_2bl_1ch'   , 'm': 20, 'p_x': 0.5},
+#         {'mode': 'sec_2bl_1ch'   , 'm': 20, 'p_x': .333},
+#         {'mode': 'sec_2bl_1ch'   , 'm': 20, 'p_x': 0.25},
+#         {'mode': 'sec_2bl_1ch'   , 'm': 20, 'p_x': 0.2},
+#         {'mode': 'sec_2bl_1ch'   , 'm': 40, 'p_x': 1},
+#         {'mode': 'sec_2bl_1ch'   , 'm': 40, 'p_x': .667},
+#         {'mode': 'sec_2bl_1ch'   , 'm': 40, 'p_x': 0.5},
+#         {'mode': 'sec_2bl_1ch'   , 'm': 40, 'p_x': 0.4},
+#         {'mode': 'sec_2bl_1ch'   , 'm': 60, 'p_x': 1.5},
+#         {'mode': 'sec_2bl_1ch'   , 'm': 60, 'p_x': 1},
+#         {'mode': 'sec_2bl_1ch'   , 'm': 60, 'p_x': .75},
+#         {'mode': 'sec_2bl_1ch'   , 'm': 60, 'p_x': 0.6},
+#     ],
+#     [
+#         {'mode': 'sec_ownrisk'   , 'm': 20, 'p_x': 0.5},
+#         {'mode': 'sec_ownrisk'   , 'm': 20, 'p_x': .333},
+#         {'mode': 'sec_ownrisk'   , 'm': 20, 'p_x': 0.25},
+#         {'mode': 'sec_ownrisk'   , 'm': 20, 'p_x': 0.2},
+#         {'mode': 'sec_ownrisk'   , 'm': 40, 'p_x': 1},
+#         {'mode': 'sec_ownrisk'   , 'm': 40, 'p_x': .667},
+#         {'mode': 'sec_ownrisk'   , 'm': 40, 'p_x': 0.5},
+#         {'mode': 'sec_ownrisk'   , 'm': 40, 'p_x': 0.4},
+#         {'mode': 'sec_ownrisk'   , 'm': 60, 'p_x': 1.5},
+#         {'mode': 'sec_ownrisk'   , 'm': 60, 'p_x': 1},
+#         {'mode': 'sec_ownrisk'   , 'm': 60, 'p_x': .75},
+#         {'mode': 'sec_ownrisk'   , 'm': 60, 'p_x': 0.6},
+#     ],
+#     [
+#         {'mode': 'sec_ownrisk_fixedother', 'm': 40, 'p_x': 1,       'a': 5, 'b': 5},
+#         {'mode': 'sec_ownrisk_fixedother', 'm': 40, 'p_x': .667,    'a': 5, 'b': 5},
+#         {'mode': 'sec_ownrisk_fixedother', 'm': 40, 'p_x': .5,      'a': 5, 'b': 5},
+#         {'mode': 'sec_ownrisk_fixedother', 'm': 40, 'p_x': .4,      'a': 5, 'b': 5},
+#         {'mode': 'sec_ownrisk_fixedother', 'm': 40, 'p_x': 1,       'a': 23, 'b': 23},
+#         {'mode': 'sec_ownrisk_fixedother', 'm': 40, 'p_x': .667,    'a': 23, 'b': 23},
+#         {'mode': 'sec_ownrisk_fixedother', 'm': 40, 'p_x': .5,      'a': 23, 'b': 23},
+#         {'mode': 'sec_ownrisk_fixedother', 'm': 40, 'p_x': .4,      'a': 23, 'b': 23},
+#         {'mode': 'sec_ownrisk_fixedother', 'm': 40, 'p_x': 1,       'a': 60, 'b': 60},
+#         {'mode': 'sec_ownrisk_fixedother', 'm': 40, 'p_x': .667,    'a': 60, 'b': 60},
+#         {'mode': 'sec_ownrisk_fixedother', 'm': 40, 'p_x': .5,      'a': 60, 'b': 60},
+#         {'mode': 'sec_ownrisk_fixedother', 'm': 40, 'p_x': .4,      'a': 60, 'b': 60},
+#     ],
+#     [
+#         {'mode': 'probability', 'a_x': 90, 'a_y': 10, 'b_x': 10, 'b_y': 90},
+#         {'mode': 'probability', 'a_x': 90, 'a_y': 10, 'b_x': 10, 'b_y': 45},
+#         {'mode': 'probability', 'a_x': 45, 'a_y': 10, 'b_x': 10, 'b_y': 90},
+#         {'mode': 'probability', 'a_x': 70, 'a_y': 10, 'b_x': 40, 'b_y': 40},
+#         {'mode': 'probability', 'a_x': 10, 'a_y': 70, 'b_x': 40, 'b_y': 40},
+#     ]
+# ]
 
 data = [
     [
-    # {'mode': 'det_giv', 'm': 20, 'p_x': .2},
-    # {'mode': 'det_giv', 'm': 40, 'p_x': 1},
-    # {'mode': 'det_giv', 'm': 40, 'p_x': .667},
-    # {'mode': 'det_giv', 'm': 40, 'p_x': .5},
-    # {'mode': 'det_giv', 'm': 40, 'p_x': .4},
-    # {'mode': 'det_giv', 'm': 60, 'p_x': 1.5},
-    # {'mode': 'det_giv', 'm': 60, 'p_x': 1},
-    # {'mode': 'det_giv', 'm': 60, 'p_x': .75},
-    # {'mode': 'det_giv', 'm': 60, 'p_x': .6},
-    # {'mode': 'det_giv', 'm': 80, 'p_x': 2},
-    # {'mode': 'det_giv', 'm': 80, 'p_x': 1.333},
-    # {'mode': 'det_giv', 'm': 80, 'p_x': 1},
-    # {'mode': 'det_giv', 'm': 100, 'p_x': 5},
-    # {'mode': 'det_giv', 'm': 100, 'p_x': 2.5},
-    # {'mode': 'det_giv', 'm': 100, 'p_x': 1.25}
+        {'mode': 'det_giv', 'm': 50, 'p_x': 0.50},
     ],
     [
-    {'mode': 'sec_1bl_1ch', 'm': 20, 'p_x': .5},
-    # {'mode': 'sec_1bl_1ch', 'm': 20, 'p_x': .333},
-    # {'mode': 'sec_1bl_1ch', 'm': 20, 'p_x': .25},
-    # {'mode': 'sec_1bl_1ch', 'm': 20, 'p_x': .2},
-    # {'mode': 'sec_1bl_1ch', 'm': 40, 'p_x': 1},
-    # {'mode': 'sec_1bl_1ch', 'm': 40, 'p_x': .667},
-    # {'mode': 'sec_1bl_1ch', 'm': 40, 'p_x': .5},
-    # {'mode': 'sec_1bl_1ch', 'm': 40, 'p_x': .4},
-    # {'mode': 'sec_1bl_1ch', 'm': 60, 'p_x': 1.5},
-    # {'mode': 'sec_1bl_1ch', 'm': 60, 'p_x': 1},
-    # {'mode': 'sec_1bl_1ch', 'm': 60, 'p_x': .75},
-    # {'mode': 'sec_1bl_1ch', 'm': 60, 'p_x': .6},
+        {'mode': 'sec_1bl_1ch', 'm': 50, 'p_x': 0.60},
     ],
     [
-    {'mode': 'sec_2bl_1ch'   , 'm': 20, 'p_x': 0.5},
-    # {'mode': 'sec_2bl_1ch'   , 'm': 20, 'p_x': .333},
-    # {'mode': 'sec_2bl_1ch'   , 'm': 20, 'p_x': 0.25},
-    # {'mode': 'sec_2bl_1ch'   , 'm': 20, 'p_x': 0.2},
-    # {'mode': 'sec_2bl_1ch'   , 'm': 40, 'p_x': 1},
-    # {'mode': 'sec_2bl_1ch'   , 'm': 40, 'p_x': .667},
-    # {'mode': 'sec_2bl_1ch'   , 'm': 40, 'p_x': 0.5},
-    # {'mode': 'sec_2bl_1ch'   , 'm': 40, 'p_x': 0.4},
-    # {'mode': 'sec_2bl_1ch'   , 'm': 60, 'p_x': 1.5},
-    # {'mode': 'sec_2bl_1ch'   , 'm': 60, 'p_x': 1},
-    # {'mode': 'sec_2bl_1ch'   , 'm': 60, 'p_x': .75},
-    # {'mode': 'sec_2bl_1ch'   , 'm': 60, 'p_x': 0.6},
+        {'mode': 'sec_1bl_2ch', 'm': 50, 'p_x': 2},
     ],
     [
-    # {'mode': 'sec_ownrisk'   , 'm': 20, 'p_x': 0.5},
-    # {'mode': 'sec_ownrisk'   , 'm': 20, 'p_x': .333},
-    # {'mode': 'sec_ownrisk'   , 'm': 20, 'p_x': 0.25},
-    # {'mode': 'sec_ownrisk'   , 'm': 20, 'p_x': 0.2},
-    # {'mode': 'sec_ownrisk'   , 'm': 40, 'p_x': 1},
-    # {'mode': 'sec_ownrisk'   , 'm': 40, 'p_x': .667},
-    # {'mode': 'sec_ownrisk'   , 'm': 40, 'p_x': 0.5},
-    # {'mode': 'sec_ownrisk'   , 'm': 40, 'p_x': 0.4},
-    # {'mode': 'sec_ownrisk'   , 'm': 60, 'p_x': 1.5},
-    # {'mode': 'sec_ownrisk'   , 'm': 60, 'p_x': 1},
-    # {'mode': 'sec_ownrisk'   , 'm': 60, 'p_x': .75},
-    # {'mode': 'sec_ownrisk'   , 'm': 60, 'p_x': 0.6},
+        {'mode': 'sec_2bl_1ch', 'm': 50, 'p_x': 0.60},
     ],
     [
-    #{'mode': 'sec_ownrisk_fixedother', 'm': 40, 'p_x': 1,       'a': 5, 'b': 5},
-    # {'mode': 'sec_ownrisk_fixedother', 'm': 40, 'p_x': .667,    'a': 5, 'b': 5},
-    # {'mode': 'sec_ownrisk_fixedother', 'm': 40, 'p_x': .5,      'a': 5, 'b': 5},
-    # {'mode': 'sec_ownrisk_fixedother', 'm': 40, 'p_x': .4,      'a': 5, 'b': 5},
-    # {'mode': 'sec_ownrisk_fixedother', 'm': 40, 'p_x': 1,       'a': 23, 'b': 23},
-    # {'mode': 'sec_ownrisk_fixedother', 'm': 40, 'p_x': .667,    'a': 23, 'b': 23},
-    # {'mode': 'sec_ownrisk_fixedother', 'm': 40, 'p_x': .5,      'a': 23, 'b': 23},
-    # {'mode': 'sec_ownrisk_fixedother', 'm': 40, 'p_x': .4,      'a': 23, 'b': 23},
-    # {'mode': 'sec_ownrisk_fixedother', 'm': 40, 'p_x': 1,       'a': 60, 'b': 60},
-    # {'mode': 'sec_ownrisk_fixedother', 'm': 40, 'p_x': .667,    'a': 60, 'b': 60},
-    # {'mode': 'sec_ownrisk_fixedother', 'm': 40, 'p_x': .5,      'a': 60, 'b': 60},
-    # {'mode': 'sec_ownrisk_fixedother', 'm': 40, 'p_x': .4,      'a': 60, 'b': 60},
+        {'mode': 'sec_ownrisk', 'm': 50, 'p_x': 0.60},
     ],
     [
-    #{'mode': 'probability', 'a_x': 90, 'a_y': 10, 'b_x': 10, 'b_y': 90},
-    # {'mode': 'probability', 'a_x': 90, 'a_y': 10, 'b_x': 10, 'b_y': 45},
-    # {'mode': 'probability', 'a_x': 45, 'a_y': 10, 'b_x': 10, 'b_y': 90},
-    # {'mode': 'probability', 'a_x': 70, 'a_y': 10, 'b_x': 40, 'b_y': 40},
-    # {'mode': 'probability', 'a_x': 10, 'a_y': 70, 'b_x': 40, 'b_y': 40},
+        {'mode': 'sec_ownrisk_fixedother', 'm': 50, 'p_x': 0.60, 'a': 30, 'b': 13.3},
+    ],
+    [
+        {'mode': 'sec_otherrisk_ownfixed', 'm': 50, 'p_x': 0.60, 'a': 30, 'b': 13.3},
+    ],
+    [
+        {'mode': 'probability', 'a_x': 70, 'a_y': 10, 'b_x': 10, 'b_y': 80}
     ]
 ]
 
@@ -199,11 +226,11 @@ def getChosenRounds():
 
 
 # Syntax for data dictionaries
-# {'mode': 'det_giv', 'm': 50, 'p_x': 0.50, 'p_y': 1, 'prob_a': 50, 'label': {'x': 'Your Tokens', 'y': 'Partner\'s Tokens'}},
-# {'mode': 'sec_1bl_1ch'   , 'm': 50, 'p_x': 0.60, 'p_y': 1, 'prob_a': 50, 'label': {'x': 'State A (50%)','y': 'State B (50%)'}},
-# {'mode': 'sec_1bl_2ch', 'm': 50, 'p_x': 2, 'p_y': 1, 'prob_a': 50, 'label': {'x': 'State A (50%)','y': 'State B (50%)'}},
-# {'mode': 'sec_2bl_1ch'   , 'm': 50, 'p_x': 0.60, 'p_y': 1, 'prob_a': 50, 'label': {'x': 'State A (50%)','y': 'State B (50%)'}},
-# {'mode': 'sec_ownrisk'   , 'm': 50, 'p_x': 0.60, 'p_y': 1, 'prob_a': 50, 'label': {'x': 'State A (50%)','y': 'State B (50%)'}},
-# {'mode': 'sec_ownrisk_fixedother'   , 'm': 50, 'p_x': 0.60, 'p_y': 1, 'prob_a': 50, 'fixed': {'m': 100, 'p_x': 2, 'p_y': 3, 'a': 30}},
-# {'mode': 'sec_otherrisk_ownfixed'   , 'm': 50, 'p_x': 0.60, 'p_y': 1, 'prob_a': 50, 'fixed': {'m': 100, 'p_x': 2, 'p_y': 3, 'a': 30}},
-# {'mode': 'probability', 'a_x': 70, 'a_y': 10, 'b_x': 10, 'b_y': 80, 'label': {'x': 'Your Tokens', 'y': 'Partner\'s Tokens'}}
+# {'mode': 'det_giv', 'm': 50, 'p_x': 0.5, 'p_y': 1, 'prob_a': 50, 'label': {'x': 'Your Tokens', 'y': "Partner's Tokens"}}
+# {'mode': 'sec_1bl_1ch', 'm': 50, 'p_x': 0.6, 'p_y': 1, 'prob_a': 50, 'label': {'x': 'State A (50%)', 'y': 'State B (50%)'}}
+# {'mode': 'sec_1bl_2ch', 'm': 50, 'p_x': 2, 'p_y': 1, 'prob_a': 50, 'label': {'x': 'State A (50%)', 'y': 'State B (50%)'}}
+# {'mode': 'sec_2bl_1ch', 'm': 50, 'p_x': 0.6, 'p_y': 1, 'prob_a': 50, 'label': {'x': 'State A (50%)', 'y': 'State B (50%)'}}
+# {'mode': 'sec_ownrisk', 'm': 50, 'p_x': 0.6, 'p_y': 1, 'prob_a': 50, 'label': {'x': 'State A (50%)', 'y': 'State B (50%)'}}
+# {'mode': 'sec_ownrisk_fixedother', 'm': 50, 'p_x': 0.6, 'a': 30, 'b': 13.3, 'p_y': 1, 'prob_a': 50, 'fixed': {'m': 43.3, 'p_x': 1, 'p_y': 1, 'a': 30}, 'label': {'x': 'State A (50%)', 'y': 'State B (50%)'}}
+# {'mode': 'sec_otherrisk_ownfixed', 'm': 50, 'p_x': 0.6, 'a': 30, 'b': 13.3, 'p_y': 1, 'prob_a': 50, 'fixed': {'m': 43.3, 'p_x': 1, 'p_y': 1, 'a': 30}, 'label': {'x': 'State A (50%)', 'y': 'State B (50%)'}}
+# {'mode': 'probability', 'a_x': 70, 'a_y': 10, 'b_x': 10, 'b_y': 80, 'label': {'x': 'Your Tokens', 'y': "Partner's Tokens"}}
