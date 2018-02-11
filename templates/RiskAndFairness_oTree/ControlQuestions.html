@@ -38,7 +38,7 @@
 
         var list1 = ''
         var list2 = ''
-        var attempts = 1
+        var attempts = 0
 
         var modemap = {
             'probability': {you: 70.0, partner: 10.0},
@@ -86,8 +86,8 @@
             var a1 = parseFloat(document.getElementById('input1').value)
             var a2 = parseFloat(document.getElementById('input2').value)
 
-            list1 += a1 + ','
-            list2 += a2 + ','
+            list1 += "'" + a1 + "' "
+            list2 += "'" + a2 + "' "
 
             toggle = true
 
@@ -100,13 +100,21 @@
                     attempts++
                     toggle = false
                 }
+                else
+                    document.getElementById('incorrect1').innerHTML = ""
+                
                 if (a2 !== modemap.sec_ownrisk.you_b)
                 {
                     var i2 = document.getElementById('incorrect2')
                     i2.innerHTML = "The correct answer is " + modemap.sec_ownrisk.you_b
-                    attempts++
-                    toggle = false
+                    if (toggle === true)
+                    {   
+                        attempts++
+                        toggle = false
+                    }
                 }
+                else
+                    document.getElementById('incorrect2').innerHTML = ""
             }
             else if (mode === 'det_giv')
             {
@@ -117,13 +125,21 @@
                     attempts++
                     toggle = false
                 }
+                else
+                    document.getElementById('incorrect1').innerHTML = ""
+                
                 if (a2 !== modemap.det_giv.partner)
                 {
                     var i2 = document.getElementById('incorrect2')
                     i2.innerHTML = "The correct answer is " + modemap.det_giv.partner
-                    attempts++
-                    toggle = false
+                    if (toggle === true)
+                    {
+                        attempts++
+                        toggle = false
+                    }
                 }
+                else
+                    document.getElementById('incorrect2').innerHTML = ""
             }
             else
             {
@@ -134,13 +150,21 @@
                     attempts++
                     toggle = false
                 }
+                else
+                    document.getElementById('incorrect1').innerHTML = ""
+                
                 if (a2 !== modemap[mode].partner)
                 {
                     var i2 = document.getElementById('incorrect2')
                     i2.innerHTML = "The correct answer is " + modemap[mode].partner
-                    attempts++
-                    toggle = false
+                    if (toggle === true)
+                    {
+                        attempts++
+                        toggle = false
+                    }
                 }
+                else
+                    document.getElementById('incorrect2').innerHTML = ""
             }
         }
 
@@ -154,8 +178,9 @@
 
 {% block content %}
     {% formfield player.time_ControlQuestions label=None %}
-    {% formfield player.cq_attempts label=None %}
-    {% formfield player.cq_list label=None %}
+    {% formfield player.cq_failed_attempts label=None %}
+    {% formfield player.cq_a1 label=None %}
+    {% formfield player.cq_a2 label=None %}
 
     <div>
         <h4>
@@ -193,20 +218,21 @@
     </div>
     <hr>
 
-    <!--div>
-        <button id="submit" class="btn btn-primary btn-large next-button" style="float: left;">Submit</button>
-    </div-->
-
     <div>
-        <button id="submit" class="btn btn-primary btn-large" onclick="check_answers()" type="button" style="float: left;">Submit</button>
+        <button id="submit" class="btn btn-primary btn-large next-button" style="float: left;">Submit</button>
     </div>
+
+    <!--div>
+        <button id="submit" class="btn btn-primary btn-large" onclick="check_answers()" type="button" style="float: left;">Submit</button>
+    </div-->
 
 
     <script type="text/javascript">
     $(document).ready(function() 
     {
-        $('.next-button').click(function()  //add something for check_answers()
+        $('.next-button').click(function()
         {
+            check_answers()
             if (toggle === false)
             {
                 return false
@@ -214,8 +240,8 @@
             else
             {
                 document.getElementById('attempts').value = attempts
-                document.getElementById('list1').value = list1
-                document.getElementById('list2').value = list2
+                document.getElementById('a1').value = list1
+                document.getElementById('a2').value = list2
                 return true
             }
         })
