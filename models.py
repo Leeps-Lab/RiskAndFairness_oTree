@@ -82,7 +82,7 @@ class Player(BasePlayer):
     # each player has its own shuffled data, and its own paying round number (starting at 1)
     # (the paying round is the same for all players, but the index of that round is unique for each shuffled dataset)
 
-    mode = models.StringField()
+    mode = models.StringField(widget=widgets.HiddenInput(attrs={'id': 'mode'}))
     partner_a = models.FloatField() # Circle is other
     partner_b = models.FloatField()
     me_a = models.FloatField() # Square is me

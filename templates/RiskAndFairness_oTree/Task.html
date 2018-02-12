@@ -193,6 +193,7 @@
         var roundData = dynamicValues[currentRound - 1]
         var mode = {{ mode | json}}
         document.getElementById("arrive_time").value = (new Date()).toISOString();
+        document.getElementById("mode").value = {{ mode | json }}
         if (mode === 'probability')
         {
             document.getElementById("ax").value = roundData.a_x
@@ -224,6 +225,7 @@
 {% block content %}
 
     {% formfield player.time_Graph label=None %}
+    {% formfield player.mode label=None %}
     
     {% if mode == 'probability' %}
         {% formfield player.ax label=None %}
@@ -344,7 +346,7 @@
                 </div>
             </div>
             <div class="row" v-if="mode !== 'probability'">
-                <input type="hidden" name="mode" v-model="mode" />
+                <!--input type="hidden" name="mode" v-model="mode" /-->
                 <input type="hidden" v-if="mode !== 'single'" name="partner_a" v-model="selected[1].x" />
                 <input type="hidden" v-if="mode !== 'single'" name="partner_b" v-model="selected[1].y" />
                 <input type="hidden" name="me_a" v-model="selected[0].x" />
@@ -353,7 +355,7 @@
                 <input type="hidden" name="prob_b" v-model="prob.b" />
             </div>
             <div class="row" v-if="mode === 'probability'">
-                <input type="hidden" name="mode" v-model="mode" />
+                <!--input type="hidden" name="mode" v-model="mode" /-->
                 <input type="hidden" name="prob_a" v-model="prob.a" />
                 <input type="hidden" name="prob_b" v-model="prob.b" />
             </div>

@@ -109,29 +109,43 @@ chosen_rounds = []
 
 data = [
     [
-        {'mode': 'det_giv', 'm': 50, 'p_x': 0.50},
+        {'mode': 'det_giv', 'm': 20, 'p_x': .2},
+        {'mode': 'det_giv', 'm': 40, 'p_x': 1},
+        {'mode': 'det_giv', 'm': 40, 'p_x': .667},
+        {'mode': 'det_giv', 'm': 40, 'p_x': .5},
+        {'mode': 'det_giv', 'm': 40, 'p_x': .4},
+        {'mode': 'det_giv', 'm': 60, 'p_x': 1.5},
+        {'mode': 'det_giv', 'm': 60, 'p_x': 1},
+        {'mode': 'det_giv', 'm': 60, 'p_x': .75},
+        {'mode': 'det_giv', 'm': 60, 'p_x': .6},
+        {'mode': 'det_giv', 'm': 80, 'p_x': 2},
+        {'mode': 'det_giv', 'm': 80, 'p_x': 1.333},
+        {'mode': 'det_giv', 'm': 80, 'p_x': 1},
+        {'mode': 'det_giv', 'm': 100, 'p_x': 5},
+        {'mode': 'det_giv', 'm': 100, 'p_x': 2.5},
+        {'mode': 'det_giv', 'm': 100, 'p_x': 1.25}
     ],
-    [
-        {'mode': 'sec_1bl_1ch', 'm': 50, 'p_x': 0.60},
-    ],
-    [
-        {'mode': 'sec_1bl_2ch', 'm': 50, 'p_x': 2},
-    ],
-    [
-        {'mode': 'sec_2bl_1ch', 'm': 50, 'p_x': 0.60},
-    ],
-    [
-        {'mode': 'sec_ownrisk', 'm': 50, 'p_x': 0.60},
-    ],
-    [
-        {'mode': 'sec_ownrisk_fixedother', 'm': 50, 'p_x': 0.60, 'a': 30, 'b': 13.3},
-    ],
-    [
-        {'mode': 'sec_otherrisk_ownfixed', 'm': 50, 'p_x': 0.60, 'a': 30, 'b': 13.3},
-    ],
-    [
-        {'mode': 'probability', 'a_x': 70, 'a_y': 10, 'b_x': 10, 'b_y': 80}
-    ]
+    # [
+    #     {'mode': 'sec_1bl_1ch', 'm': 50, 'p_x': 0.60},
+    # ],
+    # [
+    #     {'mode': 'sec_1bl_2ch', 'm': 50, 'p_x': 2},
+    # ],
+    # [
+    #     {'mode': 'sec_2bl_1ch', 'm': 50, 'p_x': 0.60},
+    # ],
+    # [
+    #     {'mode': 'sec_ownrisk', 'm': 50, 'p_x': 0.60},
+    # ],
+    # [
+    #     {'mode': 'sec_ownrisk_fixedother', 'm': 50, 'p_x': 0.60, 'a': 30, 'b': 13.3},
+    # ],
+    # [
+    #     {'mode': 'sec_otherrisk_ownfixed', 'm': 50, 'p_x': 0.60, 'a': 30, 'b': 13.3},
+    # ],
+    # [
+    #     {'mode': 'probability', 'a_x': 70, 'a_y': 10, 'b_x': 10, 'b_y': 80}
+    # ]
 ]
 
 def shuffle(data):
