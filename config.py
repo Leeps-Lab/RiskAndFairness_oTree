@@ -107,7 +107,7 @@ data = [
         {'mode': 'probability', 'a_x': 20, 'a_y': 50, 'b_x': 40, 'b_y': 60},
         {'mode': 'probability', 'a_x': 50, 'a_y': 20, 'b_x': 40, 'b_y': 30},
         {'mode': 'probability', 'a_x': 10, 'a_y': 60, 'b_x': 10, 'b_y': 40},
-    ]
+    ],
     [
         {'mode': 'sec_otherrisk_ownfixed', 'm': 40, 'p_x': 1,       'a': 15, 'b': 5},
         {'mode': 'sec_otherrisk_ownfixed', 'm': 40, 'p_x': .667,    'a': 15, 'b': 5},
@@ -116,18 +116,18 @@ data = [
         {'mode': 'sec_otherrisk_ownfixed', 'm': 40, 'p_x': 1,       'a': 13, 'b': 23},
         {'mode': 'sec_otherrisk_ownfixed', 'm': 40, 'p_x': .667,    'a': 13, 'b': 23},
         {'mode': 'sec_otherrisk_ownfixed', 'm': 40, 'p_x': .5,      'a': 23, 'b': 13},
-        {'mode': 'sec_otherrisk_ownfixed', 'm': 40, 'p_x': .4,      'a': 23, 'b': 13},
+        {'mode': 'sec_otherrisk_ownfixed', 'm': 40, 'p_x': .4,      'a': 23, 'b': 13}
     ],
     [
-        {'mode': 'sec_1bl_2ch'   , 'm': 20, 'p_x': 0.5},
-        {'mode': 'sec_1bl_2ch'   , 'm': 20, 'p_x': .333},
-        {'mode': 'sec_1bl_2ch'   , 'm': 30, 'p_x': 0.25},
-        {'mode': 'sec_1bl_2ch'   , 'm': 20, 'p_x': 0.2},
-        {'mode': 'sec_1bl_2ch'   , 'm': 40, 'p_x': 1},
-        {'mode': 'sec_1bl_2ch'   , 'm': 40, 'p_x': .667},
-        {'mode': 'sec_1bl_2ch'   , 'm': 50, 'p_x': 0.5, 'prob_a': 30},
-        {'mode': 'sec_1bl_2ch'   , 'm': 40, 'p_x': 0.4, 'prob_a': 30},
-    ],
+        {'mode': 'sec_1bl_2ch', 'm': 20, 'p_x': 0.5},
+        {'mode': 'sec_1bl_2ch', 'm': 20, 'p_x': .333},
+        {'mode': 'sec_1bl_2ch', 'm': 30, 'p_x': 0.25},
+        {'mode': 'sec_1bl_2ch', 'm': 20, 'p_x': 0.2},
+        {'mode': 'sec_1bl_2ch', 'm': 40, 'p_x': 1},
+        {'mode': 'sec_1bl_2ch', 'm': 40, 'p_x': .667},
+        {'mode': 'sec_1bl_2ch', 'm': 50, 'p_x': 0.5, 'prob_a': 30},
+        {'mode': 'sec_1bl_2ch', 'm': 40, 'p_x': 0.4, 'prob_a': 30},
+    ]
 ]
 
 # data = [
