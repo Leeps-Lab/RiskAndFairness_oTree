@@ -8,11 +8,13 @@
 lines.linewidth: 1
 
 axes.facecolor: 252525
+axes.edgecolor: 848484
+axes.linewidth: .5
 axes.grid: true
 axes.prop_cycle: cycler('color', {'60d515', 'd22b10', '1fa8e4', 'e0cc05', 'eb860d', 'b113ef'})
 grid.linestyle: --
 grid.linewidth: .5
-grid.color: 848484
+grid.color: 353535
 
 figure.facecolor: 1c1c1c
 figure.edgecolor: 1c1c1c

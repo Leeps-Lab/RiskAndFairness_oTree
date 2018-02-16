@@ -7,7 +7,9 @@ import matplotlib.pyplot as plt
 from matplotlib import style
 style.use('./elip12.mplstyle')
 
-df = pd.read_csv('test3.csv',
+csv = 'test_test.csv'
+
+df = pd.read_csv(csv,
     index_col='participant.label')
 
 # pulls data for one player from the csv otree spits out,
@@ -33,44 +35,72 @@ def format_df(player_id, data):
     return df2
 
 # plots the choices a given player made for a given mode
-def plot_data(player_id, data, mode):
+# for now were doing it with all one color. later we will implement different colors for different probabilities
+# also implement multiple graphs for each round of probability
+# display: gray (default), color, coded
+def plot_data(player_id, data, mode, display='color'):
     
     df = format_df(player_id, data)
     df = df[df['mode'] == mode]
-    print(df)
+
+    fig = plt.figure()
+    ax = fig.add_subplot(111)
+    ax.set_aspect(aspect='equal')
+    ax.spines['top'].set_visible(False)
+    ax.spines['right'].set_visible(False)
+    ax.axis([0, 100, 0, 100])
+    plt.xlabel('State A', color='#848484')
+    plt.ylabel('State B', color='#848484')
+    date, session = csv.split('_')[0], csv.split('_')[1].split('.')[0]
+    plt.title(date.capitalize() + ' ' + session.capitalize() + ' ' + player_id.capitalize() + ' ' + mode.capitalize())
+
+    if display not in ['gray', 'color', 'coded']:
+        print("Invalid display argument, defaulting to gray.")
+        display = 'gray'
+
+    if display == 'gray':
+        lines = ['#b2b2b2']
+        dots = ['#eb860d']
+    else:
+        lines = ['#60d515', '#d22b10', '#1fa8e4', '#e0cc05', '#eb860d', '#b113ef']
+        dots = ['#60d515', '#d22b10', '#1fa8e4', '#e0cc05', '#eb860d', '#b113ef']
+
     if mode == 'det_giv':
-        plt.scatter(df['me_a'], df['me_b'])
         for _, row in df.iterrows():
-            plt.plot([row['m'] / row['px'], 0], [0, row['m'] / row['py']])
+            ax.plot([row['m'] / row['px'], 0], [0, row['m'] / row['py']], color=lines[i % len(lines)], alpha=0.55, zorder=3, linewidth=.5)
+            ax.scatter(row['me_a'], row['me_b'], color=dots[i % len(dots)], alpha=.8, zorder=4)
         plt.xlabel('You', color='#848484')
         plt.ylabel('Partner', color='#848484')
 
     elif mode == 'sec_ownrisk':
-        plt.scatter(df['me_a'], df['me_b'])
         for _, row in df.iterrows():
-            plt.plot([row['m'] / row['px'], 0], [0, row['m'] / row['py']])
-        plt.xlabel('State A', color='#848484')
-        plt.ylabel('State B', color='#848484')
+            ax.plot([row['m'] / row['px'], 0], [0, row['m'] / row['py']], color=lines[i % len(lines)], alpha=0.55, zorder=3, linewidth=.5)
+            ax.scatter(row['me_a'], row['me_b'], color=dots[i % len(dots)], alpha=.8, zorder=4)
     
-    # elif mode == 'sec_1bl_1ch':
+    elif mode in ['sec_1bl_1ch', 'sec_1bl_2ch', 'sec_2bl_1ch']:
+        for i, row in df.iterrows():
+            ax.plot([row['m'] / row['px'], 0], [0, row['m'] / row['py']], color=lines[i % len(lines)], alpha=0.55, zorder=3, linewidth=.5)
+            if mode == 'sec_2bl_1ch':
+                ax.plot([0, row['m'] / row['py']], [row['m'] / row['px'], 0], color=lines[i % len(lines)], alpha=0.55, zorder=3, linewidth=.5)
+            ax.scatter(row['partner_a'], row['partner_b'], color=dots[i % len(dots)], marker='s', alpha=.7, zorder=4)
+            ax.scatter(row['me_a'], row['me_b'], color=dots[i % len(dots)], alpha=.8, zorder=4)
 
-    # elif mode == 'sec_1bl_2ch':
+    elif mode == 'sec_ownrisk_fixedother':
+        for i, row in df.iterrows():
+            ax.plot([row['m'] / row['px'], 0], [0, row['m'] / row['py']], color=lines[i % len(lines)], alpha=0.55, zorder=3, linewidth=.5)
+            ax.scatter(row['me_a'], row['me_b'], color=dots[i % len(dots)], alpha=.8, zorder=4)
 
-    # elif mode == 'sec_2bl_1ch':
-
-    # elif mode == 'sec_ownrisk':
-
-    # elif mode == 'sec_ownrisk_fixedother':
-
-    # elif mode == 'sec_otherrisk_ownfixed':
+    elif mode == 'sec_otherrisk_ownfixed':
+        for i, row in df.iterrows():
+            ax.plot([row['m'] / row['px'], 0], [0, row['m'] / row['py']], color=lines[i % len(lines)], alpha=0.55, zorder=3, linewidth=.5)
+            ax.scatter(row['partner_a'], row['partner_b'], color=dots[i % len(dots)], alpha=.8, zorder=4)
 
     # elif mode == 'probability':
     
 
     #plt.tight_layout()
-    plt.title(player_id + ' ' + mode + ' choices')
     plt.show()
 
-plot_data('LEEPS_1', df, 'det_giv')
+plot_data('LEEPS_1', df, 'sec_2bl_1ch', display='gray')
 
 
