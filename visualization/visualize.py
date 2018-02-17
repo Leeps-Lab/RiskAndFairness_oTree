@@ -65,7 +65,7 @@ def plot_prob(csv, player_id, df, show=False):
             plt.show()
         else:
             plt.savefig(date.capitalize() + '_' + session.capitalize() + '_'
-                + player_id.capitalize() + '_' + mode.capitalize() + '_' + display + '.png', format='png', dpi=250)
+                + player_id.capitalize() + '_Probability_Decision-' + str(i % 10) + '.png', format='png', dpi=250)
 
 # plots the choices a given player made for a given mode
 # for now were doing it with all one color. later we will implement different colors for different probabilities
@@ -150,7 +150,7 @@ def plot_data(csv, player_id, data, mode, display='color', show=False):
 #ADD COMMAND LINE ARGS HERE
 
 
-#plot_data(csv.split('.')[0], 'LEEPS_1', df, 'sec_1bl_1ch', display='coded', show=True)
+#plot_data(csv.split('.')[0], 'LEEPS_1', df, 'probability', display='coded', show=False)
 
 
 
