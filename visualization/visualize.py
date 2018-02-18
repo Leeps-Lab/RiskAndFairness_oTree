@@ -1,5 +1,6 @@
 # visualizes a player's choices for a specific task over a range of rounds
 
+from sys import argv
 import pandas as pd
 import numpy as np
 import matplotlib
@@ -8,18 +9,13 @@ from matplotlib import style
 from matplotlib.lines import Line2D
 style.use('./elip12.mplstyle')
 
-csv = 'anna_test.csv'
-
-df = pd.read_csv(csv,
-    index_col='participant.label')
-
 # pulls data for one player from the csv otree spits out,
 # and reformats it to have rounds as rows and each round's data in the cols
 def format_df(player_id, data):
     
     df1 = data.loc[player_id, 'RiskAndFairness_oTree.1.player.id_in_group':]
 
-    # there are 29 variables that ger recorded per round
+    # there are 29 variables that get recorded per round
     cols = [str(index).split('.')[-1] for index in df1[:][:29].index]
     df2 = pd.DataFrame(columns=cols)
     i = 0
@@ -100,7 +96,7 @@ def plot_data(csv, player_id, data, mode, display='color', show=False):
         else:
             lines = ['#60d515', '#d22b10', '#1fa8e4', '#e0cc05', '#eb860d', '#b113ef']
             dots = ['#60d515', '#d22b10', '#1fa8e4', '#e0cc05', '#eb860d', '#b113ef']
-            if display == 'coded':
+            if display == 'coded' and mode != 'det_giv':
                 probs = {}
                 i = 0
                 leg_lines = []
@@ -146,11 +142,20 @@ def plot_data(csv, player_id, data, mode, display='color', show=False):
             plt.savefig(date.capitalize() + '_' + session.capitalize() + '_'
                 + player_id.capitalize() + '_' + mode.capitalize() + '_' + display + '.png', format='png', dpi=250)
 
-
-#ADD COMMAND LINE ARGS HERE
-
-
-#plot_data(csv.split('.')[0], 'LEEPS_1', df, 'probability', display='coded', show=False)
+# lets the user specify their input with command line arguments
+if len(argv) > 1:
+    csv = str(argv[1])
+    leeps_id = str(argv[2])
+    df = pd.read_csv(csv, index_col='participant.label')
+    mode = str(argv[3])
+    if len(argv) > 4:
+        display = str(argv[4])
+        if len(argv) > 5:
+            show = bool(argv[5])
+    plot_data(csv.split('.')[0], leeps_id, df, mode, display=display, show=show)
+else: # for testing purposes
+    df = pd.read_csv('data/anna_test.csv', index_col='participant.label')
+    plot_data('data/anna_test.csv'.split('.')[0], 'LEEPS_1', df, 'det_giv', display='gray', show=True)
 
 
 
