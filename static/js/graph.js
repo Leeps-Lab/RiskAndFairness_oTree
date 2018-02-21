@@ -2,8 +2,6 @@
 Principal maintainer: Rachel Chen <me@rachelchen.me>
 Contributors:
     Eli Pandolfo, epandolf@ucsc.edu
-
-* 1-15-18, Eli Pandolfo: add comments to code. My understanding is limited so they might not all be accurate.
 */
 
 // creates a new Vue app, that holds all information related to the graph
