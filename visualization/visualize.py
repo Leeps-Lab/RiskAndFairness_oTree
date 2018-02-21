@@ -1,4 +1,5 @@
 # visualizes a player's choices for a specific task over a range of rounds
+# Author: Eli Pandolfo, epandolf@ucsc.edu
 
 from sys import argv
 import pandas as pd

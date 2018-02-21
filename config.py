@@ -8,6 +8,9 @@ Please use lowercase for dictionary keys in the future // Rachel
 # independent -> sec_1bl_2ch;
 # single -> sec_ownrisk
 
+Kristian Lopez Vargas <kristianlvargas@gmail.com>
+Eli Pandolfo <epandolf@ucsc.edu>
+
 '''
 
 import random

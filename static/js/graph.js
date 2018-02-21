@@ -82,7 +82,6 @@ var vm = new Vue({
             d3.select('[line-index="b"]')
             .attr('r', this.radius.b)
 
-            // TODO: clean up this fucking mess...
 
             this.tip.a.text(null)
             this.tip.a.append('tspan')

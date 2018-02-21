@@ -6,10 +6,10 @@ from . import config
 import random
 
 """
-Principal maintainer: Rachel Chen <me@rachelchen.me>
+Principal maintainer: Eli Pandolfo <epandolf@ucsc.edu>
 Contributors:
     Kristian Lopez Vargas <kristianlvargas@gmail.com>
-    Eli Pandolfo
+    Rachel Chen <me@rachelchen.me>
 """
 
 
