@@ -2,8 +2,6 @@
 Principal maintainer: Rachel Chen <me@rachelchen.me>
 Contributors:
     Eli Pandolfo, epandolf@ucsc.edu
-
-* 1-15-18, Eli Pandolfo: add comments to code. My understanding is limited so they might not all be accurate.
 */
 
 // creates a new Vue app, that holds all information related to the graph
@@ -55,6 +53,8 @@ var vm = new Vue({
     // computes graph dimensions based on size of browser
     computed: {
         dimension: function() {
+            //console.log(this.width - this.margin.left - this.margin.right)
+            //console.log(this.height - this.margin.top - this.margin.bottom)
             return {
                 width: this.width - this.margin.left - this.margin.right,
                 height: this.height - this.margin.top - this.margin.bottom
@@ -82,7 +82,6 @@ var vm = new Vue({
             d3.select('[line-index="b"]')
             .attr('r', this.radius.b)
 
-            // TODO: clean up this fucking mess...
 
             this.tip.a.text(null)
             this.tip.a.append('tspan')

@@ -177,10 +177,13 @@
 {% endblock %}
 
 {% block content %}
-    {% formfield player.time_ControlQuestions label=None %}
-    {% formfield player.cq_failed_attempts label=None %}
-    {% formfield player.cq_a1 label=None %}
-    {% formfield player.cq_a2 label=None %}
+    <!--
+        Principal maintainer: Eli Pandolfo <epandolf@ucsc.edu>
+    -->
+    <input type="hidden" name="time_ControlQuestions" id="arrive_time"/>
+    <input type="hidden" name="cq_failed_attempts" id="attempts"/>
+    <input type="hidden" name="cq_a1" id="a1"/>
+    <input type="hidden" name="cq_a2" id="a2"/>
 
     <div>
         <h4>

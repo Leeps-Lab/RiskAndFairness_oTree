@@ -12,7 +12,11 @@
 
 
 {% block content %}
-    {% formfield player.time_TaskInstructions label=None %}
+<!--
+    Principal maintainer: Eli Pandolfo <epandolf@ucsc.edu>
+    Contributor: Kristian Lopez Vargas <kristianlvargas@gmail.com>
+-->
+    <input type="hidden" name="time_TaskInstructions" id="arrive_time"/>
     
     {% if mode == 'probability' %}
         {% include Constants.instructions_probability %}

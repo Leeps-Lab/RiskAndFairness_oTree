@@ -5,10 +5,10 @@ from .models import Constants
 from . import config
 
 """
-Principal maintainer: Rachel Chen <me@rachelchen.me>
+Principal maintainer: Eli Pandolfo <epandolf@ucsc.edu>
 Contributors:
     Kristian Lopez Vargas <kristianlvargas@gmail.com>
-    Eli Pandolfo
+    Rachel Chen <me@rachelchen.me>
 """
 
 class InitialInstructions(Page):
@@ -214,7 +214,7 @@ class Results(Page):
 page_sequence = [
     InitialInstructions,
     TaskInstructions,
-    ControlQuestions,
+    #ControlQuestions,
     Task,
     ResultsWaitPage,
     Results
