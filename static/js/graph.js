@@ -53,6 +53,8 @@ var vm = new Vue({
     // computes graph dimensions based on size of browser
     computed: {
         dimension: function() {
+            //console.log(this.width - this.margin.left - this.margin.right)
+            //console.log(this.height - this.margin.top - this.margin.bottom)
             return {
                 width: this.width - this.margin.left - this.margin.right,
                 height: this.height - this.margin.top - this.margin.bottom

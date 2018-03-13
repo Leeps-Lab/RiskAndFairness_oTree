@@ -224,30 +224,30 @@
 
 {% block content %}
 
-    {% formfield player.time_Graph label=None %}
-    {% formfield player.mode label=None %}
+    <input type="hidden" name="time_Graph" id="arrive_time"/>
+    <input type="hidden" name="mode" id="mode"/>
     
     {% if mode == 'probability' %}
-        {% formfield player.ax label=None %}
-        {% formfield player.ay label=None %}
-        {% formfield player.bx label=None %}
-        {% formfield player.by label=None %}
+        <input type="hidden" name="ax" id="ax"/>
+        <input type="hidden" name="ay" id="ay"/>
+        <input type="hidden" name="bx" id="bx"/>
+        <input type="hidden" name="by" id="by"/>
     {% else %}
-        {% formfield player.m label=None %}
-        {% formfield player.px label=None %}
-        {% formfield player.py label=None %}
+        <input type="hidden" name="m" id="m"/>
+        <input type="hidden" name="px" id="px"/>
+        <input type="hidden" name="py" id="py"/>
 
         {% if mode == 'sec_ownrisk_fixedother' or mode == 'sec_otherrisk_ownfixed' %}
-            {% formfield player.a label=None %}
-            {% formfield player.b label=None %}
+            <input type="hidden" name="a" id="a"/>
+            <input type="hidden" name="b" id="b"/>
         {% endif %}
     {% endif %}
 
     <div id="app">
         <div class="container">
             <div class="row">
-                <div class="graph col-md-7"></div>
-                <div class="col-md-5" v-if="mode === 'probability'">
+                <div class="graph col-md-8"></div>
+                <div class="col-md-4" v-if="mode === 'probability'">
                     <h5>This is your choice:</h5>
                     <div class="row" style="margin-top: 50px">
                         <range-slider
@@ -260,26 +260,26 @@
                     </div>
 
                     <div class="row">
-                        <div class="col-md-4">
+                        <div class="col-6">
                             Probability of A:
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-6" style="text-align: right;">
                             Probability of B:
                         </div>
                     </div>
 
                     <div class="row">
-                        <div class="col-md-4" v-html="prob.a.toFixed(0) + '%'">
+                        <div class="col-6" v-html="prob.a.toFixed(0) + '%'">
                         </div>
-                        <div class="col-md-4" v-html="prob.b.toFixed(0) + '%'">
+                        <div class="col-6" v-html="prob.b.toFixed(0) + '%'" style="text-align: right;">
                         </div>
                     </div>
                     
                     <div class="row col-md-6" style="margin-top: 50px">
-                        <table class="table table-bordered table-condensed small">
+                        <table class="table table-bordered table-sm mdall">
                             <thead>
                                 <tr>
-                                    <td width="34%" style = "text-align: left;">Outcome Probability (%)</td>
+                                    <td width="34%" style = "text-align: left;">Outcome Probability</td>
                                     <td width="33%" style = "text-align: center;" ><b style="color: blue">Your Tokens<b></td>
                                     <td width="33%" style = "text-align: center;" ><b style="color: orange">Partner's Tokens<b></td>
                                 </tr>
@@ -299,14 +299,14 @@
                         </table>
                     </div>
                 </div>
-                <div class="col-md-5" v-if="mode === 'single_given'">
+                <div class="col-md-4" v-if="mode === 'single_given'">
                     <h5>This is your choice:</h5>
-                    <div class="row col-md-6" style="margin-top: 50px">
-                        <table class="table table-bordered table-condensed small">
+                    <div class="row col-9" style="margin-top: 50px">
+                        <table class="table table-bordered table-sm mdall">
                             <thead>
                                 <tr>
-                                    <td>Your Tokens</td>
-                                    <td v-if="mode !== 'single'"><b style="color: orange">Partner's Tokens<b></td>
+                                    <td width="50%">Your Tokens</td>
+                                    <td width="50%" v-if="mode !== 'single'"><b style="color: orange">Partner's Tokens<b></td>
                                 </tr>
                             </thead>
                             <tbody>
@@ -318,13 +318,13 @@
                         </table>
                     </div>
                 </div>
-                <div class="col-md-5" v-if="mode !== 'probability' && mode !== 'single_given'">
+                <div class="col-md-4" v-if="mode !== 'probability' && mode !== 'single_given'">
                     <h5>This is your choice:</h5>
-                    <div class="row col-md-6" style="margin-top: 50px">
-                        <table class="table table-bordered table-condensed small">
+                    <div class="row" style="margin-top: 50px">
+                        <table class="table table-bordered table-sm mdall">
                             <thead>
                                 <tr>
-                                    <td width="34%" style = "text-align: left;"> State: Probability (%)</td>
+                                    <td width="34%" style = "text-align: left;"> State: Probability</td>
                                     <td width="33%" style = "text-align: center; color: blue">Your Tokens</td>
                                     <td width="33%" style = "text-align: center; color: orange" v-if="mode !== 'single'">Partner's Tokens</td>
                                 </tr>

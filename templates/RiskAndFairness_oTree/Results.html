@@ -15,7 +15,9 @@
 {% endblock %}
 
 {% block content %}
-{% formfield player.time_Results label=None %}
+
+    <input type="hidden" name="time_Results" id="arrive_time"/>
+
     <h5>Your role for the experiment was {{ role | json }}.</h5>
     <h5>The paying round was Task {{ mode_num }} - Decision {{ counter }}.
     <hr>

@@ -238,6 +238,11 @@
                 document.getElementById('partner_payoff').innerHTML=roundData['b_y']
             }
         }
+        else if (mode === 'single_given')
+        {
+            document.getElementById('you_payoff').innerHTML=vm.selected[0].x
+            document.getElementById('partner_payoff').innerHTML=vm.selected[0].y
+        }
         else
         {
             if (rand * 100 < roundData['prob_a'])
@@ -300,10 +305,10 @@
     {% endcomment %}
 
     <div id="app">
-        <div class="container">
+        <div class="container-fluid" style="width: window.width - window.margin.left">
             <div class="row">
-                <div class="graph col-md-7"></div>
-                <div class="col-md-5" v-if="mode === 'probability'">
+                <div class="graph col-9"></div>
+                <div class="col-3" v-if="mode === 'probability'">
                     <h5>This is your choice:</h5>
                     <div class="row" style="margin-top: 50px">
                         <range-slider
@@ -316,28 +321,28 @@
                     </div>
 
                     <div class="row">
-                        <div class="col-md-4">
+                        <div class="col-6">
                             Probability of A:
                         </div>
-                        <div class="col-md-4" >
+                        <div class="col-6" style="text-align: right;">
                             Probability of B:
                         </div>
                     </div>
 
                     <div class="row">
-                        <div class="col-md-4" v-html="prob.a.toFixed(0) + '%'">
+                        <div class="col-6" v-html="prob.a.toFixed(0) + '%'">
                         </div>
-                        <div class="col-md-4" v-html="prob.b.toFixed(0) + '%'">
+                        <div class="col-6" v-html="prob.b.toFixed(0) + '%'" style="text-align: right;">
                         </div>
                     </div>
                     
-                    <div class="row col-md-6" style="margin-top: 50px">
-                        <table class="table table-bordered table-condensed small">
+                    <div class="row" style="margin-top: 50px">
+                        <table class="table table-bordered table-sm small">
                             <thead>
                                 <tr>
-                                    <td width="34%" sstyle = "text-align: left;">Outcome Probability (%)</td>
-                                    <td width="33%" sstyle = "text-align: center;" ><b style="color: blue">Your Tokens<b></td>
-                                    <td width="33%" sstyle = "text-align: center;" ><b style="color: orange">Partner's Tokens<b></td>
+                                    <td width="34%" style = "text-align: left;">Outcome Probability</td>
+                                    <td width="33%" style = "text-align: center;"><b style="color: blue">Your Tokens<b></td>
+                                    <td width="33%" style = "text-align: center;"><b style="color: orange">Partner's Tokens<b></td>
                                 </tr>
                             </thead>
                             <tbody>
@@ -354,33 +359,69 @@
                             </tbody>
                         </table>
                     </div>
-                </div>
-                <div class="col-md-5" v-if="mode === 'single_given'">
-                    <h5>This is your choice:</h5>
-                    <div class="row col-md-6" style="margin-top: 50px">
-                        <table class="table table-bordered table-condensed small">
+                    <div class="row" id="results" style="display: none; margin-top: 40px;">
+                        <h5>Test Outcome Results</h5>
+                        <table class="table table-bordered table-sm small">
                             <thead>
                                 <tr>
-                                    <td>Your Tokens</td>
-                                    <td v-if="mode !== 'single'"><b style="color: orange">Partner's Tokens<b></td>
+                                    <td width="34%" style = "text-align: left;">Realized Outcome</td>
+                                    <td width="33%" style = "text-align: center; color: blue"><b>Your Payoff</b></td>
+                                    <td width="33%" style = "text-align: center; color: orange" v-if="mode !== 'single'"><b>Partner's Payoff</b></td>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td v-html="selected[0].x"></td>
-                                    <td v-html="selected[0].y"></td>
+                                    <td id="outcome" style = "text-align: center;">N/A</td>
+                                    <td id="you_payoff" style = "text-align: center; color: blue">N/A</td>
+                                    <td id="partner_payoff" style = "text-align: center; color: orange" v-if="mode !== 'single'">N/A</td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
                 </div>
-                <div class="col-md-5" v-if="mode !== 'probability' && mode !== 'single_given'">
+                <div class="col-3" v-if="mode === 'single_given'">
                     <h5>This is your choice:</h5>
-                    <div class="row col-md-6" style="margin-top: 50px">
-                        <table class="table table-bordered table-condensed small">
+                    <div class="row" style="margin-top: 50px">
+                        <table class="table table-bordered table-sm small">
                             <thead>
                                 <tr>
-                                    <td width="34%" style = "text-align: left;">State: Probability (%)</td>
+                                    <td width="50%">Your Tokens</td>
+                                    <td width="50%" v-if="mode !== 'single'" style="color: orange; text-align: center;">Partner's Tokens</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td width="50%" v-html="selected[0].x"></td>
+                                    <td width="50%" v-html="selected[0].y"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="row" id="results" style="display: none; margin-top: 40px;">
+                        <h5>Test Outcome Results</h5>
+                        <table class="table table-bordered table-sm small">
+                            <thead>
+                                <tr>
+                                    <td width="50%" style="text-align: center; color: blue"><b>Your Payoff</b></td>
+                                    <td width="50%" style="text-align: center; color: orange" v-if="mode !== 'single'"><b>Partner's Payoff</b></td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td id="you_payoff" style="text-align: center; color: blue">N/A</td>
+                                    <td id="partner_payoff" style="text-align: center; color: orange" v-if="mode !== 'single'">N/A</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="col-3" v-if="mode !== 'probability' && mode !== 'single_given'">
+                    <h5>This is your choice:</h5>
+                    <div class="row" style="margin-top: 50px">
+                        <table class="table table-bordered table-sm small">
+                            <thead>
+                                <tr>
+                                    <td width="34%" style = "text-align: left;">State: Probability</td>
                                     <td width="33%" style = "text-align: center; color: blue">Your Tokens</td>
                                     <td width="33%" style = "text-align: center; color: orange" v-if="mode !== 'single'">Partner's Tokens</td>
                                 </tr>
@@ -399,16 +440,14 @@
                             </tbody>
                         </table>
                     </div>
-                </div>
-                <div id="results" style="display: none" class="col-md-5">
-                    <h5>Test Outcome Results</h5>
-                    <div class="row col-md-6">
-                        <table class="table table-bordered table-condensed small">
+                    <div class="row" id="results" style="display: none; margin-top: 40px;">
+                        <h5>Test Outcome Results</h5>
+                        <table class="table table-bordered table-sm small">
                             <thead>
                                 <tr>
                                     <td width="34%" style = "text-align: left;">Realized Outcome</td>
-                                    <td width="33%" style = "text-align: center; color: blue">Your Payoff</td>
-                                    <td width="33%" style = "text-align: center; color: orange" v-if="mode !== 'single'">Partner's Payoff</td>
+                                    <td width="33%" style = "text-align: center; color: blue"><b>Your Payoff</b></td>
+                                    <td width="33%" style = "text-align: center; color: orange" v-if="mode !== 'single'"><b>Partner's Payoff</b></td>
                                 </tr>
                             </thead>
                             <tbody>
@@ -424,7 +463,6 @@
             </div>
         </div>
     </div>
-
 
     <div>
         <button id="go" type="button" class="btn-large" onclick="test_outcome()">Test Outcome</button>
