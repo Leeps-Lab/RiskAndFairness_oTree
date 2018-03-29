@@ -214,7 +214,7 @@ class Results(Page):
 page_sequence = [
     InitialInstructions,
     TaskInstructions,
-    #ControlQuestions,
+    ControlQuestions,
     Task,
     ResultsWaitPage,
     Results
