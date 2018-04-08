@@ -9,7 +9,6 @@ var vm = new Vue({
     components: {
         rangeSlider: RangeSlider
     },
-    // root element: tells vue that the root element (el) is an app 
     el: '#app',
     data: function() {
         // returns an object containing all initial values for the graph's data
