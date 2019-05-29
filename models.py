@@ -148,13 +148,18 @@ class Group(BaseGroup):
         p1.participant.vars['pr_dict'] = config.flatten(Constants.dynamic_values)[p1.participant.vars['group_pr'] - 1]
         
         # the shuffled dynamic_values for player 1
+        print("Constants.dynamic_values")
+        print(Constants.dynamic_values)
+        # print(config.flatten(config.shuffle(Constants.dynamic_values)))
         p1.participant.vars['dynamic_values'] = config.flatten(config.shuffle(Constants.dynamic_values))
-        
+        # p1.participant.vars['dynamic_values'] = config.flatten(Constants.dynamic_values)
+
         # player 1's paying round. Retrieved by getting the index of pr_dict in player 1's dynamic values
         p1.participant.vars['pr'] = p1.participant.vars['dynamic_values'].index(p1.participant.vars['pr_dict']) + 1
 
         # the shuffled dynamic_values for player 2
         p2.participant.vars['dynamic_values'] = config.flatten(config.shuffle(Constants.dynamic_values))
+        # p2.participant.vars['dynamic_values'] = config.flatten(Constants.dynamic_values)
 
         # player 2's paying round. Retrieved by getting the index of pr_dict in player 2's dynamic values
         p2.participant.vars['pr'] = p2.participant.vars['dynamic_values'].index(p1.participant.vars['pr_dict']) + 1
