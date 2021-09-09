@@ -6,7 +6,9 @@
       window.onload = function () 
       {
         document.getElementById("arrive_time").value = (new Date()).toISOString();
+        
       }
+      
     </script>
 {% endblock %}
 
@@ -60,5 +62,6 @@
     </br>
 
     {% next_button %}
+    {% comment %} <button id="Next"  onclick="/TaskInstructions">Next</button> {% endcomment %}
 {% endblock %}
 
